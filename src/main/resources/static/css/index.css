@@ -1,0 +1,646 @@
+body {
+    background: #F0F0F0;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-family:"微软雅黑";
+}
+/*三个小图标的样式*/
+.imgs {
+    margin-left: 15px;
+    width: 30px;
+    height: 46px;
+    margin-top:2px;
+}
+
+.main-div {
+    /*border:solid 1px red;*/
+    height: auto;
+    width: 1000px;
+    margin: 10px auto 10px auto;
+    background:  white;
+    opacity:0.9;
+    z-index:10;
+    border-radius:15px 15px 15px 15px;
+    /*box-shadow:2px 2px 10px #909090;*/
+}
+
+.main-bottom-div {
+    height: auto;
+    width: 1000px;
+    margin: 0px auto 60px auto;
+    background:  white;
+    opacity:0.9;
+    z-index:10;
+    border-radius:15px 15px 15px 15px;
+
+}
+
+
+.middle-div {
+    width: 1000px;
+    height: 380px;
+    margin:0 auto;
+}
+.middle-sep-div {
+    height: 1px;
+    background: #aab9c3;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.bottom-div {
+    width: 1000px;
+    margin:0 auto;
+}
+.left-div {
+    width: 539px;
+    height: 370px;
+    float: left;
+}
+.line-sep-div {
+    background: #aab9c3;
+    width: 1px;
+    height: 370px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.right-div {
+    width: 449px;
+    height: 370px;
+    float: left;
+}
+.number-div {
+    height: 50px;
+    margin-top: 15px;
+}
+.more-btn {
+    width: 480px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+button {
+    height: 30px;
+    font-size: 10px;
+}
+.action-btn {
+    width: 234px;
+    margin-left: 30px;
+    margin-top: 0px;
+}
+
+#simulation {
+    background-color: #75dbed;
+}
+
+#compare {
+    background-color: #75dbed;
+}
+
+#select_file_btn {
+    background-color: #75dbed;
+    /*style="margin-left:10px;margin-top:-4px;width:184px;"*/
+    margin-left:15px;
+    margin-top:1px;
+    width:176px;
+    height:30px;
+    line-height: 1.5;
+    /*position: relative;*/
+    /*padding: 0.1rem 0.1rem 1.8rem;*/
+    /*border-left: .1rem solid #d0d0d0;*/
+}
+#draw_workflow {
+    background-color: #75dbed;
+    margin-left:15px;
+    margin-top:8px;
+    width:176px;
+    height:30px;
+    line-height: 1.5;
+}
+
+#strategy {
+    width:150px;
+    height:24px;
+    border-radius:11px 11px 11px 11px;
+    color:#9ca0a6;
+    margin-top:-5px;
+
+}
+
+.setting-title-div {
+    border-radius:0 15px 0 0;
+    height: 25px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 10px;
+    background: white;
+    font-family:"微软雅黑";
+}
+.fog-environment-div {
+    width: 530px;
+    height: 290px;
+    /*background: #aab9c3;*/
+    margin-left: 10px;
+}
+.number-left-div {
+    float: left;
+    background-color:#F0F0F0;
+    border-radius:10px 10px 10px 10px;
+}
+.fog-top-div {
+    float: left;
+}
+.number-label {
+    width: 170px;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+    /*font-family:"微软雅黑";*/
+}
+
+.number_div{
+    width: 70px;
+    float: left;
+}
+
+.choose-imgs {
+    width: 70px;
+    float: left;
+    /*margin-top: 10px;*/
+    border-radius:10px 10px 10px 10px;
+    color:#9ca0a6;
+}
+
+.number_input {
+    position: relative;
+    top:20px;
+    left:0px;
+    width: 50px;
+    height: 20px;
+    border-radius:10px 0px 0px 10px;
+    border-style:none;
+    outline: none;
+    text-indent: 10px;
+    border: 1px solid #9ca0a6;
+    color:#9ca0a6;
+    border-right: solid 0px #FFFFFF;
+}
+
+.show-imgs {
+    width: 245px;
+    height: 50px;
+    float: left;
+    margin-left: 18px;
+    background: white;
+    border: 1px solid #9ca0a6;
+    border-radius:5px 5px 5px 5px;
+    /*overflow-x: hidden; !*x轴禁止滚动*!*/
+    overflow-y: scroll;/*y轴滚动*/
+}
+/*隐藏div的滚动条*/
+.show-imgs::-webkit-scrollbar{
+    width:0;
+}
+.action-div {
+    height: 100px;
+}
+.action-div-1 {
+    height: 40px;
+    margin-top: 5px;
+}
+.strategy-div {
+    border-radius:0 15px 0 0;
+    height: 200px;
+}
+.workflow-div {
+    height: 150px;
+    margin-top:20px;
+}
+.strategy-content-div {
+    width: 450px;
+    height: 20px;
+    float: top;
+    margin-top: 12px;
+}
+.strategy-label {
+    width: 150px;
+    margin: 0 0 0 10px;
+    float: left;
+}
+.scheduling-div {
+    width: 100%;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 10px;
+    float: left;
+    font-family:"微软雅黑";
+}
+.minmin-input {
+    width: 90px;
+    height: 30px;
+    top:-5px;
+    margin: 0 0 0 10px;
+    float: left;
+    position: relative;
+    line-height: 30px;
+}
+.round-input {
+    width: 140px;
+    height: 30px;
+    margin: 0 0 0 10px;
+    float: left;
+}
+.alg-input {
+     width: 120px;
+     height: 30px;
+     margin: 0 0 0 10px;
+     float: left;
+ }
+.objective-label {
+    width: 90px;
+    float: left;
+    padding-bottom: 0;
+    margin-left: 10px;
+}
+.ga-input {
+    width: 280px;
+    height: 30px;
+    margin: 0 0 0 10px;
+    float: left;
+}
+.type-label {
+    width: 80px;
+    height: 20px;
+    margin: 0 0 0 10px;
+    float: left;
+    font-family:"微软雅黑";
+}
+.type-select {
+    width: 120px;
+    height: 30px;
+    float: left;
+    margin-top:-5px;
+    border-radius:15px 15px 15px 15px;
+    color:#9ca0a6;
+    text-indent: 10px;
+}
+.amount-label {
+    width: 50px;
+    height: 20px;
+    margin-left: 20px;
+    float: left;
+    font-family:"微软雅黑";
+}
+.amount-select {
+    width: 100px;
+    height: 30px;
+    margin-top:-5px;
+    margin-left: 20px;
+    float: left;
+    border-radius:15px 15px 15px 15px;
+    color:#9ca0a6;
+    text-indent: 30px;
+}
+.custom-checkbox {
+    width: 80px;
+    height: 20px;
+    margin-top: 7px;
+    margin-left: 7px;
+    float: left;
+    font-family:"微软雅黑";
+}
+.custom-input {
+    width: 120px;
+    height: 30px;
+    margin-top: 0px;
+    margin-left: 3px;
+    float: left;
+    border-radius:15px 15px 15px 15px;
+    border-style:none;
+    outline: none;
+    text-indent: 10px;
+    border: 1px solid #DBDBDB;
+    color: #9ca0a6;
+
+}
+.select-file {
+    width: 130px;
+    height: 20px;
+    margin-left: 20px;
+    float: left;
+
+}
+.deadline-label {
+    width: 80px;
+    height: 20px;
+    margin-top: 15px;
+    margin-left: 10px;
+    float: left;
+}
+.deadline-input {
+    width: 120px;
+    height: 30px;
+    float: left;
+    margin-top: 10px;
+    border-radius:15px 15px 15px 15px;
+    border-style:none;
+    outline: none;
+    text-indent: 10px;
+    border: 1px solid #DBDBDB;
+    color:#9ca0a6;
+}
+.output-div {
+    height: 30px;
+    margin-bottom: 10px;
+}
+.output-label {
+    width: 190px;
+    height: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    float: left;
+    font-family:"微软雅黑";
+}
+.output-time {
+    float: left;
+    height: 20px;
+    margin-left: 70px;
+    margin-top: 10px;
+}
+.output-input {
+    width: 120px;
+    height: 30px;
+    margin-top: 5px;
+    float: left;
+    border-radius:15px 15px 15px 15px;
+    color:#9ca0a6;
+}
+/*.table {*/
+    /*margin-left: 5px;*/
+    /*margin-right: 5px;*/
+    /*width: 990px;*/
+    /*!*table-layout: fixed;*!*/
+/*}*/
+table{
+    border: 1px solid #aab9c3;
+    /*border-collapse: collapse;*/
+}
+
+/*table th {
+    border: 1px solid #aab9c3;
+    !*color: red;*!
+    font-weight: normal;
+    font-size: 12px;
+    height: 20px;
+    width: 30px;
+}*/
+
+table tr {
+    height: 20px;
+    width:300px;
+}
+
+table td{
+    border: 1px solid #aab9c3;
+    text-align: left;
+    font-size: 12px;
+    height: 20px;
+    width: 30px;
+}
+
+.title-bar{
+    width: 100%;
+    height:140px;
+    background-color:#4597E6;
+    text-align:center;
+}
+
+.title-logo {
+   position: absolute;
+    top:40px;
+    left:40px;
+}
+
+.title_userinfo{
+    position: absolute;
+    top: 30px;
+    right:200px;
+}
+
+.title-line1 {
+    color:white;
+    font-size: 35px;
+    position: relative;
+    top:15px;
+    font-family:"微软雅黑";
+}
+
+.title-line2 {
+    color:white;
+    font-size: 35px;
+    margin-top:30px;
+    font-family:"微软雅黑";
+}
+
+.title-line3 {
+    color:white;
+    font-size: 20px;
+    margin-top:8px;
+    font-family:"微软雅黑";
+}
+
+.foot-logo {
+    position: fixed;
+    left:30px;
+    bottom: 30px;
+}
+
+.foot-QRCode {
+    position: fixed;
+    right: 30px;
+    bottom:30px;
+}
+
+.foot-QRCode2 {
+   margin-top: 75px;
+}
+
+.foot-bar {
+    background-color: white;
+    text-align: center;
+    /*color: #bc8f8f;*/
+    position: fixed;
+    width:100%;
+    height:40px;
+    bottom: 0px;
+    z-index: 2;
+    font-family:"微软雅黑";
+}
+/*修改复选框样式*/
+.al_check {
+    width: 14px;
+    height: 14px;
+    margin-top: 0;
+    background-color: #fff;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    color: #fff;
+    text-align: center;
+    line-height: 15px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    -o-appearance:none;
+    appearance:none;
+    outline: none;
+}
+
+.al_check:hover {
+    border-color: #43adea;
+}
+
+.al_check:checked {
+    color: #fff;
+    background-color: #43adea;
+    border: 1px solid #43adea;
+}
+
+.al_check:after {
+    content: "✔";
+}
+
+/*修改单选框样式*/
+.radio_input {
+    width: 90px;
+    height: 30px;
+    top:-5px;
+    /*margin: 0 0 0 10px;*/
+    float: left;
+    position: relative;
+    line-height: 30px;
+    font-family:"微软雅黑";
+}
+
+input[name='radioGroup'] {
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+}
+
+label {
+    position: absolute;
+    left: 0px;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+input:checked+label {
+    background-color: #43adea;
+    border: 1px solid #43adea;
+}
+
+input:checked+label::after {
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: 10px;
+    top: 0px;
+    left: 6px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+/*修改custom复选框样式*/
+#custom {
+    width: 14px;
+    height: 14px;
+    margin-top: 0;
+    background-color: #fff;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    color: #fff;
+    text-align: center;
+    line-height: 15px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    -o-appearance:none;
+    appearance:none;
+    outline: none;
+}
+
+#custom:hover {
+    border-color: #43adea;
+}
+
+#custom:checked {
+    color: #fff;
+    background-color: #43adea;
+    border: 1px solid #43adea;
+}
+
+#custom:after {
+    content: "✔";
+}
+
+.radio_option {
+    position: relative;
+    top:25px;
+    left:20px;
+    font-family:"微软雅黑";
+}
+
+.youtube {
+    position: fixed;
+    right:34px;
+    bottom: 348px;
+    background-color: #FFFFFF;
+    font-family:"微软雅黑";
+}
+
+.github {
+    position: fixed;
+    right:34px;
+    bottom: 64px;
+    background-color: #FFFFFF;
+    font-family:"微软雅黑";
+}
+
+.developer{
+    color: #FFFFFF;
+    position: absolute;
+    top: 30px;
+    right:60px;
+}
+
+.input_odd {
+    position: relative;
+    width: 100%;
+    height:100%;
+    border:none;
+    background-color: #F1F1F1;
+
+}
+.input_even {
+    position: relative;
+    width: 100%;
+    height:100%;
+    border:none;
+    background-color: #FFFFFF;
+}
+
+.input_border {
+    border:solid 1px #c9c9c9;
+}
+
+.clustrmap{
+    position: absolute;
+    right: 10px;
+    top: -150px;
+}
