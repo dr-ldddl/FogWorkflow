@@ -90,11 +90,14 @@
 
         </div>
         <div id="panel" class="panel">
-
+            <div id="item_left" class="operate_node mProjectPP"></div>
+            <div id="item_right" class="operate_node mDiffFit"></div>
+            <%--<div id="test3" class="operate_node mShrink"></div>--%>
         </div>
     </body>
 <script type="text/javascript" src="/layui/layui.all.js"></script>
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/jquery/jsplumb.min.js"></script>
 <script type="text/javascript" src="/js/DrawWorkflow/montage.js"></script>
 </html>

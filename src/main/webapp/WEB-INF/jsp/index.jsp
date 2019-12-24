@@ -12,28 +12,23 @@
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
 
+    <%--/////////////////////////////////////////////////////////////////////////////////--%>
+
+
+    <%--/////////////////////////////////////////////////////////////////////////////////--%>
 </head>
 <body>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
 <%--标题栏start--%>
 <div class="title-bar">
-    <%--<div class="title_userinfo">
-        <div class="layui-header">
-            <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
-                        贤心
-                        <span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child layui-anim layui-anim-upbit">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">退了</a></li>
-                <span class="layui-nav-bar" style="left: 20px; top: 55px; width: 0px; opacity: 0;"></span></ul>
-        </div>
 
-    </div>--%>
     <div class="title-logo">
         <img src="/images/titleLog.png" alt="...">
     </div>
@@ -45,9 +40,28 @@
             Developer<br>Information
         </div>
     </div>
+    <div id="login_div" class="user buttons">
+        <div class="layui-btn-group">
+            <button id="user_login" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Login</button>
+            <button id="user_register" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Register</button>
+        </div>
+    </div>
+    <div id="userinfo_div" class="user" hidden>
+        <ul class="layui-nav" style="background-color: #4597E6">
+            <%--<li class="layui-nav-item">
+                <a href="">个人中心<span class="layui-badge-dot"></span></a>
+            </li>--%>
+            <li class="layui-nav-item">
+                <a id="username_a"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+                <dl class="layui-nav-child">
+                    <%--<dd><a id="changeInfo" href="javascript:;">修改信息</a></dd>--%>
+                    <dd><a  id="logout" href="javascript:;">Logout</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
     <div class="title-line1">FogWorkflowSim: An Automated Simulation Toolkit for</div>
     <div class="title-line2">Workflow Performance Evaluation in Fog Computing</div>
-    <%--<div class="title-line3">Xiao Liu,Linmin Fan,Jia Xu,Xuejun Li,Lina Gong,John Grundy</div>--%>
 </div>
 <%--标题栏end--%>
 
@@ -58,11 +72,13 @@
 </div>
 <div class="foot-QRCode">
     <div class="clustrmap">
-        <div style="text-align:left">
-            <a href="http://www.clustrmaps.com/site/1b10d" style="line-height:1.6;font-size:10pt;background-color:transparent" title="Visitor Map for iseclab.org.cn" rel="nofollow">
-                <img src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI">
-            </a>
-        </div>
+           <%-- <a href="http://www.clustrmaps.com/site/1b10d" style="line-height:1.6;font-size:10pt;background-color:transparent;margin-right: 10px;" title="Visitor Map for iseclab.org.cn" rel="nofollow">
+                <img width="150%" src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI">
+            </a>--%>
+               <%--<a href="http://www.clustrmaps.com/site/1b10d" style="line-height:1.6;font-size:10pt;background-color:transparent;margin-right: 10px;" title="Visitor Map for iseclab.org.cn" rel="nofollow">
+                   <img width="150%" src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI">
+               </a>--%>
+               <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
     </div>
     <div class="foot-QRCode1">
         <div class="youtube">
@@ -79,13 +95,10 @@
 </div>
 <%--底栏 start--%>
 <div class="foot-bar">
-    <div>Copyright ©  Intelligent Software and Big Data Lab, Anhui University</div>
+    <div>Copyright ©  Intelligent Software and Edge Computing Lab, Anhui University</div>
     <div id="visitcount">
-        <span>总访问次数：-- || </span>
-        <span>今日总访问次数：-- || </span>
-        <span>您访问总次数：-- || </span>
-        <span>今日您访问次数：-- || </span>
-        <span>您上次登录地点：--</span>
+        <span>Total number of visits：-- || </span>
+        <span>Total number of visits today：--  </span>
     </div>
 </div>
 <%--底栏 start--%>

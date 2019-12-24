@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.tools.IpUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
@@ -36,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -45,40 +48,28 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    //@Resource ：自动注入，项目启动后会实例化一个JdbcTemplate对象,省去初始化工作。
-    /*@Resource
-    private JdbcTemplate jdbcTemplate;*/
 
 //    登录界面
-    @RequestMapping("")
-    public  String login(/*Model model*/){
-        return "login";
+    @RequestMapping("/To_login")
+    public  String login(){
+        return "userlogin";
     }
 
+    //    加载用户注册界面
+    //    @ResponseBody
+    @RequestMapping(value = "To_register")
+    public String toRegister(){
+        return "register";
+    }
 //    登录校验
     @ResponseBody
     @RequestMapping(value = "login_check")
     public String loginCheck(@RequestBody User user){
 //        System.out.println("logincheck");
-//        System.out.print(user);
+//        System.out.print("login_check"+user);
         int flag = 0;
         flag = indexService.loginCheck(user);
-        /*String sql = "select * from userInfo";
-        //query()方法：通过传入SQL 语句和Row Mapper对象可以查询出数据库中的数据。
-        List<User> userList = (List<User>) jdbcTemplate.query(sql, new RowMapper<User>() {
-            @Override
-            public User mapRow(ResultSet rs, int i) throws SQLException {
-                User user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setEmail(rs.getString("email"));
-                return user;
-            }
-        });
-        System.out.println("查询数据库成功：");
-        for (User user : userList) {
-            System.out.println("name:"+user.getUsername()+"; password:"+user.getPassword()+"; email:"+user.getEmail());
-        }*/
+
         if(flag == 2){
             return "success";
         }
@@ -90,18 +81,12 @@ public class IndexController {
         }
     }
 
-//    加载用户注册界面
-//    @ResponseBody
-    @RequestMapping(value = "To_register")
-    public String toRegister(/*Model model*/){
-        return "register";
-    }
 
 //    用户注册
     @ResponseBody
     @RequestMapping(value = "register")
     public String register(@RequestBody User user){
-//        System.out.println(user);
+//        System.out.println("register:"+user);
 
         String flag = "";
         flag = indexService.register(user);
@@ -120,10 +105,22 @@ public class IndexController {
     private String visitIp = "";
     private String visitAddress = "";
     private String visitDate = "";
+
+
+
 //    主页面初始化-->重定向到FogWorkflowSim
+    @RequestMapping(value = "")
+    public String index(HttpServletRequest request){
+        userName = "";
+        visitDate = "";
+        visitAddress = "";
+        visitIp = "";
+
+        return "redirect:/FogWorkflowSim";
+    }
 //    @ResponseBody
-    @RequestMapping("index")
-    public String index(@RequestParam("username") String username, @RequestParam("visitip") String visitip, @RequestParam("visitaddress") String visitaddress, @RequestParam("visitdate") String visitdate) {
+    @RequestMapping(value = "login_success")
+    public String login_success(@RequestParam("username") String username, @RequestParam("visitip") String visitip, @RequestParam("visitaddress") String visitaddress, @RequestParam("visitdate") String visitdate) {
         /*String typeJson = indexService.initTypeList();
         model.addAttribute("typeJson", typeJson);
         return "index";*/
@@ -133,16 +130,15 @@ public class IndexController {
         System.out.println("visitdate:" + visitdate);*/
 
         userName = username;
-        /*visitIp = visitip;
-        visitAddress = visitaddress;
-        visitDate = visitdate;*/
+
 
         VisitCount visitcount = new VisitCount();
         visitcount.setUserName(username);
         visitcount.setVisitAddress(visitaddress);
         visitcount.setVisitDate(visitdate);
         visitcount.setVisitIp(visitip);
-        String result = indexService.updateCount(visitcount);
+//        System.out.println("visitcount"+visitcount);
+//        String result = indexService.updateCount(visitcount);
         return "redirect:/FogWorkflowSim";
 
     }
@@ -151,7 +147,7 @@ public class IndexController {
 
 //    实际上的初始化界面
     @RequestMapping("FogWorkflowSim")
-    public String fogWorkflowSim(Model model){
+    public String fogWorkflowSim(Model model,HttpServletRequest request){
         /*System.out.println(userName);
         User user = indexService.getUser(userName);
         String userJson = JSONObject.toJSONString(user);
@@ -166,6 +162,16 @@ public class IndexController {
         visitcount.setVisitIp(visitIp);
 //        记录用户访问次数
 //        String result = indexService.updateCount(visitcount);
+        String ipAddress = IpUtil.getIpAddr(request);
+
+        //获取系统当前时间
+        Date date = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = formatter.format(date);
+        System.out.println(formatter.format(date));
+        System.out.println(ipAddress);
+        String result = indexService.updateCount(ipAddress,currentTime);
 
         return "index";
     }
@@ -182,22 +188,24 @@ public class IndexController {
     @ResponseBody
     @RequestMapping("getUser")
     public String getUser(){
-        User user = indexService.getUser(userName);
-        String userJson = JSONObject.toJSONString(user);
+        String userJson = "";
+        if(userName != ""){
+            User user = indexService.getUser(userName);
+            userJson = JSONObject.toJSONString(user);
+        }
         return userJson;
     }
 
 //    统计网站的访问信息
     @RequestMapping(value = "getVisitCount")
     @ResponseBody
-    public Object getVisitCount(@RequestBody JSONObject jsonParam){
-
-        String username = (String) jsonParam.get("username");
-
+    public Object getVisitCount(HttpServletRequest request){
         JSONObject json = new JSONObject();
-        json = indexService.getVisitCount(username);
+        json = indexService.getVisitCount();
         return json;
     }
+
+
     private String al_type = "";
 
 //    algorithmsSetting页面

@@ -1,4 +1,14 @@
 
+//获取随机数
+var chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+function generateMixed(n) {
+    var res = "";
+    for(var i = 0; i < n ; i ++) {
+        var id = Math.ceil(Math.random()*35);
+        res += chars[id];
+    }
+    return res;
+}
 
 //删除的绝对位置
 var topDiv = $("#del img").offset().top;    //距离上
@@ -21,7 +31,9 @@ $('.sameline .operate_node').draggable({
                 }
             }
         });
+
     }
+
 });
 
 //重置按钮
@@ -34,18 +46,17 @@ $("#montage_save").click(function(){
 
 });
 
-//获取随机数
-var chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-function generateMixed(n) {
-    var res = "";
-    for(var i = 0; i < n ; i ++) {
-        var id = Math.ceil(Math.random()*35);
-        res += chars[id];
-    }
-    return res;
-}
 
+jsPlumb.ready(function () {
+    jsPlumb.connect({
+        source: 'item_left',
+        target: 'item_right',
+        endpoint: 'Rectangle'
+    })
 
+    jsPlumb.draggable('item_left')
+    jsPlumb.draggable('item_right')
+})
 
 
 

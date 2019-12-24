@@ -22,7 +22,31 @@ $(document).ready(function () {
 
         var typeJson = new Object();
         var userJson = new Object();
-
+        //获取完整用户信息
+        $.ajax({
+            url:"/getUser",
+            type:"POST",
+            data:"",
+            dataType:"text",
+            async:false,
+            contentType:"application/json",
+            success:function (res) {
+                if(res != ""){
+                    userJson = eval("("+res+")");
+                    // console.log(userJson);
+                    var username = userJson['username'];
+                    $("#username_a").html($("#username_a").html().replace('我',username));
+                    $("#userinfo_div").show();
+                    $("#login_div").hide();
+                }else{
+                    // console.log(userJson);
+                    console.log("no user");
+                }
+            },
+            error:function(res){
+                layer.msg("Failed to obtain user information!");
+            }
+        });
         //获取algorithms参数
         $.ajax({
             url:"/getAlgorithms",
@@ -41,23 +65,6 @@ $(document).ready(function () {
             }
         });
 
-        //获取完整用户信息
-        $.ajax({
-            url:"/getUser",
-            type:"POST",
-            // data:"",
-            dataType:"text",
-            async: false,
-            contentType: "application/json",
-            success:function (res) {
-                // console.log(res);
-                userJson = eval("("+res+")");
-
-            },
-            error:function () {
-                layer.msg("获取用户信息失败！");
-            }
-        });
     }
 
     // 输出提示信息
@@ -685,16 +692,28 @@ $(document).ready(function () {
 
     // 导出表格数据
     $("#export").click(function () {
+        // debugger;
+        // 判断用户是否登录
+        if(jQuery.isEmptyObject(userJson)){
+            layer.msg("Please log in and export the data！",
+                {time:1000}
+            );
+            return false;
+        }
         var flag = false;
         $(".tr-line").each(function(){
             var text = $(this).find("td:first").text();
             if(text == ""|| text ==null){
                 flag = true;
-                tips("There is no data to export");
+                // tips("There is no data to export");
+                layer.msg("There is no data to export!",
+                    {time:1000}
+                );
                 return false;
 
             }
         });
+
         if(!flag){
             var filename = "";
             var algorithms_type = $("#output").text();
@@ -729,12 +748,11 @@ $(document).ready(function () {
             }
         });
     });
-
     var username = userJson['username'];
     //统计网页被访问次数
    $.ajax({
        url : "/getVisitCount",
-       data : JSON.stringify({"username":username}),
+       data : "",
        type : "POST",
        dataType : "JSON",
        contentType : "application/json;charset=utf-8",
@@ -743,21 +761,58 @@ $(document).ready(function () {
                 // console.log(res);
                 var sum = res['sum'];
                 var sum_today = res['sum_today'];
-                var sum_user = res['sum_user'];
-                var sum_user_today = res['sum_user_today'];
-                var last_location = res['last_location'];
-                $("#visitcount").children()[0].innerHTML = "总访问次数：" + sum + " || ";
-                $("#visitcount").children()[1].innerHTML = "今日总访问次数：" + sum_today + " || ";
-                $("#visitcount").children()[2].innerHTML = "您访问总次数：" + sum_user + " || ";
-                $("#visitcount").children()[3].innerHTML = "今日您访问次数：" + sum_user_today + " || ";
-                $("#visitcount").children()[4].innerHTML = "您上次登录地点：" + last_location;
+
+                $("#visitcount").children()[0].innerHTML = "Total number of visits：" + sum + " || ";
+                $("#visitcount").children()[1].innerHTML = "Total number of visits today：" + sum_today + "  ";
+
        },
        error : function(res){
             // console.log(res);
             console.log("error");
        }
    })
+   //登录
+    $("#user_login").click(function(){
+        layer.open({
+            type: 2
+            , offset: "140px"
+            , title: "Login"
+            , content: "/To_login"
+            , skin: 'title-style'
+            , area: ['600px', '580px']
+            ,cancel: function(){
+                // feedSetting();
+            }
+        });
+    });
 
+   // 用户注册
+    $("#user_register").click(function(){
+        layer.open({
+            type: 2
+            , offset: "140px"
+            , title: "Register"
+            , content: "/To_register"
+            , skin: 'title-style'
+            , area: ['600px', '580px']
+            ,cancel: function(){
+                // feedSetting();
+            }
+        });
+    });
+
+    // 修改信息
+    $("#changeInfo").click(function(){
+        console.log("changeInfo");
+    });
+
+    //退出登录
+    $("#logout").click(function(){
+        // console.log("logout");
+       /* $("#userinfo_div").hide();
+        $("#login_div").show();*/
+        window.location.href = "/";
+    })
 });
 function parents_blur(obj){
     if(obj.className.indexOf("input_even")){

@@ -968,24 +968,32 @@ public class IndexService {
     }
 
     //记录访问次数
-    public String updateCount(VisitCount visitCount) {
-        String username = visitCount.getUserName();
-        String visitip = visitCount.getVisitIp();
-        String visitaddress = visitCount.getVisitAddress();
-        String visitdate = visitCount.getVisitDate();
-
-        String sql = "insert into visitcount(username,visitip,visitdate,visitaddress) values('" + username + "','" + visitip + "','" + visitdate + "','" + visitaddress + "')";
+    public String updateCount(String ipAddress , String currentTime) {
+//        String username = visitCount.getUserName();
+//        String visitip = visitCount.getVisitIp();
+//        String visitaddress = visitCount.getVisitAddress();
+//        String visitdate = visitCount.getVisitDate();
+//
+//        String sql = "insert into visitcount(username,visitip,visitdate,visitaddress) values('" + username + "','" + visitip + "','" + visitdate + "','" + visitaddress + "')";
+//        int insert_flag = jdbcTemplate.update(sql);
+////        System.out.println("insert flag" + insert_flag);
+//        if (insert_flag == 1){
+//            return "success";
+//
+//        }else{
+//            return "failed";
+//        }
+        String sql = "insert into accesscount(visitip,visitdate) values('" + ipAddress + "','" + currentTime + "')";
         int insert_flag = jdbcTemplate.update(sql);
-//        System.out.println("insert flag" + insert_flag);
-        if (insert_flag == 1){
+        if (insert_flag == 1) {
             return "success";
 
         }else{
             return "failed";
         }
-    }
 
-    public JSONObject getVisitCount(String username) {
+    }
+    public JSONObject getVisitCount() {
 //        今天的日期
         Date date=new Date();
         Calendar calendar = Calendar.getInstance();
@@ -998,59 +1006,20 @@ public class IndexService {
 //        String today = dateString;
 
 //        总访问次数
-        String sql_sum = "SELECT count(*) FROM visitcount";
+        String sql_sum = "SELECT count(*) FROM accesscount";
 //        今日总访问次数
-        String sql_sum_today = "SELECT count(*) FROM visitcount WHERE visitdate LIKE '" + today +"%'";
-//        当前用户总访问次数
-        String sql_userSum = "SELECT count(*) FROM visitcount WHERE username= '" + username + "'";
-//        当前用户今日访问次数
-        String sql_userSum_today = "SELECT count(*) FROM visitcount WHERE username= '" + username + "' and visitdate LIKE '" + today +"%'";
-//        当前用户上次登录地点
-        String sql_location = "SELECT * FROM visitcount WHERE username= '" + username + "' order by id desc limit 1,1";
-//        String sql_location = "select * from visitcount where username='root'";
-//        System.out.println(sql_location);
-        List<VisitCount> visitCounts = (List<VisitCount>) jdbcTemplate.query(sql_location, new RowMapper<VisitCount>() {
-            @Override
-            public VisitCount mapRow(ResultSet rs, int i) throws SQLException {
-                VisitCount visitCount = new VisitCount();
-                visitCount.setUserName(rs.getString("username"));
-                visitCount.setVisitIp(rs.getString("visitip"));
-                visitCount.setVisitAddress(rs.getString("visitaddress"));
-                visitCount.setVisitDate(rs.getString("visitdate"));
-                return visitCount;
-            }
-        });
-        /*List<VisitCount> visitCounts = jdbcTemplate.query(sql_location, new RowMapper<VisitCount>() {
-            @Override
-            public VisitCount mapRow(ResultSet rs, int rowNum) throws SQLException {
-                VisitCount visitCount = new VisitCount();
-                visitCount.setUserName(rs.getString("username"));
-                visitCount.setVisitIp(rs.getString("visitip"));
-                visitCount.setVisitDate(rs.getString("visitdate"));
-                visitCount.setVisitAddress(rs.getString("visitaddress"));
-                return visitCount;
-            }
-        });*/
-        System.out.println(visitCounts);
-        VisitCount visitCount = new VisitCount();
-        visitCount = visitCounts.get(0);
-        String last_location = visitCount.getVisitAddress();
+        String sql_sum_today = "SELECT count(*) FROM accesscount WHERE visitdate LIKE '" + today +"%'";
 
 //        System.out.println(sql_sum);
 //        System.out.println(sql_sum_today);
-//        System.out.println(sql_userSum);
-//        System.out.println(sql_userSum_today);
         int sum = jdbcTemplate.queryForObject(sql_sum,Integer.class);
         int sum_today = jdbcTemplate.queryForObject(sql_sum_today,Integer.class);
-        int sum_user = jdbcTemplate.queryForObject(sql_userSum,Integer.class);
-        int sum_user_today = jdbcTemplate.queryForObject(sql_userSum_today,Integer.class);
+
+
 
         JSONObject json =new JSONObject();
         json.put("sum", sum);
         json.put("sum_today", sum_today);
-        json.put("sum_user", sum_user);
-        json.put("sum_user_today", sum_user_today);
-        json.put("last_location", last_location);
 //        System.out.println("json:" + json.toJSONString());
         return json;
     }
