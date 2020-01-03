@@ -31,6 +31,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -95,9 +96,11 @@ public class IndexController {
     }
 
 //    开发人员按钮
-    @RequestMapping("developerInfo")
+    @RequestMapping("systemInfo")
     public String developerInfo(Model model){
-        return "developerInformation";
+
+//        return "developerInformation";
+        return "systemInfo";
     }
 
 
@@ -214,6 +217,30 @@ public class IndexController {
 //        model.addAttribute("al_type", alType);
         al_type = alType;
         return "algorithmsSetting";
+    }
+
+//    查询所有系统历史版本
+    @RequestMapping(value = "getVersions")
+    @ResponseBody
+    public String getVersions(){
+        String sysVersions = indexService.getVersions();
+        return sysVersions;
+    }
+
+    //查看系统当前版本号
+    @ResponseBody
+    @RequestMapping(value = "getCurrentVersion")
+    public String getCurrentVersion(){
+        String currentVersion = indexService.getCurrentVersion();
+        return currentVersion;
+    }
+
+    //开发人员信息
+    @ResponseBody
+    @RequestMapping(value = "getDevelopers")
+    public String getDevelopers(){
+        String developers = indexService.getDevelopers();
+        return developers;
     }
 
     @ResponseBody
@@ -401,11 +428,14 @@ public class IndexController {
     }
 
     @RequestMapping("drawWorkflow")
-    public String drawWorkflow() {
+    public String drawWorkflow(Model model) {
         return "drawWorkflow";
     }
 
-
+    @RequestMapping(value = "node_edit")
+    public String nodeInfo(){
+        return "DrawWorkflow/nodeInfo";
+    }
 
 }
 

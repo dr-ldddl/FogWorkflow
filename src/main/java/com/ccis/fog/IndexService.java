@@ -1023,4 +1023,60 @@ public class IndexService {
 //        System.out.println("json:" + json.toJSONString());
         return json;
     }
+
+    //获取系统版本信息
+    public String getVersions() {
+       String sql = " SELECT * FROM systemversion";
+        List<SystemVersion>  versionList = (List<SystemVersion>) jdbcTemplate.query(sql, new RowMapper<SystemVersion>() {
+            @Override
+            public SystemVersion mapRow(ResultSet rs, int i) throws SQLException {
+                SystemVersion version = new SystemVersion();
+                version.setUpdateTime(rs.getString("updateTime"));
+                version.setNote(rs.getString("note"));
+                version.setVersionNum(rs.getString("versionNum"));
+                return version;
+            }
+        });
+
+//        System.out.println(versionList.toString());
+        return JSON.toJSONString(versionList);
+
+    }
+
+    //查看系统当前版本号
+    public String getCurrentVersion() {
+        String sql = "SELECT * FROM systemversion ORDER BY id DESC limit 1";
+//        System.out.println("sql:"+sql);
+        List<SystemVersion>  versionList = (List<SystemVersion>) jdbcTemplate.query(sql, new RowMapper<SystemVersion>() {
+            @Override
+            public SystemVersion mapRow(ResultSet rs, int i) throws SQLException {
+                SystemVersion systemVersion = new SystemVersion();
+                systemVersion.setVersionNum(rs.getString("versionNum"));
+                systemVersion.setNote(rs.getString("note"));
+                systemVersion.setUpdateTime(rs.getString("updateTime"));
+                return systemVersion;
+            }
+        });
+        SystemVersion systemVersion= versionList.get(0);
+        return JSON.toJSONString(systemVersion);
+
+    }
+
+    //开发人员信息
+    public String getDevelopers() {
+        String sql = "SELECT * FROM developers";
+        List<Developer>  developerList = (List<Developer>) jdbcTemplate.query(sql, new RowMapper<Developer>() {
+            @Override
+            public Developer mapRow(ResultSet rs, int i) throws SQLException {
+                Developer developer = new Developer();
+                developer.setName(rs.getString("name"));
+                developer.setUniversity(rs.getString("university"));
+                developer.setEmail(rs.getString("email"));
+                return developer;
+            }
+        });
+
+//        System.out.println(JSON.toJSONString(developerList));
+        return JSON.toJSONString(developerList);
+    }
 }

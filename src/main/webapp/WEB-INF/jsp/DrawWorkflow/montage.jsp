@@ -12,9 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montage</title>
-
+    <link rel="stylesheet" type="text/css" href="/layui/css/jquery-ui-1.10.4.min.css">
     <link rel="stylesheet" type="text/css" href="/css/DrawWorkflow/montage.css">
-    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <%--<body>
@@ -87,17 +86,17 @@
                        <button id="montage_reset" type="button" class="layui-btn">重置</button>
                    </div>
                </div>
-
         </div>
         <div id="panel" class="panel">
-            <div id="item_left" class="operate_node mProjectPP"></div>
-            <div id="item_right" class="operate_node mDiffFit"></div>
-            <%--<div id="test3" class="operate_node mShrink"></div>--%>
+            <div id="item_left" class="item"></div>
+            <div id="item_right" class="item" style="left:150px;"></div>
         </div>
     </body>
+<script type="text/javascript" src="/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/layui/layui.all.js"></script>
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/jquery/jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript" src="/jquery/jsplumb.min.js"></script>
 <script type="text/javascript" src="/js/DrawWorkflow/montage.js"></script>
 </html>

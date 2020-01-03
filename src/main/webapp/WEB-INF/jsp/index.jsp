@@ -11,9 +11,7 @@
     <%--<script type="text/javascript" src="/js/global.js"></script>--%>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
-
     <%--/////////////////////////////////////////////////////////////////////////////////--%>
-
 
     <%--/////////////////////////////////////////////////////////////////////////////////--%>
 </head>
@@ -37,7 +35,7 @@
             <img src="/images/developers.png">
         </div>
         <div class="developer_png">
-            Developer<br>Information
+            System<br>Informations
         </div>
     </div>
     <div id="login_div" class="user buttons">
@@ -96,6 +94,7 @@
 <%--底栏 start--%>
 <div class="foot-bar">
     <div>Copyright ©  Intelligent Software and Edge Computing Lab, Anhui University</div>
+    <div id="versions">Version:--</div>
     <div id="visitcount">
         <span>Total number of visits：-- || </span>
         <span>Total number of visits today：--  </span>
@@ -317,9 +316,6 @@
             </tbody>
         </table>
     </div>
-</div>
-<div hidden>
-    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
 </div>
 
 </body>

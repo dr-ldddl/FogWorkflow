@@ -10,15 +10,12 @@
 <head>
     <meta charset="UTF-8">
     <title>draw workflow</title>
-    <script type="text/javascript" src="/jquery/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.all.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
-    <%--<script type="text/javascript" src="/jquery/raphael.min.js"></script>--%>
     <link rel="stylesheet" href="/layui/css/layui.css">
-    <!--<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="/layui/css/jquery-ui-1.10.4.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/drawWorkflow.css">
 </head>
 <body>
-<div class="layui-tab">
+<%--<div class="layui-tab">
     <ul class="layui-tab-title">
         <li class="layui-this">Montage</li>
         <li>CyberShake</li>
@@ -47,7 +44,7 @@
             <%@include file="DrawWorkflow/other.jsp"%>
         </div>
     </div>
-</div>
+</div>--%>
 
 <%--<script>
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
@@ -57,163 +54,218 @@
         //…
     });
 </script>--%>
-<div id="raphael"></div>
-<%--<script type="text/javascript">
-    //整体画布
-    var paper = Raphael("raphael", 1200, 500);
-    //环节数据
-    var jsonA = [{'taskId':201,'name':'任务1','duration':2,'xAxis':100,'yAxis':0},
-        {'taskId':202,'name':'任务2','duration':3,'xAxis':200,'yAxis':0},
-        {'taskId':203,'name':'任务3','duration':5,'xAxis':300,'yAxis':0},
-        {'taskId':204,'name':'任务4','duration':1,'xAxis':200,'yAxis':100},
-        {'taskId':205,'name':'任务5','duration':1,'xAxis':400,'yAxis':0}];
-    //环节与环节直接的关系
-    var jsonB = [{'taskId':201,'pTaskId':202},
-        {'taskId':202,'pTaskId':203},
-        {'taskId':201,'pTaskId':204},
-        {'taskId':203,'pTaskId':205},
-        {'taskId':204,'pTaskId':205}];
-    var jsonC =[];
-    //循环调用执行生成环节
-    for(var i in jsonA){
-        createNode(jsonA[i]);//环节绘制
-    }
-    function createNode(obj){
-        var move = function (dx, dy, x, y) {
-            //console.log(dx, dy, x, y);
-            var attr = {x: this.xx + dx, y: this.yy + dy};
-            this.attr(attr);
-            var lb = this.data("cooperative");
-            //console.log(this.xx, dx, this.yy, dy)
-            var attr1 = {x: this.xx+ dx+this.attr("width") / 2, y: this.yy+dy+this.attr("height") / 2};
-            lb.attr(attr1);
-            /*重绘指定线路*/
-            jsonC=[];
-            for (var i in jsonB) {
-                if (jsonB[i].taskId==obj.taskId) {
-                    jsonC.push(jsonB[i]);
-                }
-                if (jsonB[i].pTaskId==obj.taskId) {
-                    jsonC.push(jsonB[i]);
-                }
-            }
-            for(var i in jsonC){
-                var pn=paper.getById(jsonC[i].taskId+"_"+jsonC[i].pTaskId);
-                pn.remove();
-                drawArr(jsonC[i]);
-            }
-        }, start = function (x, y) {
-            this.attr({opacity: 1});
-            this.lastX = x;
-            this.lastY = y;
-            this.xx = this.attr("x");
-            this.yy = this.attr("y");
-        },up = function () {
-            this.attr({opacity: 0.8});
-        };
-        this.text = paper.text(obj.xAxis+25, obj.yAxis+25,obj.duration).attr({
-            "fill":"#17A9C6", // font-color
-            "font-size":12, // font size in pixels
-            "text-anchor":"start",
-            "font-family":"century gothic" // font family of the text
-        });
-        var p =paper.rect(obj.xAxis, obj.yAxis, 50, 50, 10);
-        p.attr({"fill":"green", stroke:"#666", 'opacity':0.3,"title":obj.name});
-        p.id=obj.taskId;
-        p.drag(move, start, up);
-        //p.dblclick(msg(obj));
-        p.dblclick(function a() {
-                jsonC=[];
-                for (var i in jsonB) {
-                    if (jsonB[i].taskId==obj.taskId) {
-                        // alert("<<<<<<<<"+jsonB[i].taskId);//获得该id下的名字
-                        jsonC.push(jsonB[i]);
-                    }
-                    if (jsonB[i].pTaskId==obj.taskId) {
-                        // alert("<<<<<<<<"+jsonB[i].taskId);//获得该id下的名字
-                        jsonC.push(jsonB[i]);
-                    }
-                }
-                console.log(jsonC);
-            }
-        );
-        p.data("cooperative", this.text).toBack();
-    }
-    //循环执行
-    for(var i in jsonB){
-        drawArr(jsonB[i]);
-    }
-    function drawArr(obj) {
-        var obj1=paper.getById(obj.taskId);
-        var obj2=paper.getById(obj.pTaskId);
-        var json1 = getStartEnd(obj1, obj2);
-        var x2=(json1.end.x-json1.start.x)/2;
-        var y2=(json1.end.y-json1.start.y)/2;
-        // paper.path("M "+ json1.start.x +" "+json1.start.y  +" h "+x2+"   v "+ y2+"   h "+x2+" ").attr({
-        var b=paper.path("M "+ json1.start.x +" "+json1.start.y  +" L "+ json1.end.x +" "+json1.end.y  +"");
-        b.attr({
-            stroke: "blue",
-            "stroke-width": "2px",
-            "arrow-end": "classic-wide-long" });
-        b.id=obj.taskId+"_"+obj.pTaskId;
-        return obj;
-    };
 
+<div class="top_bar">
+    <div id="Montage" class="selectAlgo">
+        <div class="sameline">
+            <div id="mProjectPP" class="operate_node mProjectPP" ></div>
+            <div>mProjectPP</div>
+        </div>
+        <div class="sameline">
+            <div id='mDiffFit' class="operate_node mDiffFit" ></div>
+            <div>mDiffFit</div>
+        </div>
+        <div class="sameline">
+            <div id='mConcatFit' class="operate_node mConcatFit" ></div>
+            <div>mConcatFit</div>
+        </div>
+        <div class="sameline">
+            <div id='mBgModel' class="operate_node mBgModel" ></div>
+            <div>mBgModel</div>
+        </div>
+        <div class="sameline">
+            <div id='mBackground' class="operate_node mBackground" ></div>
+            <div>mBackground</div>
+        </div>
+        <div class="sameline">
+            <div id='mImgTbl' class="operate_node mImgTbl" ></div>
+            <div>mImgTbl</div>
+        </div>
+        <div class="sameline">
+            <div id='mAdd' class="operate_node mAdd" ></div>
+            <div>mAdd</div>
+        </div>
+        <div class="sameline">
+            <div id='mShrink' class="operate_node mShrink" ></div>
+            <div>mShrink</div>
+        </div>
+        <div class="sameline">
+            <div id='mJPEG' class="operate_node mJPEG" ></div>
+            <div>mJPEG</div>
+        </div>
+    </div>
 
-    function getStartEnd(obj1, obj2) {
-        var bb1 = obj1.getBBox(),
-            bb2 = obj2.getBBox();
-        var p = [
-            { x: bb1.x + bb1.width / 2, y: bb1.y - 1 },
-            { x: bb1.x + bb1.width / 2, y: bb1.y + bb1.height + 1 },
-            { x: bb1.x - 1, y: bb1.y + bb1.height / 2 },
-            { x: bb1.x + bb1.width + 1, y: bb1.y + bb1.height / 2 },
-            { x: bb2.x + bb2.width / 2, y: bb2.y - 1 },
-            { x: bb2.x + bb2.width / 2, y: bb2.y + bb2.height + 1 },
-            { x: bb2.x - 1, y: bb2.y + bb2.height / 2 },
-            { x: bb2.x + bb2.width + 1, y: bb2.y + bb2.height / 2 }
-        ];
-        var d = {}, dis = [];
-        for (var i = 0; i < 4; i++) {
-            for (var j = 4; j < 8; j++) {
-                var dx = Math.abs(p[i].x - p[j].x),
-                    dy = Math.abs(p[i].y - p[j].y);
-                if (
-                    (i == j - 4) ||
-                    (((i != 3 && j != 6) || p[i].x < p[j].x) &&
-                        ((i != 2 && j != 7) || p[i].x > p[j].x) &&
-                        ((i != 0 && j != 5) || p[i].y > p[j].y) &&
-                        ((i != 1 && j != 4) || p[i].y < p[j].y))
-                ) {
-                    dis.push(dx + dy);
-                    d[dis[dis.length - 1]] = [i, j];
-                }
-            }
-        }
-        if (dis.length == 0) {
-            var res = [0, 4];
-        } else {
-            res = d[Math.min.apply(Math, dis)];
-        }
-        var result = {};
-        result.start = {};
-        result.end = {};
-        result.start.x = p[res[0]].x;
-        result.start.y = p[res[0]].y;
-        result.end.x = p[res[1]].x;
-        result.end.y = p[res[1]].y;
-        return result;
-    }
+    <div id="CyberShake" class="selectAlgo" hidden>
+        <div class="sameline">
+            <div id="extsgt" class="operate_node extsgt" ></div>
+            <div>ExtractSGT</div>
+        </div>
+        <div class="sameline">
+            <div id="seissyn" class="operate_node seissyn" ></div>
+            <div>SeismogramSynthesis</div>
+        </div>
+        <div class="sameline">
+            <div id="zipseis" class="operate_node zipseis" ></div>
+            <div>ZipSeis</div>
+        </div>
+        <div class="sameline">
+            <div id="pvco" class="operate_node pvco" ></div>
+            <div>PeakValCalcOkaya</div>
+        </div>
+        <div class="sameline">
+            <div id="zippsa" class="operate_node zippsa" ></div>
+            <div>ZipPSA</div>
+        </div>
+    </div>
 
-    function msg(obj)
-    {
-        alert(obj.taskId) ;
-        for (var i in jsonB) {
-            if ([i].taskId==this.id) {
-                alert("<<<<<<<<"+[i].taskId);//获得该id下的名字
-            }
-        }
-    }
-</script>--%>
+    <div id="Epigenomics" class="selectAlgo" hidden>
+        <div class="sameline">
+            <div id="fastQSplit" class="operate_node fastQSplit" ></div>
+            <div>fastQSplit</div>
+        </div>
+        <div class="sameline">
+            <div id="filterContams" class="operate_node filterContams" ></div>
+            <div>filterContams</div>
+        </div>
+        <div class="sameline">
+            <div id="sol2sanger" class="operate_node sol2sanger" ></div>
+            <div>sol2sanger</div>
+        </div>
+        <div class="sameline">
+            <div id="fastq2bfq" class="operate_node fastq2bfq" ></div>
+            <div>fastq2bfq</div>
+        </div>
+        <div class="sameline">
+            <div id="map" class="operate_node map" ></div>
+            <div>map</div>
+        </div>
+        <div class="sameline">
+            <div id="mapMerge" class="operate_node mapMerge" ></div>
+            <div>mapMerge</div>
+        </div>
+        <div class="sameline">
+            <div id="maqIndex" class="operate_node maqIndex" ></div>
+            <div>maqIndex</div>
+        </div>
+        <div class="sameline">
+            <div id="pileup" class="operate_node pileup" ></div>
+            <div>pileup</div>
+        </div>
+    </div>
+    <div id="Inspiral" class="selectAlgo" hidden>
+        <div class="sameline">
+            <div id="tmpltbank" class="operate_node tmpltbank" ></div>
+            <div>tmpltBank</div>
+        </div>
+        <div class="sameline">
+            <div id="inspiral" class="operate_node inspiral" ></div>
+            <div>Inspiral</div>
+        </div>
+        <div class="sameline">
+            <div id="thinca" class="operate_node thinca" ></div>
+            <div>Thinca</div>
+        </div>
+        <div class="sameline">
+            <div id="trigbank" class="operate_node trigbank" ></div>
+            <div>TrigBank</div>
+        </div>
+
+    </div>
+    <div id="Sipht" class="selectAlgo" hidden>
+        <div class="sameline">
+            <div id="patser" class="operate_node patser" ></div>
+            <div>Patser</div>
+        </div>
+        <div class="sameline">
+            <div id="srna" class="operate_node srna" ></div>
+            <div>SRNA</div>
+        </div>
+        <div class="sameline">
+            <div id="synteny" class="operate_node synteny" ></div>
+            <div>Blast_synteny</div>
+        </div>
+        <div class="sameline">
+            <div id="paralogues" class="operate_node paralogues" ></div>
+            <div>Blast_paralogues</div>
+        </div>
+        <div class="sameline">
+            <div id="transterm" class="operate_node transterm" ></div>
+            <div>Transterm</div>
+        </div>
+        <div class="sameline">
+            <div id="motif" class="operate_node motif" ></div>
+            <div>RNA_Motif</div>
+        </div>
+        <div class="sameline">
+            <div id="concate" class="operate_node concate" ></div>
+            <div>Patser_Concate</div>
+        </div>
+        <div class="sameline">
+            <div id="candidate" class="operate_node candidate" ></div>
+            <div>Blast_Candidate</div>
+        </div>
+        <div class="sameline">
+            <div id="annotate" class="operate_node annotate" ></div>
+            <div>SRNA_annotate</div>
+        </div>
+        <div class="sameline">
+            <div id="findterm" class="operate_node findterm" ></div>
+            <div>Findterm</div>
+        </div>
+        <div class="sameline">
+            <div id="blast" class="operate_node blast" ></div>
+            <div>Blast</div>
+        </div>
+        <div class="sameline">
+            <div id="ffnparse" class="operate_node ffnparse" ></div>
+            <div>FFN_Parse</div>
+        </div>
+        <div class="sameline">
+            <div id="qrna" class="operate_node qrna" ></div>
+            <div>Blast_QRNA</div>
+        </div>
+        <div class="sameline">
+            <div id="transfer" class="operate_node transfer" ></div>
+            <div>Last_transfer</div>
+        </div>
+    </div>
+
+    <div class="buttons operation">
+        <div class="layui-btn-group">
+            <button id="montage_save" type="button" class="layui-btn">Save</button>
+            <button id="montage_reset" type="button" class="layui-btn">Reset</button>
+            <button id="montage_back" type="button" class="layui-btn">Back</button>
+        </div>
+    </div>
+    <div class="select_div operation">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <%--<label class="layui-form-label">选择框</label>--%>
+                <div id="choseAlgo" class="layui-input-block algo_select">
+                    <select name="city" lay-verify="required">
+                        <option value="montage">Montage</option>
+                        <option value="cybershake">CyberShake</option>
+                        <option value="epigenomics">Epigenomics</option>
+                        <option value="inspiral">Inspiral</option>
+                        <option value="sipht">Sipht</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="panel" class="panel">
+    <%--<div id="item_left" class="item"></div>
+    <div id="item_right" class="item" style="left:150px;"></div>--%>
+
+</div>
 </body>
+<script type="text/javascript" src="/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/layui/layui.all.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/jquery/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="/jquery/jsplumb.min.js"></script>
+<script type="text/javascript" src="/jquery/jsplumb.js"></script>
+<script type="text/javascript" src="/js/drawWorkflow.js"></script></body>
 </html>

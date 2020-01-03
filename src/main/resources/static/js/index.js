@@ -40,7 +40,7 @@ $(document).ready(function () {
                     $("#login_div").hide();
                 }else{
                     // console.log(userJson);
-                    console.log("no user");
+                    // console.log("no user");
                 }
             },
             error:function(res){
@@ -318,10 +318,10 @@ $(document).ready(function () {
         layer.open({
             type: 2,
             offset: "140px",
-            title: "Developer Information",
-            content: "/developerInfo",
+            title: "System Informations",
+            content: "/systemInfo",
             skin: "title-style",
-            area: ['600px', '400px'],
+            area: ['700px', '500px'],
             cancel: function(){
 
             }
@@ -333,10 +333,10 @@ $(document).ready(function () {
         layer.open({
             type: 2,
             offset: "140px",
-            title: "Developer Information",
-            content: "/developerInfo",
+            title: "System Informations",
+            content: "/systemInfo",
             skin: "title-style",
-            area: ['600px', '400px'],
+            area: ['700px', '500px'],
             cancel: function(){
 
             }
@@ -736,7 +736,7 @@ $(document).ready(function () {
 
     //可视化工作流
     $("#draw_workflow").click(function(){
-        layer.open({
+        /*layer.open({
             type: 2
             , offset: "140px"
             , title: "Draw Workflow"
@@ -746,7 +746,32 @@ $(document).ready(function () {
             ,cancel: function(){
                 // feedSetting();
             }
-        });
+        });*/
+        window.location.href = "/drawWorkflow";
+    });
+
+    //获取版本信息
+    $.ajax({
+        url : "/getCurrentVersion",
+        data : "",
+        type : "POST",
+        dataType : "JSON",
+        contentType : "application/json;charset=utf-8",
+        async : false,
+        success : function(res){
+            debugger
+            // console.log(res);
+            console.log(res);
+            var versionNum = res['versionNum'];
+            var note = res['note'];
+            var updateTime = res['updateTime'];
+            $("#versions").html("Version:" + versionNum);
+
+        },
+        error : function(res){
+            // console.log(res);
+            console.log("error");
+        }
     });
     var username = userJson['username'];
     //统计网页被访问次数
@@ -826,3 +851,4 @@ function parents_blur(obj){
 function parents_focus(obj){
     obj.className += ' input_border';
 }
+

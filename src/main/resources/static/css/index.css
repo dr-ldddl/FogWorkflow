@@ -472,11 +472,18 @@ table td{
     /*color: #bc8f8f;*/
     position: fixed;
     width:100%;
-    height:20px;
+    height:40px;
     bottom: 0px;
     z-index: 2;
     font-family:"微软雅黑";
 }
+
+/*#versions{
+    font-family:"微软雅黑";
+    position: relative;
+    float: right;
+    top: 0px;
+}*/
 /*修改复选框样式*/
 .al_check {
     width: 14px;
