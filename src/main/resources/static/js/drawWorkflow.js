@@ -141,8 +141,87 @@ $(document).ready(function(){
             map['children'] = [];
             /*map['ID'] = '';
             map['nameSpace'] */
+            if(id.indexOf("mProjectPP") >= 0){
+                var runtime = 13 + Math.random();
+                runtime = changeTwoDecimal_f(runtime);
+                var fits_input = 4222080;
+                var fits_output = 4100000 + parseInt(Math.random()*10000);
+
+                map['runtime'] = runtime;
+                map['fits_input'] = fits_input;
+                map['fits_output'] = fits_output;
+            }else if(id.indexOf("mDiffFit") >= 0){
+                var runtime = 10 + Math.random();
+                runtime = changeTwoDecimal_f(runtime);
+                var max = 50000;
+                var min = 10000;
+                var fits_output = 200 + parseInt(Math.random() * 100 + 1);
+                var diff_output = parseInt(Math.random() * (max - min + 1) + min);
+
+                map['runtime'] = runtime;
+                map['fits_input'] = [];
+                map['areafits_input'] = [];
+                map['fits_output'] = fits_output;
+                map['diff_output'] = diff_output;
+            }else if(id.indexOf("mConcatFit") >= 0){
+                var runtime = Math.random();
+                var fits_list_tbl = 163;
+                var max = 1000;
+                var min = 100;
+                var fitstbl_output = 1000 + parseInt(Math.random() * (max - min + 1) + min);
+                map['runtime'] = runtime;
+                map['fits_list_tbl'] = fits_list_tbl;
+                map['fits'] = [];
+                map['diff'] = [];
+                map['fitstbl_output'] = fitstbl_output;
+            }else if(id.indexOf("mBgModel") >= 0){
+                var runtime = changeTwoDecimal_f(Math.random());
+                var pimagestbl_input = 670;
+                var fitstbl_input = '';
+                var max = 1000;
+                var min = 100;
+                var correctionstbl = 1000 + parseInt(Math.random() * (max - min + 1) + min);
+                map['pimagestbl_input'] = pimagestbl_input;
+                map['fitstbl_input'] = fitstbl_input;
+                map['correctionstbl_output'] = correctionstbl;
+
+            }else if(id.indexOf("mBackground") >= 0){
+                var runtime = 10 + Math.random();
+                runtime = changeTwoDecimal_f(runtime);
+                var correctionstbl_input = '';
+                var random = 4100000 + parseInt(Math.random()*10000);
+                map['runtime'] = runtime;
+                map['fits_input'] = random;
+                map['areafits_input'] = random;
+                map['fits_output'] = random;
+                map['areafits_output'] = random;
+
+            }else if(id.indexOf("mImgTbl") >= 0){
+                var runtime = 1 + Math.random();
+                runtime = changeTwoDecimal_f(rumtime);
+                var max = 5000;
+                var min = 1000;
+                var newcimagestbl_output = parseInt(Math.random() * (max - min + 1) + min);
+                map['runtime'] = runtime;
+                map['fits'] = [];
+                map['areafits'] = [];
+                map['newcimagestbl_output'] = newcimagestbl_output;
+
+            }else if(id.indexOf("mAdd") >= 0){
+                var runtime = parseInt(Math.random()*10) + Math.random();
+                runtime = changeTwoDecimal_f(runtime);
+                var hdr_input = 304;
+                var newcimagestbl_input = '';
+                var max = 100000000;
+                var min = 60000000;
+                var mosaic_output = parseInt(Math.random() * (max - min + 1) + min);
+            }else if(id.indexOf("mShrink") >= 0){
+
+            }else if(id.indexOf("mJPEG") >= 0){
+
+            }
             nodeArr.push(map);
-            // console.log(nodeArr)
+            console.log(nodeArr)
 
 
 
@@ -381,11 +460,12 @@ function edit(obj, event){
 
 //编辑按钮
 $(document).on('click','#editBtn',function(){
+    var nodeType = $(this).val().split("_")[0].substring(0);
     layer.open({
         type: 2
         , offset: "140px"
         , title: "Edit"
-        , content: "/node_edit"
+        , content: "/node_edit?nodetype=" + nodeType
         , skin: 'title-style'
         , area: ['600px', '580px']
         ,cancel: function(){
@@ -454,6 +534,25 @@ document.body.onmouseup = function(e){     //在body里点击触发事件
     }
 
 }*/
+
+function changeTwoDecimal_f(x) {
+    var f_x = parseFloat(x);
+    if (isNaN(f_x)) {
+        alert('function:changeTwoDecimal->parameter error');
+        return false;
+    }
+    var f_x = Math.round(x * 100) / 100;
+    var s_x = f_x.toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    return s_x;
+}
 
 
 

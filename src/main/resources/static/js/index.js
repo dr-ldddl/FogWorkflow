@@ -1,4 +1,43 @@
 $(document).ready(function () {
+    //根据屏幕大小设置样式
+    var screen = $(window).width();
+    console.log(screen);
+    if(screen < 1400){
+        var schoolLogo = $("#schoolLogo");
+        var schoolLogo_w = schoolLogo.width();
+        var schoolLogo_h = schoolLogo.height();
+        schoolLogo.css({
+            "width" : schoolLogo_w*0.7, "height" : schoolLogo_h*0.7
+        });
+
+        var QRCode01 = $("#QRCode01");
+        var QRCode01_w = QRCode01.width();
+        var QRCode01_h = QRCode01.height();
+        QRCode01.css({
+            "width" : QRCode01_w*0.7, "height" : QRCode01_h*0.7
+        });
+
+        var QRCode02 = $("#QRCode02");
+        var QRCode02_w = QRCode02.width();
+        var QRCode02_h = QRCode02.height();
+        QRCode02.css({
+            "width" : QRCode02_w*0.7, "height" : QRCode02_h*0.7
+        });
+
+        var clustrmap = $("#clustrmap");
+        var clustrmap_w = clustrmap.width();
+        var clustrmap_h = clustrmap.height();
+        clustrmap.css({
+            "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"-15px","top":"-120px"
+        });
+
+        /*$(".foot-QRCode").css("bottom","0px");
+        $(".foot-QRCode2").css("margin-top","15px");*/
+
+        $(".title-line1").css("font-size","27px");
+        $(".title-line2").css("font-size","27px");
+
+    }
 
     {
         var alSet = new Set();
@@ -838,6 +877,45 @@ $(document).ready(function () {
         $("#login_div").show();*/
         window.location.href = "/";
     })
+
+    //意见按钮
+    $(".advices").click(function(){
+        if(jQuery.isEmptyObject(userJson)){
+            layer.msg("Please log in and submit recommendations！",
+                {time:1000}
+            );
+            return false;
+        }
+        console.log(userJson);
+        var username = userJson['username'];
+        if(username == "root"){
+            layer.open({
+                type: 2
+                , offset: "140px"
+                , title: "All recommendations"
+                , content: "/allRecommendations"
+                , skin: 'title-style'
+                , area: ['600px', '500px']
+                ,cancel: function(){
+                    // feedSetting();
+                }
+            });
+        }else{
+            layer.open({
+                type: 2
+                , offset: "140px"
+                , title: "Submit recommendations"
+                , content: "/recommendations"
+                , skin: 'title-style'
+                , area: ['600px', '500px']
+                ,cancel: function(){
+                    // feedSetting();
+                }
+            });
+        }
+
+
+    });
 });
 function parents_blur(obj){
     if(obj.className.indexOf("input_even")){

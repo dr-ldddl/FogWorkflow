@@ -432,9 +432,43 @@ public class IndexController {
         return "drawWorkflow";
     }
 
+    String nodeType = "";
     @RequestMapping(value = "node_edit")
-    public String nodeInfo(){
+    public String nodeInfo(@RequestParam("nodetype") String nodetype){
+        nodeType = nodetype;
         return "DrawWorkflow/nodeInfo";
+    }
+
+    @RequestMapping(value = "getnodeType")
+    @ResponseBody
+    public String getnodeType(){
+        return nodeType;
+    }
+
+    @RequestMapping(value = "recommendations")
+    public String recommendations(){
+        return "recommendations";
+    }
+
+    //提交建议
+    @RequestMapping(value = "submitAdvices")
+    public String submitAdvices(@RequestBody Advices advices){
+        System.out.println(advices);
+        String result = indexService.updateAdvices(advices);
+        return result;
+    }
+
+    //查询建议
+    @RequestMapping(value = "allRecommendations")
+    public String allRecommendations(){
+
+        return "allRecommendations";
+    }
+    @ResponseBody
+    @RequestMapping(value = "getRecommendations")
+    public String getRecommendations(){
+        String advices = indexService.getRecommendations();
+        return advices;
     }
 
 }

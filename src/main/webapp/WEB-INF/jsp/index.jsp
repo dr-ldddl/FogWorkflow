@@ -11,9 +11,6 @@
     <%--<script type="text/javascript" src="/js/global.js"></script>--%>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
-    <%--/////////////////////////////////////////////////////////////////////////////////--%>
-
-    <%--/////////////////////////////////////////////////////////////////////////////////--%>
 </head>
 <body>
 <script>
@@ -66,29 +63,23 @@
 <%--底部logo start--%>
 <div class="foot-logo">
     <%--<div class="clustrrmap"><br><div style="text-align:left"><a href="http://www.clustrmaps.com/map/sites.google.com/site/drxiaoliu/" style="line-height:1.6;font-size:10pt;background-color:transparent" title="Visitor Map for sites.google.com/site/drxiaoliu/" rel="nofollow"><img src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI"></a></div>--%>
-    <img src="/images/schoolLogo.png">
+    <img id="schoolLogo" src="/images/schoolLogo.png">
 </div>
 <div class="foot-QRCode">
-    <div class="clustrmap">
-           <%-- <a href="http://www.clustrmaps.com/site/1b10d" style="line-height:1.6;font-size:10pt;background-color:transparent;margin-right: 10px;" title="Visitor Map for iseclab.org.cn" rel="nofollow">
-                <img width="150%" src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI">
-            </a>--%>
-               <%--<a href="http://www.clustrmaps.com/site/1b10d" style="line-height:1.6;font-size:10pt;background-color:transparent;margin-right: 10px;" title="Visitor Map for iseclab.org.cn" rel="nofollow">
-                   <img width="150%" src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI">
-               </a>--%>
-               <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
+    <div id="clustrmap" class="clustrmap">
+        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
     </div>
     <div class="foot-QRCode1">
-        <div class="youtube">
+        <%--<div class="youtube">
             <span>Scan QR code to enter</span>
-        </div>
-        <img src="/images/QRCode01.png">
+        </div>--%>
+        <img id="QRCode01" src="/images/QRCode01.png">
     </div>
     <div class="foot-QRCode2">
-        <div class="github">
+        <%--<div class="github">
             <span>Scan QR code to enter</span>
-        </div>
-        <img src="/images/QRCode02.png">
+        </div>--%>
+        <img id="QRCode02" src="/images/QRCode02.png">
     </div>
 </div>
 <%--底栏 start--%>
@@ -99,6 +90,7 @@
         <span>Total number of visits：-- || </span>
         <span>Total number of visits today：--  </span>
     </div>
+    <div class="advices layui-icon layui-icon-survey" style="font-size: 30px; color: #1E9FFF;"></div>
 </div>
 <%--底栏 start--%>
 <div style="display: none" id="parent_cloud_tips"></div>

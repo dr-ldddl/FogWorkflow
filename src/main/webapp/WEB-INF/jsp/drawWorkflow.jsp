@@ -158,7 +158,7 @@
             <div>tmpltBank</div>
         </div>
         <div class="sameline">
-            <div id="inspiral" class="operate_node inspiral" ></div>
+            <div id="inspiral_node" class="operate_node inspiral" ></div>
             <div>Inspiral</div>
         </div>
         <div class="sameline">

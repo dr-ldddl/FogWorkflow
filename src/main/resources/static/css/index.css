@@ -451,18 +451,21 @@ table td{
 }
 
 .foot-logo {
+    z-index: 1;
     position: fixed;
     left:30px;
     bottom: 30px;
 }
 
 .foot-QRCode {
+    z-index: 1;
     position: fixed;
     right: 30px;
     bottom:30px;
 }
 
 .foot-QRCode2 {
+    z-index: 1;
    margin-top: 75px;
 }
 
@@ -648,7 +651,8 @@ input:checked+label::after {
 
 .clustrmap{
     position: absolute;
-    left: -140px;
+    /*left: -140px;*/
+    right: 0px;
     top: -200px;
     /*border: solid 1px red;*/
     width: 300px;
@@ -660,4 +664,10 @@ input:checked+label::after {
     right: 150px;
     top: 50px;
     z-index: 1;
+}
+
+.advices{
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }

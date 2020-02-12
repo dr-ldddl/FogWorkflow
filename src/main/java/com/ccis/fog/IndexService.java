@@ -1079,4 +1079,33 @@ public class IndexService {
 //        System.out.println(JSON.toJSONString(developerList));
         return JSON.toJSONString(developerList);
     }
+
+    public String updateAdvices(Advices advices) {
+        String date = advices.getDate();
+        String context = advices.getAdvices();
+        String sql = "insert into advices(date,advices) values('" + date + "','" + context + "')";
+        int insert_flag = jdbcTemplate.update(sql);
+        if(insert_flag == 1){
+            return "success";
+        }
+        else{
+            return "false";
+        }
+    }
+
+    public String getRecommendations() {
+        String sql = "SELECT * FROM advices";
+        List<Advices>  advicesList = (List<Advices>) jdbcTemplate.query(sql, new RowMapper<Advices>() {
+            @Override
+            public Advices mapRow(ResultSet rs, int i) throws SQLException {
+                Advices advices = new Advices();
+                advices.setDate(rs.getString("date"));
+                advices.setAdvices(rs.getString("advices"));
+                return advices;
+            }
+        });
+
+        System.out.println(JSON.toJSONString(advicesList));
+        return JSON.toJSONString(advicesList);
+    }
 }
