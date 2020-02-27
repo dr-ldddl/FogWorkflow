@@ -2,7 +2,7 @@ package com.ccis.fog;
 
 public class VisitCount {
 
-    private String userName;
+    private String email;
 
     private String visitIp;
 
@@ -11,7 +11,7 @@ public class VisitCount {
     private String visitAddress;
 
     public String getUserName() {
-        return userName;
+        return email;
     }
 
     public String getVisitIp() {
@@ -26,8 +26,8 @@ public class VisitCount {
         return visitAddress;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setVisitIp(String visitIp) {
@@ -45,7 +45,7 @@ public class VisitCount {
     @Override
     public String toString() {
         return "visitCount{" +
-                "userName='" + userName + '\'' +
+                "email='" + email + '\'' +
                 ", visitIp='" + visitIp + '\'' +
                 ", visitDate='" + visitDate + '\'' +
                 ", visitAddress='" + visitAddress + '\'' +

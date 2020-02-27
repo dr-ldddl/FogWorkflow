@@ -48,8 +48,67 @@ import java.util.List;
 public class IndexController {
     @Autowired
     private IndexService indexService;
+    @Autowired
+    EmailService emailService;
 
+    private static String verCode_email = "";
+    @ResponseBody
+    @RequestMapping("/email")
+    public String sendEmail(@RequestParam("emailAddress") String emailAddress) {
+        System.out.println(emailAddress);
+        try {
+            verCode_email = VerCodeGenerateUtil.generateVerCode();
+            emailService.sendEmailVerCode(emailAddress,verCode_email);
+            return verCode_email;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "邮件发送失败";
+        }
+    }
 
+    @ResponseBody
+    @RequestMapping("/register_email")
+    public String registerEmailCheck(@RequestParam("emailAddress") String emailAddress) {
+        System.out.println(emailAddress);
+        System.out.println("ssss");
+        int flag = indexService.registerEmailCheck(emailAddress);
+        if(flag == 0){
+            try {
+                verCode_email = VerCodeGenerateUtil.generateVerCode();
+                emailService.sendEmailVerCode(emailAddress,verCode_email);
+                return verCode_email;
+            } catch (Exception e) {
+                System.out.println(e.toString());
+                return "error";
+            }
+//            return "success";
+        }else{
+            return "failed";
+        }
+
+    }
+    //忘记密码校验
+    @ResponseBody
+    @RequestMapping("/forgotPsw_email")
+    public String forgotPswCheck(@RequestParam("emailAddress") String emailAddress) {
+        System.out.println(emailAddress);
+//        System.out.println("ssss");
+        int flag = indexService.registerEmailCheck(emailAddress);
+        if(flag != 0){
+            try {
+                verCode_email = VerCodeGenerateUtil.generateVerCode();
+                emailService.sendEmailVerCode(emailAddress,verCode_email);
+                return verCode_email;
+            } catch (Exception e) {
+                System.out.println(e.toString());
+                return "邮件发送失败";
+            }
+//            return "success";
+        }else{
+            return "none";
+        }
+
+    }
 //    登录界面
     @RequestMapping("/To_login")
     public  String login(){
@@ -104,7 +163,7 @@ public class IndexController {
     }
 
 
-    private String userName = "";
+    private String email = "";
     private String visitIp = "";
     private String visitAddress = "";
     private String visitDate = "";
@@ -114,7 +173,7 @@ public class IndexController {
 //    主页面初始化-->重定向到FogWorkflowSim
     @RequestMapping(value = "")
     public String index(HttpServletRequest request){
-        userName = "";
+        email = "";
         visitDate = "";
         visitAddress = "";
         visitIp = "";
@@ -123,20 +182,20 @@ public class IndexController {
     }
 //    @ResponseBody
     @RequestMapping(value = "login_success")
-    public String login_success(@RequestParam("username") String username, @RequestParam("visitip") String visitip, @RequestParam("visitaddress") String visitaddress, @RequestParam("visitdate") String visitdate) {
+    public String login_success(@RequestParam("email") String emailAddress, @RequestParam("visitip") String visitip, @RequestParam("visitaddress") String visitaddress, @RequestParam("visitdate") String visitdate) {
         /*String typeJson = indexService.initTypeList();
         model.addAttribute("typeJson", typeJson);
         return "index";*/
-        /*System.out.println("username:" + username);
+        /*System.out.println("email:" + email);
         System.out.println("visitip:" + visitip);
         System.out.println("visitaddress:" + visitaddress);
         System.out.println("visitdate:" + visitdate);*/
 
-        userName = username;
+        email = emailAddress;
 
 
         VisitCount visitcount = new VisitCount();
-        visitcount.setUserName(username);
+        visitcount.setEmail(email);
         visitcount.setVisitAddress(visitaddress);
         visitcount.setVisitDate(visitdate);
         visitcount.setVisitIp(visitip);
@@ -159,7 +218,7 @@ public class IndexController {
         model.addAttribute("typeJson", typeJson);
         model.addAttribute("userJson",userJson);*/
         VisitCount visitcount = new VisitCount();
-        visitcount.setUserName(userName);
+        visitcount.setEmail(email);
         visitcount.setVisitAddress(visitAddress);
         visitcount.setVisitDate(visitDate);
         visitcount.setVisitIp(visitIp);
@@ -192,8 +251,8 @@ public class IndexController {
     @RequestMapping("getUser")
     public String getUser(){
         String userJson = "";
-        if(userName != ""){
-            User user = indexService.getUser(userName);
+        if(email != ""){
+            User user = indexService.getUser(email);
             userJson = JSONObject.toJSONString(user);
         }
         return userJson;
@@ -451,6 +510,7 @@ public class IndexController {
     }
 
     //提交建议
+    @ResponseBody
     @RequestMapping(value = "submitAdvices")
     public String submitAdvices(@RequestBody Advices advices){
         System.out.println(advices);
@@ -464,6 +524,8 @@ public class IndexController {
 
         return "allRecommendations";
     }
+
+    //查询所有建议
     @ResponseBody
     @RequestMapping(value = "getRecommendations")
     public String getRecommendations(){
@@ -471,5 +533,18 @@ public class IndexController {
         return advices;
     }
 
+
+    @RequestMapping(value = "forgotPsw")
+    public String forgotPsw(){
+        return "forgotPsw";
+    }
+
+    //找回密码
+    @ResponseBody
+    @RequestMapping(value = "resetPsw")
+    public String resetPsw(@RequestParam("emailAddress") String emailAddress , @RequestParam("password") String password){
+        String result = indexService.resetPsw(emailAddress , password);
+        return result;
+    }
 }
 

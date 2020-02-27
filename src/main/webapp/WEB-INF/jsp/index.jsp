@@ -73,13 +73,13 @@
         <%--<div class="youtube">
             <span>Scan QR code to enter</span>
         </div>--%>
-        <img id="QRCode01" src="/images/QRCode01.png">
+        <a href="https://youtu.be/AsMovcuSkx8" target="_blank"><img id="QRCode01" src="/images/QRCode01.png"></a>
     </div>
     <div class="foot-QRCode2">
         <%--<div class="github">
             <span>Scan QR code to enter</span>
         </div>--%>
-        <img id="QRCode02" src="/images/QRCode02.png">
+        <a href="https://github.com/CCIS-AHU/FogWorkflowSim.git" target="_blank"><img id="QRCode02" src="/images/QRCode02.png"></a>
     </div>
 </div>
 <%--底栏 start--%>

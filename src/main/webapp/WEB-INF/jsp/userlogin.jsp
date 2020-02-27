@@ -30,11 +30,14 @@
         .layui-elem-quote{background-color: inherit!important;}
         .layui-input, .layui-select, .layui-textarea{background-color: inherit; padding-left: 30px;}
         .register{
-            width: 425px;
-            margin-top: 5px;
-            margin-left: 13px;
+            /*width: 425px;*/
+            margin-top:  5px;
+            /*margin-left: 13px;*/
             /*position: relative;*/
             /*left: -10px;*/
+        }
+        #fogot{
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -47,7 +50,7 @@
     <div class="layui-form zyl_pad_01">
         <div class="layui-col-sm12 layui-col-md12">
             <div class="layui-form-item">
-                <input id="username" type="text" name="username" lay-verify="|username" autocomplete="off" placeholder="user name" class="layui-input">
+                <input id="email" type="text" name="email" lay-verify="|username" autocomplete="off" placeholder="email address" class="layui-input">
                 <i class="layui-icon layui-icon-username zyl_lofo_icon"></i>
             </div>
         </div>
@@ -72,6 +75,9 @@
         </div>
         <div class="layui-col-sm12 layui-col-md12">
             <button id="login" class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">Login</button>
+        </div>
+        <div class="layui-col-sm12 layui-col-md12">
+            <button id="fogot" class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">Forgot password</button>
         </div>
     </div>
     <%--</form>--%>
@@ -116,15 +122,16 @@
     });*/
     $("#login").click(function (){
         // console.log("login");
-        var username = $("#username").val();
+        var email = $("#email").val();
         var password = $("#password").val();
         var vercode = $("#vercode").val().toLowerCase();
         var vercode_right = $("#vercodes_right").text().toLowerCase();
-        var text_reg = /^[\S]{4,12}$/;
+        var email_reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        var password_reg = /^[\S]{4,12}$/;
         // console.log(vercode);
         // console.log(vercode_right);
-        if(username ==""){
-            layer.msg("The user name cannot be empty!",
+        if(email ==""){
+            layer.msg("The email address cannot be empty!",
                 {time:1000}
             );
             return false;
@@ -141,13 +148,13 @@
             );
             return false;
         }
-        if((!text_reg.test(username)) && (username != "")){
-            layer.msg("The account must have 4 to 12 digits and no Spaces!",
+        if((!email_reg.test(email)) && (email != "")){
+            layer.msg("The Email address format is not correct!",
                 {time:1000}
             );
             return false;
         }
-        if((!text_reg.test(password)) && (password != "")){
+        if((!password_reg.test(password)) && (password != "")){
             layer.msg("The passwords must be 4 to 12 digits and no Spaces!",
                 {time:1000}
             );
@@ -159,7 +166,8 @@
             );
             return false;
         }
-        var data = JSON.stringify({'username':username,'password':password});
+        debugger
+        var data = JSON.stringify({'email':email,'password':password});
         $.ajax({
             url:"/login_check",
             data:data,
@@ -172,7 +180,7 @@
                 // console.log(res);
                 if(res == "success"){
 
-                    parent.location.href = "/login_success?username=" + username +"&visitip=" + visitip
+                    parent.location.href = "/login_success?email=" + email +"&visitip=" + visitip
                         +"&visitaddress=" + visitaddress +"&visitdate=" + visitdate;
 
                 }
@@ -184,7 +192,7 @@
                 }
                 else{
                     layer.msg("This user does not exist. Please register!",
-                        {time:1000}
+                        {time:10000}
                     );
                     parent.location.href = "/";
                 }
@@ -197,6 +205,24 @@
 
     });
 
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    //forgot password button
+    $("#fogot").click(function(){
+        //关闭当前页面
+        parent.layer.close(index);
+        //打开找回密码页面
+        parent.layer.open({
+            type: 2
+            , offset: "140px"
+            , title: "Forgot Password"
+            , content: "/forgotPsw"
+            , skin: 'title-style'
+            , area: ['600px', '580px']
+            ,cancel: function(){
+                // feedSetting();
+            }
+        });
+    });
 
     // console.log(visitip +" "+visitaddress+" "+getFormatDate() );
     /*layui.use(['carousel', 'form'], function(){

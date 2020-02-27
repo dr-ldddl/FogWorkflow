@@ -1,8 +1,8 @@
 $(document).ready(function () {
     //根据屏幕大小设置样式
     var screen = $(window).width();
-    console.log(screen);
-    if(screen < 1400){
+    // console.log(screen);
+    if(screen < 1400 && screen > 700){
         var schoolLogo = $("#schoolLogo");
         var schoolLogo_w = schoolLogo.width();
         var schoolLogo_h = schoolLogo.height();
@@ -37,6 +37,35 @@ $(document).ready(function () {
         $(".title-line1").css("font-size","27px");
         $(".title-line2").css("font-size","27px");
 
+    }
+    if(screen > 1500 && screen <1950){
+        var schoolLogo = $("#schoolLogo");
+        var schoolLogo_w = schoolLogo.width();
+        var schoolLogo_h = schoolLogo.height();
+        schoolLogo.css({
+            "width" : schoolLogo_w*0.7, "height" : schoolLogo_h*0.7
+        });
+
+        var QRCode01 = $("#QRCode01");
+        var QRCode01_w = QRCode01.width();
+        var QRCode01_h = QRCode01.height();
+        QRCode01.css({
+            "width" : QRCode01_w*0.7, "height" : QRCode01_h*0.7
+        });
+
+        var QRCode02 = $("#QRCode02");
+        var QRCode02_w = QRCode02.width();
+        var QRCode02_h = QRCode02.height();
+        QRCode02.css({
+            "width" : QRCode02_w*0.7, "height" : QRCode02_h*0.7
+        });
+
+        var clustrmap = $("#clustrmap");
+        var clustrmap_w = clustrmap.width();
+        var clustrmap_h = clustrmap.height();
+        clustrmap.css({
+            "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"-15px","top":"-120px"
+        });
     }
 
     {
@@ -733,12 +762,12 @@ $(document).ready(function () {
     $("#export").click(function () {
         // debugger;
         // 判断用户是否登录
-        if(jQuery.isEmptyObject(userJson)){
+        /*if(jQuery.isEmptyObject(userJson)){
             layer.msg("Please log in and export the data！",
                 {time:1000}
             );
             return false;
-        }
+        }*/
         var flag = false;
         $(".tr-line").each(function(){
             var text = $(this).find("td:first").text();
@@ -798,7 +827,7 @@ $(document).ready(function () {
         contentType : "application/json;charset=utf-8",
         async : false,
         success : function(res){
-            debugger
+            // debugger
             // console.log(res);
             console.log(res);
             var versionNum = res['versionNum'];
@@ -880,13 +909,13 @@ $(document).ready(function () {
 
     //意见按钮
     $(".advices").click(function(){
-        if(jQuery.isEmptyObject(userJson)){
+        /*if(jQuery.isEmptyObject(userJson)){
             layer.msg("Please log in and submit recommendations！",
                 {time:1000}
             );
             return false;
         }
-        console.log(userJson);
+        console.log(userJson);*/
         var username = userJson['username'];
         if(username == "root"){
             layer.open({

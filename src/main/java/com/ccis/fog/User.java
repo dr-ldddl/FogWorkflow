@@ -8,11 +8,9 @@ public class User {
 
     private String email;
 
-    private String address;
-
     private String organization;
 
-    private String telnumber;
+    private String subscribe;
 
     public String getUsername() {
         return username;
@@ -26,16 +24,8 @@ public class User {
         return email;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public String getOrganization() {
         return organization;
-    }
-
-    public String getTelnumber() {
-        return telnumber;
     }
 
     public void setUsername(String username) {
@@ -50,17 +40,18 @@ public class User {
         this.email = email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public void setOrganization(String organization) {
         this.organization = organization;
     }
 
-    public void setTelnumber(String telnumber) {
-        this.telnumber = telnumber;
+    public String getSubscribe() {
+        return subscribe;
     }
+
+    public void setSubscribe(String subscribe) {
+        this.subscribe = subscribe;
+    }
+
 
     @Override
     public String toString() {
@@ -68,9 +59,8 @@ public class User {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
                 ", organization='" + organization + '\'' +
-                ", telnumber='" + telnumber + '\'' +
+                ", subscribe='" + subscribe + '\'' +
                 '}';
     }
 }

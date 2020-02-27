@@ -859,7 +859,7 @@ public class IndexService {
     //用户登录校验
     public int loginCheck(User user) {
         int flag = 0;
-        String sql = "SELECT * FROM userinfo WHERE username ='" + user.getUsername() + "' AND password = '" + user.getPassword() +"'";
+        String sql = "SELECT * FROM userinfo WHERE email ='" + user.getEmail() + "' AND password = '" + user.getPassword() +"'";
 //        System.out.println("sql:" + sql);
         List<User> userList = (List<User>) jdbcTemplate.query(sql, new RowMapper<User>() {
             @Override
@@ -868,9 +868,8 @@ public class IndexService {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
                 user.setOrganization(rs.getString("organization"));
-                user.setTelnumber(rs.getString("telnumber"));
+                user.setSubscribe(rs.getString("subscribe"));
                 return user;
             }
         });
@@ -880,7 +879,7 @@ public class IndexService {
             flag = 2;
         }
         else{//用户名正确
-            sql = "SELECT * FROM userinfo WHERE username = '" + user.getUsername() + "'";
+            sql = "SELECT * FROM userinfo WHERE email = '" + user.getEmail() + "'";
             userList = (List<User>) jdbcTemplate.query(sql, new RowMapper<User>() {
                 @Override
                 public User mapRow(ResultSet rs, int i) throws SQLException {
@@ -888,9 +887,7 @@ public class IndexService {
                     user.setUsername(rs.getString("username"));
                     user.setPassword(rs.getString("password"));
                     user.setEmail(rs.getString("email"));
-                    user.setAddress(rs.getString("address"));
                     user.setOrganization(rs.getString("organization"));
-                    user.setTelnumber(rs.getString("telnumber"));
                     return user;
                 }
             });
@@ -910,9 +907,10 @@ public class IndexService {
         String username = user.getUsername();
         String password = user.getPassword();
         String email = user.getEmail();
-        String address = user.getAddress();
+//        String address = user.getAddress();
         String organization =user.getOrganization();
-        String telnumber = user.getTelnumber();
+//        String telnumber = user.getTelnumber();
+        String subscribe = user.getSubscribe();
 
         String sql = "SELECT * FROM userinfo WHERE username = '" + user.getUsername() + "'";
 
@@ -923,17 +921,17 @@ public class IndexService {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
                 user.setOrganization(rs.getString("organization"));
-                user.setTelnumber(rs.getString("telnumber"));
+                user.setSubscribe(rs.getString("subscribe"));
                 return user;
             }
         });
         if (userList.size() > 0){
             return "existed";
         }
-        sql = "INSERT INTO userinfo (username,password,email,address,organization,telnumber) VALUES ('"
-                + username +"','"+ password + "','" + email + "','" + address + "','" + organization + "','" + telnumber +"')";
+        sql = "INSERT INTO userinfo (username,password,email,organization,subscribe) VALUES ('"
+                + username +"','"+ password + "','" + email + "','"
+                + organization+ "','" + subscribe +"')";
 //        System.out.println(sql);
         int insert_flag = jdbcTemplate.update(sql);
 //        System.out.println(insert_flag);
@@ -946,8 +944,8 @@ public class IndexService {
     }
 
     //查询用户信息
-    public User getUser(String userName) {
-        String sql = "SELECT * FROM userinfo WHERE username = '" + userName + "'";
+    public User getUser(String email) {
+        String sql = "SELECT * FROM userinfo WHERE email = '" + email + "'";
 //        System.out.println("sql:"+sql);
         List<User>  userList = (List<User>) jdbcTemplate.query(sql, new RowMapper<User>() {
             @Override
@@ -956,9 +954,8 @@ public class IndexService {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
                 user.setOrganization(rs.getString("organization"));
-                user.setTelnumber(rs.getString("telnumber"));
+                user.setSubscribe(rs.getString("subscribe"));
                 return user;
             }
         });
@@ -1107,5 +1104,53 @@ public class IndexService {
 
         System.out.println(JSON.toJSONString(advicesList));
         return JSON.toJSONString(advicesList);
+    }
+
+    //重置密码
+    public String resetPsw(String emailAddress , String password) {
+        String sql_select = "SELECT * FROM userinfo where email='" + emailAddress +"'";
+        List<User>  userList = (List<User>) jdbcTemplate.query(sql_select, new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int i) throws SQLException {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setOrganization(rs.getString("organization"));
+                user.setSubscribe(rs.getString("subscribe"));
+                return user;
+            }
+        });
+        if(userList.size() == 0){
+            return "none";
+        }
+        else{
+            String sql = "update userinfo set password='" + password + "' where email='" + emailAddress +"'";
+            int insert_flag = jdbcTemplate.update(sql);
+            if(insert_flag == 1){
+                return "success";
+            }
+            else{
+                return "failure";
+            }
+        }
+
+    }
+
+    public int registerEmailCheck(String emailAddress) {
+        String sql_select = "SELECT * FROM userinfo where email='" + emailAddress +"'";
+        List<User>  userList = (List<User>) jdbcTemplate.query(sql_select, new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int i) throws SQLException {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setOrganization(rs.getString("organization"));
+                user.setSubscribe(rs.getString("subscribe"));
+                return user;
+            }
+        });
+        return userList.size();
     }
 }
