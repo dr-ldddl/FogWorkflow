@@ -467,13 +467,24 @@ $(document).ready(function () {
     });
 
     $("#select_file_btn").click(function () {
-        return $("#select-file").click();
+        // return $("#select-file").click();
+        layer.open({
+            type: 2
+            , offset: "140px"
+            , title: "Select Custom XML File"
+            , content: "/selectCustomFile"
+            , skin: 'title-style'
+            , area: ['1000px', '650px']
+            ,cancel: function(){
+                feedSetting();
+            }
+        });
     });
 
     // 上传自定义的xml文件
-    $("#select-file").change(function () {
+    /*$("#select-file").change(function () {
         var formData = new FormData();
-        formData.append("file",$(this)[0].files[0])
+        formData.append("file",$(this)[0].files[0]);
         $.ajax({
             url:"/customFile",
             type:"POST",
@@ -492,7 +503,51 @@ $(document).ready(function () {
             }
         })
         $(this).val("");
+    });*/
+
+
+
+    // 转化自定义的xml文件
+    $("#trans_workflow").click(function () {
+        // console.log("ddd");
+         $("#import-file").click();
+
     });
+    $("#import-file").change(function () {
+        var WorkflowData = new FormData();
+        WorkflowData.append("file",$(this)[0].files[0]);
+        $.ajax({
+            url:"/transformFile",
+            type:"POST",
+            data:WorkflowData,
+            dataType:"text",
+            //上传文件无需缓存
+            cache: false,
+            //用于对data参数进行序列化处理 这里必须false
+            processData: false,
+            contentType: false,
+            mimeType:"multipart/form-data",
+           success:function (data) {
+               // alert("Transform Success!"+"  Saved in :E:/" );
+               console.log(data);
+               var url = "/getfinalXML?filename=" + data; //提交数据和下载地址
+
+               var form = $("<form></form>").attr("action", url).attr("method", "post");
+               //将数据赋值给Input进行form表单提交数据
+               form.append($("<input></input>").attr("type", "hidden").attr("name", "queryJson").attr("value", data));
+               form.appendTo('body').submit().remove(); //模拟提交
+            },
+            error:function () {
+                alert("Transform Error!");
+            }
+        })
+
+    });
+
+
+
+
+
 
     // 开始模拟，传入simulation/compare
     function start(url) {
@@ -517,18 +572,43 @@ $(document).ready(function () {
         json.nodeSize = nodeSize;
 
 
-        if ($("#custom").prop("checked")) {
+       /* if ($("#custom").prop("checked")) {
             var fileType = custom.substring(custom.length - 4);
             var customName = custom.substring(0,custom.length - 4);
             var customArr = customName.split('_');
-            var reg1 = /^[A-Za-z]+$/;
+            var reg1 = /^[A-Za-z0-9]+$/;
             var reg2 = /^\d+$/;
+            // console.log(fileType);
+            // console.log(customArr);
+            // console.log(fileType != ".xml");
+            // console.log(customArr.length != 2 );
+            // console.log(!reg1.test(customArr[0]));
+            // console.log(!reg2.test(customArr[1]));
             if(fileType != ".xml" || customArr.length != 2 || !reg1.test(customArr[0]) || !reg2.test(customArr[1])){
                 tips("The file format you selected is incorrect. Please select again!");
                 return;
             }
             json.custom = custom;
-        }
+        }*/
+       console.log(custom);
+       if($(".workflow_custom").hasClass("layui-form-radioed")){
+           var fileType = custom.substring(custom.length - 4);
+           var customName = custom.substring(0,custom.length - 4);
+           var customArr = customName.split('_');
+           var reg1 = /^[A-Za-z0-9]+$/;
+           var reg2 = /^\d+$/;
+           // console.log(fileType);
+           // console.log(customArr);
+           // console.log(fileType != ".xml");
+           // console.log(customArr.length != 2 );
+           // console.log(!reg1.test(customArr[0]));
+           // console.log(!reg2.test(customArr[1]));
+           if(fileType != ".xml" || customArr.length != 2 || !reg1.test(customArr[0]) || !reg2.test(customArr[1])){
+               tips("The file format you selected is incorrect. Please select again!");
+               return;
+           }
+           json.custom = custom;
+       }
         json.deadline = deadline;
 
         var data = $("#parent_cloud_tips").text();
@@ -815,8 +895,10 @@ $(document).ready(function () {
                 // feedSetting();
             }
         });*/
-        window.location.href = "/drawWorkflow";
+        // window.location.href = 'http://47.74.84.61:8089/index';
+        window.location.href = "http://127.0.0.1:8089/index";
     });
+
 
     //获取版本信息
     $.ajax({
@@ -945,7 +1027,39 @@ $(document).ready(function () {
 
 
     });
+
+    //workflow setting 单选按钮1
+    $(".workflow_example").click(function(){
+        $(this).addClass("layui-form-radioed");
+        $(this).html("<i class=\"layui-anim layui-icon layui-anim-scaleSpring\"></i><div></div>");
+        $(".workflow_custom").removeClass("layui-form-radioed");
+        $(".workflow_custom").html("<i class=\"layui-anim layui-icon\"></i><div></div>");
+
+        $("#sType").attr("disabled",false);
+        $("#amount").attr("disabled",false);
+        $("#custom_input").attr("disabled", true);
+        $("#select_file_btn").attr("disabled", true);
+    });
+
+    // workflow setting单选按钮2
+    $(".workflow_custom").click(function(){
+        $(this).addClass("layui-form-radioed");
+        $(this).html("<i class=\"layui-anim layui-icon layui-anim-scaleSpring\"></i><div></div>");
+        $(".workflow_example").removeClass("layui-form-radioed");
+        $(".workflow_example").html("<i class=\"layui-anim layui-icon\"></i><div></div>");
+
+        $("#sType").attr("disabled",true);
+        $("#amount").attr("disabled",true);
+        $("#custom_input").attr("disabled", false);
+        $("#select_file_btn").attr("disabled", false);
+
+    });
+
 });
+function loadCustomXml(xmlName){
+    console.log(xmlName);
+    $("#custom_input").val(xmlName);
+}
 function parents_blur(obj){
     if(obj.className.indexOf("input_even")){
         // console.log(obj.className);

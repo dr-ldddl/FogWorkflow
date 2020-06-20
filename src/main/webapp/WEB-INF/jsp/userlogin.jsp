@@ -126,7 +126,7 @@
         var password = $("#password").val();
         var vercode = $("#vercode").val().toLowerCase();
         var vercode_right = $("#vercodes_right").text().toLowerCase();
-        var email_reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        var email_reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
         var password_reg = /^[\S]{4,12}$/;
         // console.log(vercode);
         // console.log(vercode_right);

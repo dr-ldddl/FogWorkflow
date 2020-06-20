@@ -38,7 +38,7 @@ body {
 
 .middle-div {
     width: 1000px;
-    height: 380px;
+    height: 390px;
     margin:0 auto;
 }
 .middle-sep-div {
@@ -59,7 +59,7 @@ body {
 .line-sep-div {
     background: #aab9c3;
     width: 1px;
-    height: 370px;
+    height: 380px;
     float: left;
     margin-left: 5px;
     margin-right: 5px;
@@ -67,7 +67,7 @@ body {
 }
 .right-div {
     width: 449px;
-    height: 370px;
+    height: 380px;
     float: left;
 }
 .number-div {
@@ -101,9 +101,9 @@ button {
 #select_file_btn {
     background-color: #75dbed;
     /*style="margin-left:10px;margin-top:-4px;width:184px;"*/
-    margin-left:15px;
-    margin-top:1px;
-    width:176px;
+    margin-left:-40px;
+    margin-top:-4px;
+    width:75px;
     height:30px;
     line-height: 1.5;
     /*position: relative;*/
@@ -112,9 +112,17 @@ button {
 }
 #draw_workflow {
     background-color: #75dbed;
+    margin-left:0px;
+    margin-top:-4px;
+    width:120px;
+    height:30px;
+    line-height: 1.5;
+}
+#trans_workflow {
+    background-color: #75dbed;
     margin-left:15px;
     margin-top:8px;
-    width:176px;
+    width:150px;
     height:30px;
     line-height: 1.5;
 }
@@ -221,7 +229,7 @@ button {
     width: 450px;
     height: 20px;
     float: top;
-    margin-top: 12px;
+    margin-top: 15px;
 }
 .strategy-label {
     width: 150px;
@@ -332,8 +340,8 @@ button {
 
 }
 .deadline-label {
-    width: 80px;
-    height: 20px;
+    width: 70px;
+    height: 30px;
     margin-top: 15px;
     margin-left: 10px;
     float: left;
@@ -604,6 +612,17 @@ input:checked+label::after {
     top:25px;
     left:20px;
     font-family:"微软雅黑";
+}
+
+.workflow_example{
+    position: relative;
+    left:-400px;
+    top: -8px;
+}
+.workflow_custom{
+    position: relative;
+    left:-209px;
+    top: -6px;
 }
 
 .youtube {

@@ -114,9 +114,18 @@ button {
     background-color: #75dbed;
     margin-left:15px;
     margin-top:8px;
-    width:176px;
+    width:80px;
     height:30px;
     line-height: 1.5;
+}
+#trans_workflow {
+    background-color: #75dbed;
+    margin-left:15px;
+    margin-top:8px;
+    width:80px;
+    height:30px;
+    line-height: 1.5;
+    position: relative;
 }
 
 #strategy {

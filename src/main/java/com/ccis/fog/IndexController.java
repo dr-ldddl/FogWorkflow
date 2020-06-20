@@ -1,7 +1,10 @@
 package com.ccis.fog;
 
+
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -9,7 +12,12 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +31,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.tools.IpUtil;
+import javax.xml.transform.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
@@ -32,16 +43,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.io.Console;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 @Controller
 @RequestMapping("/")
@@ -50,6 +61,8 @@ public class IndexController {
     private IndexService indexService;
     @Autowired
     EmailService emailService;
+
+
 
     private static String verCode_email = "";
     @ResponseBody
@@ -167,6 +180,9 @@ public class IndexController {
     private String visitIp = "";
     private String visitAddress = "";
     private String visitDate = "";
+
+
+
 
 
 
@@ -349,6 +365,95 @@ public class IndexController {
     public String customFile(@RequestParam("file") MultipartFile file){
         return indexService.upload(file);
     }
+
+    @ResponseBody
+    @RequestMapping("transformFile")
+    public String  transformFile(@RequestParam("file") MultipartFile file,HttpServletResponse response) throws IOException {
+         domparse xml=new domparse();
+         String  getfile=indexService.uploadgetloaction(file);
+         System.out.println("上传路径为： "+getfile);
+       //*String getfile="B:/Abiye/ActivitiExplorer/src/main/resources/transform/Epigenomics_24 _activiti.xml";*//*
+        xml.getDocument(getfile);//加载需要导入的xml文件，并进行解析
+        xml.intitialdata();//节点信息初始化
+        xml.deleteNode();//删除根节点信息进行重构，节点坐标信息仍然保留
+        xml.creatNode();//创建xml任务节点
+        xml.createdge();//创建xml边
+        xml.edgedependency();//创建边依赖
+        xml.deleteionode();//删除头尾无用依赖节点
+        xml.saveXml();
+        System.out.println("执行完成！");
+        return xml.finalName;
+
+        
+        //return xml.back();
+
+
+    }
+
+    public static byte[] toByteArrFromFile(String path) throws Exception{
+        File inFile = new File(path);
+        FileInputStream fileInputStream = new FileInputStream(inFile);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        int i;
+        //转化为字节数组流
+        while ((i = fileInputStream.read()) != -1) {
+            byteArrayOutputStream.write(i);
+        }
+        fileInputStream.close();
+        // 把文件存在一个字节数组中
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        byteArrayOutputStream.close();
+        return bytes;
+    }
+    @ResponseBody
+    @RequestMapping("getfinalXML")
+    public void getfinalXML(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        /*String fileName = request.getParameter("filename");
+        byte[] exportBytes = new byte[];
+        ByteArrayInputStream in = new ByteArrayInputStream(exportBytes);
+        IOUtils.copy(in, response.getOutputStream());
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+        response.flushBuffer();*/
+
+        ////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////
+        String fileName = request.getParameter("filename");
+        System.out.print(fileName);
+        File file = new File("E:", fileName);
+//        File file = new File("/root/sim/dax/",fileName);
+//        response.setContentType("application/octet-stream");
+//        response.setHeader("Content-Disposition","attachment;filename=" + fileName);
+//        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            byte[] buffer = new byte[128];
+            int count = 0;
+            domparse xml=new domparse();
+//            String xmlName = xml.finalName;
+//            fileName = new String(xmlName.getBytes(),"ISO-8859-1");
+//            response.setHeader("Content-Disposition", "attachment; filename=" + xmlName);
+            response.setContentType("bin;charset=iso8859_1");
+            while ((count = fis.read(buffer)) > 0) {
+
+
+                response.getOutputStream().write(buffer, 0, count);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            fis.close();
+        }
+        //return xml.back();
+
+
+    }
+
 
     @ResponseBody
     @RequestMapping("export")
@@ -546,5 +651,35 @@ public class IndexController {
         String result = indexService.resetPsw(emailAddress , password);
         return result;
     }
+
+    //跳转到自定义工作流文件列表页面
+    @RequestMapping("selectCustomFile")
+    public String selectCustomFile(Model model) {
+
+        return "customFileChose";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "getxmlfile")
+    public String getXmlFile(){
+        String path = "E:\\activitiXML";
+//        String path = "/root/sim/dagXML/";
+        File file = new File(path);
+        File[] files = file.listFiles();
+        JSONArray gResTable =new JSONArray();
+        for (File img:files) {
+            gResTable.add(img.getName());
+        }
+        System.out.print(gResTable);
+        return gResTable.toJSONString();
+    }
+    //跳转到示例工作流文件列表页面
+    @RequestMapping("selectExampleFile")
+    public String exampleFileChose() {
+
+        return "exampleFileChose";
+    }
+
 }
 

@@ -37,6 +37,22 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.io.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+
 
 @Service
 public class IndexService {
@@ -84,6 +100,11 @@ public class IndexService {
     static public int ga_repeat;
     static public long pso_time;
     static public long ga_time;
+
+
+
+
+
 
     public String initTypeList() {
         JSONObject jsonObject = new JSONObject();
@@ -852,6 +873,24 @@ public class IndexService {
         }
         return fileName;
     }
+    public String uploadgetloaction(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        if (!file.isEmpty()) {
+            File filepath = new File(xml_path);
+            if (!filepath.exists())
+                filepath.mkdirs();
+            try {
+                // 转存文件
+                file.transferTo(new File(xml_path + fileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        String location=xml_path+fileName;
+
+        return location;
+    }
+
 
     //@Resource ：自动注入，项目启动后会实例化一个JdbcTemplate对象,省去初始化工作。
     @Resource
@@ -1153,4 +1192,8 @@ public class IndexService {
         });
         return userList.size();
     }
+
+
+
+
 }
