@@ -984,6 +984,8 @@ public class IndexService {
 
     //查询用户信息
     public User getUser(String email) {
+
+
         String sql = "SELECT * FROM userinfo WHERE email = '" + email + "'";
 //        System.out.println("sql:"+sql);
         List<User>  userList = (List<User>) jdbcTemplate.query(sql, new RowMapper<User>() {
@@ -995,11 +997,27 @@ public class IndexService {
                 user.setEmail(rs.getString("email"));
                 user.setOrganization(rs.getString("organization"));
                 user.setSubscribe(rs.getString("subscribe"));
+                user.setXmlfiles(rs.getString("xmlfiles"));
                 return user;
             }
         });
 //        System.out.println("userlist" + userList);
         User user= userList.get(0);
+       /* String xmlfiles = user.getXmlfiles();
+        JSONArray files= new JSONArray();
+        JSONArray xmlfiles_json = JSONArray.parseArray(xmlfiles);
+        for (int i = 0;i< xmlfiles_json.size(); i++){
+            files.add(xmlfiles_json.get(i).toString());
+            System.out.println(xmlfiles_json.get(i).toString());
+        }
+
+        files.add("file1");
+        files.remove("file2");//file2为指定名称
+        String xmlfiles_update = "update userinfo set xmlfiles ='" + files.toString() + "' where email='" + email +"'";;
+        System.out.println(xmlfiles_update);
+        int insert_flag = jdbcTemplate.update(xmlfiles_update);
+        System.out.println(insert_flag);
+        System.out.println(files);*/
         return user;
     }
 
@@ -1176,6 +1194,7 @@ public class IndexService {
 
     }
 
+    //注册邮箱检查
     public int registerEmailCheck(String emailAddress) {
         String sql_select = "SELECT * FROM userinfo where email='" + emailAddress +"'";
         List<User>  userList = (List<User>) jdbcTemplate.query(sql_select, new RowMapper<User>() {
@@ -1193,7 +1212,27 @@ public class IndexService {
         return userList.size();
     }
 
+    //查询用户创建的xml文件名称
+    public String getXmlFile(User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
 
-
-
+        String sql_select = "SELECT * FROM userinfo where email = '"+ email + "' and password = '" + password + "'";
+        List<User>  userList = (List<User>) jdbcTemplate.query(sql_select, new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int i) throws SQLException {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setOrganization(rs.getString("organization"));
+                user.setSubscribe(rs.getString("subscribe"));
+                user.setXmlfiles(rs.getString("xmlfiles"));
+                return user;
+            }
+        });
+        User user_return = userList.get(0);
+        System.out.println(user_return);
+        return "";
+    }
 }
