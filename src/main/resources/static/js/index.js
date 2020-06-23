@@ -109,7 +109,7 @@ $(document).ready(function () {
                     // $("#customXML").empty();
                     for(var i = 0; i < xmlfils.length; i++){
                         // debugger
-                        console.log(xmlfils[i]);
+                        // console.log(xmlfils[i]);
                         $("#customXML").append('<option value="'+i+'">'+xmlfils[i]+'</option>');
 
                     }
@@ -925,10 +925,16 @@ $(document).ready(function () {
         }
         var email = userJson['email'];
         var password = userJson['password'];
-        console.log(email);
-        console.log(password);
+        // console.log(email);
+        // console.log(password);
         // window.location.href = 'http://47.74.84.61:8089/index?email=" + email + "&password=" + password';
-        window.location.href = "http://127.0.0.1:8089/index?email=" + email + "&password=" + password;
+        // window.location.href = "http://127.0.0.1:8089/index?email=" + email + "&password=" + password;
+        $.cookie("email",email,{expires:7});
+        $.cookie("password",password,{expires:7});
+        window.location.href = "http://127.0.0.1:8089/index";
+
+
+
     });
 
 
