@@ -90,6 +90,7 @@ $(document).ready(function () {
 
         var typeJson = new Object();
         var userJson = new Object();
+        var xmlMame = new Object();
         //获取完整用户信息
         $.ajax({
             url:"/getUser",
@@ -103,6 +104,15 @@ $(document).ready(function () {
                     userJson = eval("("+res+")");
                     // console.log(userJson);
                     var username = userJson['username'];
+                    var xmlfils = eval("("+userJson['xmlfiles']+")");
+                    console.log(xmlfils);
+                    // $("#customXML").empty();
+                    for(var i = 0; i < xmlfils.length; i++){
+                        // debugger
+                        console.log(xmlfils[i]);
+                        $("#customXML").append('<option value="'+i+'">'+xmlfils[i]+'</option>');
+
+                    }
                     $("#username_a").html($("#username_a").html().replace('我',username));
                     $("#userinfo_div").show();
                     $("#login_div").hide();
@@ -132,6 +142,26 @@ $(document).ready(function () {
                 alert("import error!");
             }
         });
+        //获取自定义xml文件
+
+        
+        /*$.ajax({
+            url:"/getxmlfile",
+            type:"POST",
+            // data:"",
+            dataType:"text",
+            async: false,
+            contentType: "application/json",
+            success:function (res) {
+                //console.log(res);
+                 var xmlDetail = eval("("+res+")");
+                 xmlMame = xmlDetail[0];
+
+            },
+            error:function () {
+                alert("import error!");
+            }
+        });*/
 
     }
 
@@ -163,6 +193,7 @@ $(document).ready(function () {
     }
 
     showTypeSelect();
+
 
     function sortNumber(a,b) {
         return parseInt(a) - parseInt(b);
@@ -348,6 +379,8 @@ $(document).ready(function () {
         changeNumbers();
 
     });
+
+
 
     // Fog Computing Environment Setting文本框内容改变事件
     $(".number_input").change(function(){
@@ -559,7 +592,8 @@ $(document).ready(function () {
         var workflow_type = $("#sType").find("option:selected").text();
         var nodeSize = $("#amount").find("option:selected").text();
         var daxPath = workflow_type + "_" + nodeSize + ".xml";
-        var custom = $("#custom_input").val();
+        // var custom = $("#custom_input").val();
+        var custom = $("#customXML").find("option:selected").text();
         var deadline = $("#deadline").val();
 
         var json = new Object();
@@ -592,7 +626,7 @@ $(document).ready(function () {
         }*/
        console.log(custom);
        if($(".workflow_custom").hasClass("layui-form-radioed")){
-           var fileType = custom.substring(custom.length - 4);
+           /*var fileType = custom.substring(custom.length - 4);
            var customName = custom.substring(0,custom.length - 4);
            var customArr = customName.split('_');
            var reg1 = /^[A-Za-z0-9]+$/;
@@ -606,7 +640,7 @@ $(document).ready(function () {
            if(fileType != ".xml" || customArr.length != 2 || !reg1.test(customArr[0]) || !reg2.test(customArr[1])){
                tips("The file format you selected is incorrect. Please select again!");
                return;
-           }
+           }*/
            json.custom = custom;
        }
         json.deadline = deadline;
@@ -840,7 +874,6 @@ $(document).ready(function () {
 
     // 导出表格数据
     $("#export").click(function () {
-        // debugger;
         // 判断用户是否登录
         /*if(jQuery.isEmptyObject(userJson)){
             layer.msg("Please log in and export the data！",
@@ -884,19 +917,18 @@ $(document).ready(function () {
 
     //可视化工作流
     $("#draw_workflow").click(function(){
-        /*layer.open({
-            type: 2
-            , offset: "140px"
-            , title: "Draw Workflow"
-            , content: "drawWorkflow"
-            , skin: 'title-style'
-            , area: ['1400px', '780px']
-            ,cancel: function(){
-                // feedSetting();
-            }
-        });*/
-        // window.location.href = 'http://47.74.84.61:8089/index';
-        window.location.href = "http://127.0.0.1:8089/index";
+        if(jQuery.isEmptyObject(userJson)){
+            layer.msg("Please log in！",
+                {time:1000}
+            );
+            return false;
+        }
+        var email = userJson['email'];
+        var password = userJson['password'];
+        console.log(email);
+        console.log(password);
+        // window.location.href = 'http://47.74.84.61:8089/index?email=" + email + "&password=" + password';
+        window.location.href = "http://127.0.0.1:8089/index?email=" + email + "&password=" + password;
     });
 
 
@@ -1030,29 +1062,42 @@ $(document).ready(function () {
 
     //workflow setting 单选按钮1
     $(".workflow_example").click(function(){
+        //设置Custom单选框和当前单选框
         $(this).addClass("layui-form-radioed");
         $(this).html("<i class=\"layui-anim layui-icon layui-anim-scaleSpring\"></i><div></div>");
         $(".workflow_custom").removeClass("layui-form-radioed");
         $(".workflow_custom").html("<i class=\"layui-anim layui-icon\"></i><div></div>");
 
+        //设置下拉框允许点击和不允许点击
         $("#sType").attr("disabled",false);
         $("#amount").attr("disabled",false);
         $("#custom_input").attr("disabled", true);
         $("#select_file_btn").attr("disabled", true);
+        $("#customXML").attr("disabled",true);
     });
 
     // workflow setting单选按钮2
     $(".workflow_custom").click(function(){
+        // 判断用户是否登录
+        var flag_isLogin = jQuery.isEmptyObject(userJson);
+        if(flag_isLogin){
+            layer.msg("Please log in！",
+                {time:1000}
+            );
+            return false;
+        }
+        //设置Example单选框和当前单选框
         $(this).addClass("layui-form-radioed");
         $(this).html("<i class=\"layui-anim layui-icon layui-anim-scaleSpring\"></i><div></div>");
         $(".workflow_example").removeClass("layui-form-radioed");
         $(".workflow_example").html("<i class=\"layui-anim layui-icon\"></i><div></div>");
 
+        //设置下拉框允许点击和不允许点击
         $("#sType").attr("disabled",true);
         $("#amount").attr("disabled",true);
         $("#custom_input").attr("disabled", false);
         $("#select_file_btn").attr("disabled", false);
-
+        $("#customXML").attr("disabled",false);
     });
 
 });

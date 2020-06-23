@@ -73,13 +73,17 @@
         <%--<div class="youtube">
             <span>Scan QR code to enter</span>
         </div>--%>
-        <img id="QRCode01" src="/images/QRCode01.png">
+        <a href="https://youtu.be/AsMovcuSkx8">
+            <img id="QRCode01" src="/images/QRCode01.png">
+        </a>
     </div>
     <div class="foot-QRCode2">
         <%--<div class="github">
             <span>Scan QR code to enter</span>
         </div>--%>
-        <img id="QRCode02" src="/images/QRCode02.png">
+        <a href="https://github.com/ISEC-AHU/FogWorkflowSim">
+            <img id="QRCode02" src="/images/QRCode02.png">
+        </a>
     </div>
 </div>
 <%--底栏 start--%>
@@ -260,7 +264,7 @@
                 <div class="strategy-content-div">
                     <div class="workflow_example layui-unselect layui-form-radio layui-form-radioed "><i class="layui-anim layui-icon layui-anim-scaleSpring"></i><div></div></div>
                     <div class="type-label">
-                        &nbsp;&nbsp;&nbsp;&nbsp;Type:
+                        &nbsp;&nbsp;&nbsp;&nbsp;Example&nbsp;&nbsp;Type:
                     </div>
                     <select id="sType" class="type-select"></select>
                     <div class="amount-label">Amount:</div>
@@ -274,12 +278,13 @@
                     <div class="workflow_custom layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div></div></div>
                     <div class="custom-checkbox">
                         <%--<input id="custom" type="checkbox"/>--%>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom:
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom&nbsp;&nbsp;&nbsp;Type:
                     </div>
-                    <input class="custom-input" id="custom_input" type="text" disabled="disabled"/>
-                    <input class="custom-input" style="display: none" type="file" id="select-file"/>
+                    <select id="customXML" class="type-select" style="margin-top:2px;margin-left:43px;" disabled></select>
+                    <%--<input class="custom-input" id="custom_input" type="text" disabled="disabled"/>
+                    <input class="custom-input" style="display: none" type="file" id="select-file"/>--%>
                     <%--<button class="layui-btn layui-btn-radius layui-btn-primary" id="select_file_btn" disabled="disabled" style="margin-left:10px;margin-top:-4px;">Select File</button>--%>
-                    <button id="select_file_btn" class="layui-btn layui-btn-radius layui-btn-normal">Select</button>
+                    <%--<button id="select_file_btn" class="layui-btn layui-btn-radius layui-btn-normal" disabled="disabled" >Select</button>--%>
                     <button id="draw_workflow" class = "layui-btn layui-btn-radius">Draw Workflow</button>
                 </div>
                 <%--<div class="strategy-content-div">

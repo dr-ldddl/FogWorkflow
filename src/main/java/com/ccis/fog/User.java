@@ -12,6 +12,8 @@ public class User {
 
     private String subscribe;
 
+    private String xmlfiles;
+
     public String getUsername() {
         return username;
     }
@@ -26,6 +28,10 @@ public class User {
 
     public String getOrganization() {
         return organization;
+    }
+
+    public String getXmlfiles() {
+        return xmlfiles;
     }
 
     public void setUsername(String username) {
@@ -52,6 +58,9 @@ public class User {
         this.subscribe = subscribe;
     }
 
+    public void setXmlfiles(String xmlfiles) {
+        this.xmlfiles = xmlfiles;
+    }
 
     @Override
     public String toString() {
@@ -61,6 +70,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", organization='" + organization + '\'' +
                 ", subscribe='" + subscribe + '\'' +
+                ", xmlfiles='" + xmlfiles + '\'' +
                 '}';
     }
 }

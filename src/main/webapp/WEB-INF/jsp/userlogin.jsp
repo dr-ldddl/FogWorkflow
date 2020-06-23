@@ -166,7 +166,6 @@
             );
             return false;
         }
-        debugger
         var data = JSON.stringify({'email':email,'password':password});
         $.ajax({
             url:"/login_check",

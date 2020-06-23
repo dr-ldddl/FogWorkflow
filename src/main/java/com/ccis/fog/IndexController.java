@@ -1,6 +1,6 @@
 package com.ccis.fog;
 
-
+import java.util.Calendar;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -34,6 +34,11 @@ import org.tools.IpUtil;
 import javax.xml.transform.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
 
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
@@ -262,10 +267,11 @@ public class IndexController {
         return typeJson;
     }
 
-//    获取登录用户的完整信息
+    //    获取登录用户的完整信息
     @ResponseBody
     @RequestMapping("getUser")
     public String getUser(){
+
         String userJson = "";
         if(email != ""){
             User user = indexService.getUser(email);
@@ -662,22 +668,36 @@ public class IndexController {
 
     @ResponseBody
     @RequestMapping(value = "getxmlfile")
-    public String getXmlFile(){
-        String path = "E:\\activitiXML";
+    public String getXmlFile(@RequestBody User user){
+
+       /* String path = "E:\\activitiXML";
 //        String path = "/root/sim/dagXML/";
         File file = new File(path);
         File[] files = file.listFiles();
-        JSONArray gResTable =new JSONArray();
+        JSONArray xmlName = new JSONArray();
+        JSONArray xmlTime = new JSONArray();
+        JSONArray xmlDetail = new JSONArray();
         for (File img:files) {
-            gResTable.add(img.getName());
+            Calendar cal = Calendar.getInstance();
+            long time = file.lastModified();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            cal.setTimeInMillis(time);
+            System.out.println("修改时间 " + formatter.format(cal.getTime()));
+            xmlName.add(img.getName());
+            xmlTime.add(formatter.format(cal.getTime()));
         }
-        System.out.print(gResTable);
-        return gResTable.toJSONString();
+        xmlDetail.add(xmlName);
+        xmlDetail.add(xmlTime);
+        System.out.print(xmlDetail);
+        return xmlDetail.toJSONString();*/
+
+//        System.out.println(user);
+        String result = indexService.getXmlFile(user);
+       return result;
     }
     //跳转到示例工作流文件列表页面
     @RequestMapping("selectExampleFile")
     public String exampleFileChose() {
-
         return "exampleFileChose";
     }
 

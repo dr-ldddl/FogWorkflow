@@ -140,7 +140,7 @@ public class domparse {
         s=namemaps.item(2).getNodeValue();//存放工作流名称
         String node_No = String.valueOf(nodenumber);
         finalName = s+"_"+node_No +".xml";
-        loction="/root/sim/dax/"+s+"_"+node_No +".xml";
+//        loction="/root/sim/dax/"+s+"_"+node_No +".xml";
           loction="E:/activitiXML/"+s+"_"+node_No +".xml";
         loction="E:/"+s+".xml";
          System.out.println("文件名："+s);

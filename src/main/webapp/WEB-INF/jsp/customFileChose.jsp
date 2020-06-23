@@ -24,8 +24,8 @@
     <thead>
     <tr>
         <th>Chose</th>
-        <th>XMLFileName</th>
-
+        <th>XML FileName</th>
+        <th>Creation Time</th>
     </tr>
     </thead>
     <tbody id="xml_th">
@@ -55,14 +55,22 @@ $(document).ready(function(){
         contentType: "application/json",
         success:function (res) {
             console.log(res);
-            xmlFiles = eval("("+res+")");
+            var xmlFiles = eval("("+res+")");
+            var xmlName = xmlFiles[0];
+            var xmlTime = xmlFiles[1];
+            console.log(xmlName);
+            console.log(xmlTime);
             var html ="";
-            for(var i = 0; i < xmlFiles.length; i++){
-                var xmlName = xmlFiles[i];
-                console.log(xmlName)
+            for(var i = 0; i < xmlName.length; i++){
+                var xmlName_item = xmlName[i];
+                var xmlTime_item = xmlTime[i];
+                console.log(xmlName_item);
+                console.log(xmlTime_item);
                 html += "<tr>";
+
                 html +=     "<td>"+ "<div class=\" chose_radio layui-unselect layui-form-radio\" value="+ xmlName +"><i class=\"layui-anim layui-icon\"></i><div></div></div>" +"</td>";
-                html +=     "<td>"+ xmlName +"</td>";
+                html +=     "<td>"+ xmlName_item +"</td>";
+                html +=     "<td>"+ xmlTime_item +"</td>";
                 html += "</tr>";
             }
             $("#xml_th").html(html);

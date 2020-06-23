@@ -110,11 +110,13 @@ button {
     /*padding: 0.1rem 0.1rem 1.8rem;*/
     /*border-left: .1rem solid #d0d0d0;*/
 }
+
+
 #draw_workflow {
     background-color: #75dbed;
-    margin-left:0px;
+    margin-left:-30px;
     margin-top:-4px;
-    width:120px;
+    width:127px;
     height:30px;
     line-height: 1.5;
 }
@@ -288,6 +290,7 @@ button {
     width: 120px;
     height: 30px;
     float: left;
+    margin-left:40px;
     margin-top:-5px;
     border-radius:15px 15px 15px 15px;
     color:#9ca0a6;
@@ -301,14 +304,14 @@ button {
     font-family:"微软雅黑";
 }
 .amount-select {
-    width: 100px;
+    width: 62px;
     height: 30px;
     margin-top:-5px;
-    margin-left: 20px;
+    margin-left: 18px;
     float: left;
     border-radius:15px 15px 15px 15px;
     color:#9ca0a6;
-    text-indent: 30px;
+    text-indent: 10px;
 }
 .custom-checkbox {
     width: 80px;
@@ -621,8 +624,8 @@ input:checked+label::after {
 }
 .workflow_custom{
     position: relative;
-    left:-209px;
-    top: -6px;
+    left:-249px;
+    top: -3px;
 }
 
 .youtube {
