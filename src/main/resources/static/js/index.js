@@ -91,40 +91,56 @@ $(document).ready(function () {
         var typeJson = new Object();
         var userJson = new Object();
         var xmlMame = new Object();
-        //获取完整用户信息
-        $.ajax({
-            url:"/getUser",
-            type:"POST",
-            data:"",
-            dataType:"text",
-            async:false,
-            contentType:"application/json",
-            success:function (res) {
-                if(res != ""){
-                    userJson = eval("("+res+")");
-                    // console.log(userJson);
-                    var username = userJson['username'];
-                    var xmlfils = eval("("+userJson['xmlfiles']+")");
-                    console.log(xmlfils);
-                    // $("#customXML").empty();
-                    for(var i = 0; i < xmlfils.length; i++){
-                        // debugger
-                        // console.log(xmlfils[i]);
-                        $("#customXML").append('<option value="'+i+'">'+xmlfils[i]+'</option>');
 
-                    }
-                    $("#username_a").html($("#username_a").html().replace('我',username));
-                    $("#userinfo_div").show();
-                    $("#login_div").hide();
-                }else{
-                    // console.log(userJson);
-                    // console.log("no user");
-                }
-            },
-            error:function(res){
-                layer.msg("Failed to obtain user information!");
+        //获取完整用户信息
+        var cookieEmail = $.cookie("email");
+        var emailAddress = $("#emailAddress").val();
+        if(emailAddress!=""){
+            $.cookie("email",emailAddress,{ expires: 1});
+        }else{
+            if (cookieEmail == "null"){
+                emailAddress = "";
+            }else{
+                emailAddress = $.cookie("email");
             }
-        });
+        }
+        if(emailAddress != ""){
+            $.cookie("email",emailAddress,{ expires: 7});
+            $.ajax({
+                url:"/getUser",
+                type:"GET",
+                data:{"email":emailAddress},
+                dataType:"text",
+                async:false,
+                contentType:"application/json",
+                success:function (res) {
+                    if(res != ""){
+                        userJson = eval("("+res+")");
+                        // console.log(userJson);
+                        var username = userJson['username'];
+                        var xmlfils = eval("("+userJson['xmlfiles']+")");
+                        // console.log(xmlfils);
+                        // $("#customXML").empty();
+                        for(var i = 0; i < xmlfils.length; i++){
+                            // debugger
+                            // console.log(xmlfils[i]);
+                            $("#customXML").append('<option value="'+i+'">'+xmlfils[i]+'</option>');
+
+                        }
+                        $("#username_a").html($("#username_a").html().replace('我',username));
+                        $("#userinfo_div").show();
+                        $("#login_div").hide();
+                    }else{
+                        // console.log(userJson);
+                        // console.log("no user");
+                    }
+                },
+                error:function(res){
+                    layer.msg("Failed to obtain user information!");
+                }
+            });
+        }
+
         //获取algorithms参数
         $.ajax({
             url:"/getAlgorithms",
@@ -562,7 +578,7 @@ $(document).ready(function () {
             mimeType:"multipart/form-data",
            success:function (data) {
                // alert("Transform Success!"+"  Saved in :E:/" );
-               console.log(data);
+               // console.log(data);
                var url = "/getfinalXML?filename=" + data; //提交数据和下载地址
 
                var form = $("<form></form>").attr("action", url).attr("method", "post");
@@ -687,6 +703,7 @@ $(document).ready(function () {
                         char_json.y = y;
                         char_json.x_name = "Iterations";
                         char_json.y_name = optimize_objective;
+                        char_json.alg = al_array[0];
                         $("#chart_content").text(JSON.stringify(char_json));
 
                         layer.open({
@@ -929,9 +946,19 @@ $(document).ready(function () {
         // console.log(password);
         // window.location.href = 'http://47.74.84.61:8089/index?email=" + email + "&password=" + password';
         // window.location.href = "http://127.0.0.1:8089/index?email=" + email + "&password=" + password;
-        $.cookie("email",email,{expires:7});
-        $.cookie("password",password,{expires:7});
+        debugger;
+
+        $.cookie('email', null);
+        $.cookie('password', null);
+        $.cookie("email",email,{ expires: 7});
+        $.cookie("password",password,{ expires: 7});
+        // console.log("cookie:");
+        // // console.log($.cookie("email"));
+        // console.log($.cookie("password"));
         window.location.href = "http://127.0.0.1:8089/index";
+        // window.location.href = 'http://47.74.84.61:8089/index';
+
+
 
 
 
@@ -949,7 +976,7 @@ $(document).ready(function () {
         success : function(res){
             // debugger
             // console.log(res);
-            console.log(res);
+            // console.log(res);
             var versionNum = res['versionNum'];
             var note = res['note'];
             var updateTime = res['updateTime'];
@@ -1021,6 +1048,8 @@ $(document).ready(function () {
 
     //退出登录
     $("#logout").click(function(){
+        $.cookie("email",null);
+        $.cookie("password",null);
         // console.log("logout");
        /* $("#userinfo_div").hide();
         $("#login_div").show();*/
