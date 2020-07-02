@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     //根据屏幕大小设置样式
     var screen = $(window).width();
     // console.log(screen);
@@ -91,20 +92,22 @@ $(document).ready(function () {
         var typeJson = new Object();
         var userJson = new Object();
         var xmlMame = new Object();
-
         //获取完整用户信息
         var cookieEmail = $.cookie("email");
+        console.log(cookieEmail == undefined)
         var emailAddress = $("#emailAddress").val();
         if(emailAddress!=""){
             $.cookie("email",emailAddress,{ expires: 1});
         }else{
-            if (cookieEmail == "null"){
+            if (cookieEmail == "null" || cookieEmail == undefined){
                 emailAddress = "";
             }else{
                 emailAddress = $.cookie("email");
             }
         }
+        console.log(emailAddress);
         if(emailAddress != ""){
+            emailAddress = emailAddress.replace("%20","").replace("%40","@");
             $.cookie("email",emailAddress,{ expires: 7});
             $.ajax({
                 url:"/getUser",
@@ -597,9 +600,10 @@ $(document).ready(function () {
 
 
 
-
+    var ajaxbg = $("#background,#progressBar");
     // 开始模拟，传入simulation/compare
     function start(url) {
+        // ajaxbg.show();
         var cloudServer = $("#cloudServer").val();
         var fogServer = $("#fogServer").val();
         var mobile = $("#mobile").val();
@@ -671,12 +675,11 @@ $(document).ready(function () {
         });
         json.alSet = al_array;
 
-
         $.ajax({
             type: "POST",
             url: url,
             data: {json: JSON.stringify(json)},
-            async: false,
+            async: true,
             dataType:"JSON",
             success: function (res) {
                 // console.log(res);
@@ -705,7 +708,7 @@ $(document).ready(function () {
                         char_json.y_name = optimize_objective;
                         char_json.alg = al_array[0];
                         $("#chart_content").text(JSON.stringify(char_json));
-
+                        //关闭加载动画
                         layer.open({
                             type: 2
                             , offset: "140px"
@@ -715,6 +718,7 @@ $(document).ready(function () {
                             , area: ['1000px', '580px']
                             ,cancel: function(){
                                 // feedSetting();
+                                ajaxbg.hide();
                             }
                         });
                     }
@@ -734,7 +738,8 @@ $(document).ready(function () {
                         source.push(list[i]);
                     }
                     $("#chart_content").text(JSON.stringify(source));
-
+                    //关闭加载动画
+                    // ajaxbg.hide();
                     layer.open({
                         type: 2
                         , offset: "140px"
@@ -744,9 +749,12 @@ $(document).ready(function () {
                         , area: ['1000px', '580px']
                         ,cancel: function(){
                             // feedSetting();
+                            ajaxbg.hide();
                         }
                     });
                 }
+                //关闭加载动画
+                ajaxbg.hide();
             },
         });
     }
@@ -761,6 +769,8 @@ $(document).ready(function () {
             return;
         }
         var url = "simulation";
+        //开启加载动画
+        ajaxbg.show();
         start(url);
     });
 
@@ -773,8 +783,14 @@ $(document).ready(function () {
             tips("Please select at least two algorithms!");
             return;
         }
+        debugger
         var url = "compare";
+        console.log("dddd");
+        /*layer.msg("Please waiting！"
+        );*/
+        ajaxbg.show();
         start(url);
+        // ajaxbg.hide();
     });
 
     // 表格添加数据
@@ -952,10 +968,21 @@ $(document).ready(function () {
         $.cookie('password', null);
         $.cookie("email",email,{ expires: 7});
         $.cookie("password",password,{ expires: 7});
+
         // console.log("cookie:");
-        // // console.log($.cookie("email"));
+        // console.log($.cookie("email"));
         // console.log($.cookie("password"));
-        window.location.href = "http://127.0.0.1:8089/index";
+
+
+
+        // var email_encode = encrypt(email);
+        // var password_encode = encrypt(password);
+        var email_encode = encode64(email);
+        var password_encode = encode64(password);
+        // console.log(email_encode+"ggggggggggggggg");
+        // window.location.href = "http://127.0.0.1:8089/index?email=" + email_encode + "&password=" + password_encode;
+        // window.location.href = "http://127.0.0.1:8089/index";
+        window.location.href = 'http://www.iseclab.org.cn:8089/index';
         // window.location.href = 'http://47.74.84.61:8089/index';
 
 
@@ -1152,4 +1179,9 @@ function parents_blur(obj){
 function parents_focus(obj){
     obj.className += ' input_border';
 }
+
+
+
+
+
 
