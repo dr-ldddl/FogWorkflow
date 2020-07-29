@@ -1,7 +1,8 @@
 $(document).ready(function () {
+
     //根据屏幕大小设置样式
     var screen = $(window).width();
-    // console.log(screen);
+    console.log(screen);
     if(screen < 1400 && screen > 700){
         var schoolLogo = $("#schoolLogo");
         var schoolLogo_w = schoolLogo.width();
@@ -49,6 +50,8 @@ $(document).ready(function () {
         var QRCode01 = $("#QRCode01");
         var QRCode01_w = QRCode01.width();
         var QRCode01_h = QRCode01.height();
+        // console.log(QRCode01_w);
+        // console.log(QRCode01_h);
         QRCode01.css({
             "width" : QRCode01_w*0.7, "height" : QRCode01_h*0.7
         });
@@ -64,7 +67,7 @@ $(document).ready(function () {
         var clustrmap_w = clustrmap.width();
         var clustrmap_h = clustrmap.height();
         clustrmap.css({
-            "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"-15px","top":"-120px"
+            "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"150px","top":"-182px"
         });
     }
 
@@ -91,20 +94,22 @@ $(document).ready(function () {
         var typeJson = new Object();
         var userJson = new Object();
         var xmlMame = new Object();
-
         //获取完整用户信息
         var cookieEmail = $.cookie("email");
+        // console.log(cookieEmail == undefined)
         var emailAddress = $("#emailAddress").val();
         if(emailAddress!=""){
             $.cookie("email",emailAddress,{ expires: 1});
         }else{
-            if (cookieEmail == "null"){
+            if (cookieEmail == "null" || cookieEmail == undefined){
                 emailAddress = "";
             }else{
                 emailAddress = $.cookie("email");
             }
         }
+        // console.log(emailAddress);
         if(emailAddress != ""){
+            emailAddress = emailAddress.replace("%20","").replace("%40","@");
             $.cookie("email",emailAddress,{ expires: 7});
             $.ajax({
                 url:"/getUser",
@@ -597,9 +602,10 @@ $(document).ready(function () {
 
 
 
-
+    var ajaxbg = $("#background,#progressBar");
     // 开始模拟，传入simulation/compare
     function start(url) {
+        // ajaxbg.show();
         var cloudServer = $("#cloudServer").val();
         var fogServer = $("#fogServer").val();
         var mobile = $("#mobile").val();
@@ -671,12 +677,11 @@ $(document).ready(function () {
         });
         json.alSet = al_array;
 
-
         $.ajax({
             type: "POST",
             url: url,
             data: {json: JSON.stringify(json)},
-            async: false,
+            async: true,
             dataType:"JSON",
             success: function (res) {
                 // console.log(res);
@@ -705,7 +710,7 @@ $(document).ready(function () {
                         char_json.y_name = optimize_objective;
                         char_json.alg = al_array[0];
                         $("#chart_content").text(JSON.stringify(char_json));
-
+                        //关闭加载动画
                         layer.open({
                             type: 2
                             , offset: "140px"
@@ -715,6 +720,7 @@ $(document).ready(function () {
                             , area: ['1000px', '580px']
                             ,cancel: function(){
                                 // feedSetting();
+                                ajaxbg.hide();
                             }
                         });
                     }
@@ -734,7 +740,8 @@ $(document).ready(function () {
                         source.push(list[i]);
                     }
                     $("#chart_content").text(JSON.stringify(source));
-
+                    //关闭加载动画
+                    // ajaxbg.hide();
                     layer.open({
                         type: 2
                         , offset: "140px"
@@ -744,9 +751,12 @@ $(document).ready(function () {
                         , area: ['1000px', '580px']
                         ,cancel: function(){
                             // feedSetting();
+                            ajaxbg.hide();
                         }
                     });
                 }
+                //关闭加载动画
+                ajaxbg.hide();
             },
         });
     }
@@ -761,6 +771,8 @@ $(document).ready(function () {
             return;
         }
         var url = "simulation";
+        //开启加载动画
+        ajaxbg.show();
         start(url);
     });
 
@@ -773,8 +785,14 @@ $(document).ready(function () {
             tips("Please select at least two algorithms!");
             return;
         }
+        debugger
         var url = "compare";
+        // console.log("dddd");
+        /*layer.msg("Please waiting！"
+        );*/
+        ajaxbg.show();
         start(url);
+        // ajaxbg.hide();
     });
 
     // 表格添加数据
@@ -952,11 +970,21 @@ $(document).ready(function () {
         $.cookie('password', null);
         $.cookie("email",email,{ expires: 7});
         $.cookie("password",password,{ expires: 7});
+
         // console.log("cookie:");
-        // // console.log($.cookie("email"));
+        // console.log($.cookie("email"));
         // console.log($.cookie("password"));
+
+
+
+        // var email_encode = encrypt(email);
+        // var password_encode = encrypt(password);
+        var email_encode = encode64(email);
+        var password_encode = encode64(password);
+        // console.log(email_encode+"ggggggggggggggg");
+        // window.location.href = "http://127.0.0.1:8089/index?email=" + email_encode + "&password=" + password_encode;
         window.location.href = "http://127.0.0.1:8089/index";
-        // window.location.href = 'http://47.74.84.61:8089/index';
+        // window.location.href = 'http://www.iseclab.org.cn:8089/index';
 
 
 
@@ -1153,3 +1181,105 @@ function parents_focus(obj){
     obj.className += ' input_border';
 }
 
+/*
+*功能：对url加密算法（只针对window.location.href跳转，不针对post表单提交及ajax方式）
+*算法：对于暴露在浏览器地址栏中的属性值进行加密，如一个属性为agentID=1，
+*     若对1加密后为k230101io934jksd32r4，说明如下：
+*     前三位为随机数；
+*     第四到第五位为要加密字符转换成16进制的位数，
+*       如：要加密字符为15转换成16进制为f，位数为1，则第四、五位为01；
+*     第六位标识要加密字符为何种字符，0：纯数字，1：字符
+*       若是字符和数字的混合，则不加密；
+*     从第七位开始为16进制转换后的字符（字母和非数字先转换成asc码）；
+*     若加密后的字符总位数不足20位，则用随机数补齐到20位，若超出20位，则不加随机数。
+*     即加密后总位数至少为20位。
+*/
+function encode16(str){
+    str=str.toLowerCase();
+    if (str.match(/^[-+]?\d*$/) == null){//非整数字符，对每一个字符都转换成16进制，然后拼接
+        var s=str.split("");
+        var temp="";
+        for(var i=0;i<s.length;i++){
+            s[i]=s[i].charCodeAt();//先转换成Unicode编码
+            s[i]=s[i].toString(16);
+            temp=temp+s[i];
+        }
+        return temp+"{"+1;//1代表字符
+    }else{//数字直接转换成16进制
+        str=parseInt(str).toString(16);
+    }
+    return str+"{"+0;//0代表纯数字
+}
+
+
+function produceRandom(n){
+    var num="";
+    for(var i=0;i<n;i++)
+    {
+        num+=Math.floor(Math.random()*10);
+    }
+    return num;
+}
+
+//主加密函数
+function encrypt(str){
+    var encryptStr="";//最终返回的加密后的字符串
+    encryptStr+=produceRandom(3);//产生3位随机数
+
+    var temp=encode16(str).split("{");//对要加密的字符转换成16进制
+    var numLength=temp[0].length;//转换后的字符长度
+    numLength=numLength.toString(16);//字符长度换算成16进制
+    if(numLength.length==1){//如果是1，补一个0
+        numLength="0"+numLength;
+    }else if(numLength.length>2){//转换后的16进制字符长度如果大于2位数，则返回，不支持
+        return "";
+    }
+    encryptStr+=numLength;
+
+    if(temp[1]=="0"){
+        encryptStr+=0;
+    }else if(temp[1]=="1"){
+        encryptStr+=1;
+    }
+
+    encryptStr+=temp[0];
+
+    if(encryptStr.length<20){//如果小于20位，补上随机数
+        var ran=produceRandom(20-encryptStr.length);
+        encryptStr+=ran;
+    }
+    return encryptStr;
+}
+
+
+
+var keyStr = "ABCDEFGHIJKLMNOP" + "QRSTUVWXYZabcdef" + "ghijklmnopqrstuv"
+    + "wxyz0123456789+/" + "=";
+
+function encode64(input) {
+
+    var output = "";
+    var chr1, chr2, chr3 = "";
+    var enc1, enc2, enc3, enc4 = "";
+    var i = 0;
+    do {
+        chr1 = input.charCodeAt(i++);
+        chr2 = input.charCodeAt(i++);
+        chr3 = input.charCodeAt(i++);
+        enc1 = chr1 >> 2;
+        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+        enc4 = chr3 & 63;
+        if (isNaN(chr2)) {
+            enc3 = enc4 = 64;
+        } else if (isNaN(chr3)) {
+            enc4 = 64;
+        }
+        output = output + keyStr.charAt(enc1) + keyStr.charAt(enc2)
+            + keyStr.charAt(enc3) + keyStr.charAt(enc4);
+        chr1 = chr2 = chr3 = "";
+        enc1 = enc2 = enc3 = enc4 = "";
+    } while (i < input.length);
+
+    return output;
+}

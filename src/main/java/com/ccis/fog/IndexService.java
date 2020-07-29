@@ -81,6 +81,12 @@ public class IndexService {
     @Value("${sim.xml_path}")
     private String xml_path;
 
+    @Value("${dagXmlPath}")
+    private String dagxmlpath;
+
+    @Value("${activitiXmlPath}")
+    private String activitixmlpath;
+
 //    static public Map<String, List<Job>> records = new HashMap<>();
     static public Map<String, List<OutputEntity>> outputMap = new HashMap<>();
     static public int cloudNumber = 1;
@@ -214,7 +220,11 @@ public class IndexService {
         if (customPath == null || customPath.equals("")) {
             daxPath = xml_path + json.getString("daxPath");
         } else {
-            daxPath = xml_path + customPath;
+//            daxPath = xml_path + customPath;
+//            daxPath = "E:\\dagXML\\" + customPath;
+//            System.out.println(dagxmlpath +"llllllllllllll");
+            daxPath = dagxmlpath +customPath;
+            System.out.println(daxPath +"llllllllllllll");
         }
         nodeSize = json.getInteger("nodeSize");
         deadlineString = json.getString("deadline");
@@ -950,6 +960,7 @@ public class IndexService {
         String organization =user.getOrganization();
 //        String telnumber = user.getTelnumber();
         String subscribe = user.getSubscribe();
+        JSONArray xmlfiles =new JSONArray();
 
         String sql = "SELECT * FROM userinfo WHERE username = '" + user.getUsername() + "'";
 
@@ -962,15 +973,16 @@ public class IndexService {
                 user.setEmail(rs.getString("email"));
                 user.setOrganization(rs.getString("organization"));
                 user.setSubscribe(rs.getString("subscribe"));
+                user.setXmlfiles(rs.getString("xmlfiles"));
                 return user;
             }
         });
         if (userList.size() > 0){
             return "existed";
         }
-        sql = "INSERT INTO userinfo (username,password,email,organization,subscribe) VALUES ('"
+        sql = "INSERT INTO userinfo (username,password,email,organization,subscribe,xmlfiles) VALUES ('"
                 + username +"','"+ password + "','" + email + "','"
-                + organization+ "','" + subscribe +"')";
+                + organization+ "','" + subscribe +"','" + xmlfiles.toString() +"')";
 //        System.out.println(sql);
         int insert_flag = jdbcTemplate.update(sql);
 //        System.out.println(insert_flag);

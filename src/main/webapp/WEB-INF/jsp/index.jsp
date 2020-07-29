@@ -3,24 +3,11 @@
 <head>
     <title>FogWorkflowSim</title>
     <meta charset="utf-8">
-    <script src="/jquery/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.all.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
-    <script type="text/javascript" src="/js/jquery.table2excel.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
-    <%--<script type="text/javascript" src="/js/global.js"></script>--%>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body>
-<script>
-    //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function(){
-        var element = layui.element;
 
-        //…
-    });
-</script>
 <%--标题栏start--%>
 <div class="title-bar">
 
@@ -37,7 +24,7 @@
     </div>
     <div id="login_div" class="user buttons">
         <div class="layui-btn-group">
-            <button id="user_login" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Login</button>
+            <button id="user_login" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Login </button>
             <button id="user_register" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Register</button>
         </div>
     </div>
@@ -62,12 +49,13 @@
 
 <%--底部logo start--%>
 <div class="foot-logo">
-    <%--<div class="clustrrmap"><br><div style="text-align:left"><a href="http://www.clustrmaps.com/map/sites.google.com/site/drxiaoliu/" style="line-height:1.6;font-size:10pt;background-color:transparent" title="Visitor Map for sites.google.com/site/drxiaoliu/" rel="nofollow"><img src="//www.clustrmaps.com/map_v2.png?u=qPeh&amp;d=g_dgqlQ4X6dkN1YcoFlwuHFkkaOhicHGj3rCFl246DI"></a></div>--%>
     <img id="schoolLogo" src="/images/schoolLogo.png">
 </div>
+
 <div class="foot-QRCode">
     <div id="clustrmap" class="clustrmap">
-        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
+        <script type="text/javascript" id="clustrmaps" src="/jquery/clustrmaps.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
+        <%--<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>--%>
     </div>
     <div class="foot-QRCode1">
         <%--<div class="youtube">
@@ -331,5 +319,26 @@
 </div>
 </div>
 
+<div id="background" class="background" style="display: none; "></div>
+<div id="progressBar" class="progressBar" style="display: none; ">Data loading, please wait...</div>
+
+<input type="hidden" id="emailAddress" value='${emailAddress}'>
+
 </body>
+<script src="/jquery/jquery-1.9.1.min.js"></script>
+<script src="/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="/layui/layui.all.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.table2excel.js"></script>
+<script type="text/javascript" src="/jquery/jsencrypt.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<%--<script type="text/javascript" src="/js/global.js"></script>--%>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
 </html>

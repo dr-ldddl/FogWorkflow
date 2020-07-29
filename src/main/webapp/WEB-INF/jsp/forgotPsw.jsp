@@ -131,6 +131,7 @@
                             //这里时设置当时间到0的时候重新设置点击事件，并且默认time修改为60
                             $("#sendemail").text("Get verification code");
                             $("#sendemail").removeClass("layui-btn-disabled");
+                            $("#sendemail").attr("disabled",false);
                             countTime = 60;
                             clearInterval(t);
                         }else{
@@ -138,6 +139,7 @@
                             $("#sendemail").text("Send again " + countTime);
                             $("#sendemail").addClass("layui-btn-disabled");
                             console.log(countTime);
+                            $("#sendemail").attr("disabled",true);
                             countTime--;
                         }
                     }, 1000);

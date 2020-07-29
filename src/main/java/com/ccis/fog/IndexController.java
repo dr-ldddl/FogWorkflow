@@ -27,9 +27,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.tools.IpUtil;
 import javax.xml.transform.*;
 import javax.xml.parsers.DocumentBuilder;
@@ -203,7 +205,7 @@ public class IndexController {
     }
 //    @ResponseBody
     @RequestMapping(value = "login_success")
-    public String login_success(@RequestParam("email") String emailAddress, @RequestParam("visitip") String visitip, @RequestParam("visitaddress") String visitaddress, @RequestParam("visitdate") String visitdate) {
+    public String login_success(RedirectAttributes model, @RequestParam("email") String emailAddress, @RequestParam("visitip") String visitip, @RequestParam("visitaddress") String visitaddress, @RequestParam("visitdate") String visitdate) {
         /*String typeJson = indexService.initTypeList();
         model.addAttribute("typeJson", typeJson);
         return "index";*/
@@ -213,7 +215,8 @@ public class IndexController {
         System.out.println("visitdate:" + visitdate);*/
 
         email = emailAddress;
-
+        model.addFlashAttribute("emailAddress",emailAddress);
+        System.out.println(emailAddress);
 
         VisitCount visitcount = new VisitCount();
         visitcount.setEmail(email);
@@ -269,9 +272,9 @@ public class IndexController {
 
     //    获取登录用户的完整信息
     @ResponseBody
-    @RequestMapping("getUser")
-    public String getUser(){
-
+    @RequestMapping(value = "getUser")
+    public String getUser(@RequestParam String email){
+        System.out.println(email);
         String userJson = "";
         if(email != ""){
             User user = indexService.getUser(email);
@@ -701,5 +704,21 @@ public class IndexController {
         return "exampleFileChose";
     }
 
+    @Resource
+    public JdbcTemplate jdbcTemplate;//fog项目后台代码
+    @ResponseBody
+    @RequestMapping( value = "/transmitUser")
+    public void  transmitUSER(@RequestParam("email") String Email){
+        System.out.println("transmitUser");
+        System.out.println(Email);
+        String id="test_1024";//更新current_use表,使得后fogdesign项目获得值
+        String sql1 = "update current_user_tabler set email = ? where Identi = ?";
+        int temp1 = jdbcTemplate.update(sql1, email,id);
+        if(temp1 > 0) {
+            System.out.println("current_use表中账户密码增加成功");
+        }
+        else
+            System.out.println("current_use表中账户密码增加失败");
+    }
 }
 

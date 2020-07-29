@@ -10,6 +10,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -48,7 +49,14 @@ public class domparse {
 
         // String getfile="B:/Abiye/ActivitiExplorer/src/main/resources/transform/subprocess.xml";
 
+    @Value("${sim.xml_path}")
+    private String xml_path;
 
+    @Value("${dagXmlPath}")
+    private String dagxmlpath;
+
+    @Value("${activitiXmlPath}")
+    private String activitixmlpath;
 
     //选择文件路径
     public String selectfile(){
@@ -140,15 +148,16 @@ public class domparse {
         s=namemaps.item(2).getNodeValue();//存放工作流名称
         String node_No = String.valueOf(nodenumber);
         finalName = s+"_"+node_No +".xml";
-//        loction="/root/sim/dax/"+s+"_"+node_No +".xml";
-          loction="E:/activitiXML/"+s+"_"+node_No +".xml";
-        loction="E:/"+s+".xml";
-         System.out.println("文件名："+s);
+//        loction="/root/sim/activitiXML/"+s+"_"+node_No +".xml";
+//          loction="E:/activitiXML/"+s+"_"+node_No +".xml";
+        loction = activitixmlpath +s+"_"+node_No +".xml";
+//        loction="E:/"+s+".xml";
+//         System.out.println("文件名："+s);
         // s.concat(".xml");
 
         loction.concat(s);
 
-        System.out.println("文件名："+loction);
+//        System.out.println("文件名："+loction);
         /*获取边信息*/
         NodeList Brandedge = doc.getElementsByTagName("sequenceFlow");//获得所有标签名字为sequenceFlow的节点
         edgenumber=Brandedge.getLength();
