@@ -10,10 +10,7 @@ import org.fog.utils.Config;
 import org.fog.utils.FogEvents;
 import org.fog.utils.FogLinearPowerModel;
 import org.fog.utils.NetworkUsageMonitor;
-import org.workflowsim.CondorVM;
-import org.workflowsim.FileItem;
-import org.workflowsim.Job;
-import org.workflowsim.WorkflowEngine;
+import org.workflowsim.*;
 import org.workflowsim.utils.Parameters.FileType;
 
 import java.util.ArrayList;
@@ -140,6 +137,12 @@ public class Controller extends SimEntity{
 		getmobile().setEnergyConsumption(getMobileEnergy());
 		List<Job> jobList = wfEngine.getJobsReceivedList();
 		for(Job job : jobList){
+			//task runtime
+			List<Task> taskList = job.getTaskList();
+			for (Task task: taskList) {
+				System.out.println(task.getRunlength());
+			}
+
 			if(getDC(job.getVmId()) == getcloud().getId()){
 				count1++;
 				WAN_sendInput += job.getInputsize();

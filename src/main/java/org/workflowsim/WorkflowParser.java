@@ -253,7 +253,6 @@ public final class WorkflowParser {
                         }
                         task.setFileList(mFileList);
                         this.getTaskList().add(task);
-
                         /**
                          * Add dependencies info.
                          */

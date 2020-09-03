@@ -2,8 +2,9 @@ $(document).ready(function () {
 
     //根据屏幕大小设置样式
     var screen = $(window).width();
-    // console.log(screen);
+    console.log(screen);
     if(screen < 1400 && screen > 700){
+        console.log(111);
         var schoolLogo = $("#schoolLogo");
         var schoolLogo_w = schoolLogo.width();
         var schoolLogo_h = schoolLogo.height();
@@ -40,6 +41,7 @@ $(document).ready(function () {
 
     }
     if(screen > 1500 && screen <1950){
+        console.log(222);
         var schoolLogo = $("#schoolLogo");
         var schoolLogo_w = schoolLogo.width();
         var schoolLogo_h = schoolLogo.height();
@@ -65,7 +67,8 @@ $(document).ready(function () {
         var clustrmap_w = clustrmap.width();
         var clustrmap_h = clustrmap.height();
         clustrmap.css({
-            "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"-15px","top":"-120px"
+            "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"150px","top":"-182px"
+            // "width" : clustrmap_w*0.5, "height" : clustrmap_h*0.5,"right":"-15px","top":"-120px"
         });
     }
 
@@ -977,12 +980,12 @@ $(document).ready(function () {
 
         // var email_encode = encrypt(email);
         // var password_encode = encrypt(password);
-        var email_encode = encode64(email);
-        var password_encode = encode64(password);
+        // var email_encode = encode64(email);
+        // var password_encode = encode64(password);
         // console.log(email_encode+"ggggggggggggggg");
         // window.location.href = "http://127.0.0.1:8089/index?email=" + email_encode + "&password=" + password_encode;
-        // window.location.href = "http://127.0.0.1:8089/index";
-        window.location.href = 'http://www.iseclab.org.cn:8089/index';
+        window.location.href = "http://127.0.0.1:8089/index";
+        // window.location.href = 'http://www.iseclab.org.cn:8089/index';
         // window.location.href = 'http://47.74.84.61:8089/index';
 
 

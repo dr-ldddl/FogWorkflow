@@ -322,6 +322,10 @@ public class Task extends Cloudlet {
     	return OutputFileList;
     }
 
+    public Long getRunlength() {
+        return runlength;
+    }
+
     /**
      * Gets the total cost of processing or executing this task The original
      * getProcessingCost does not take cpu cost into it also the data file in

@@ -678,6 +678,7 @@ input:checked+label::after {
     top: -200px;
     width: 300px;
     height: 150px;
+
 }
 
 .user{

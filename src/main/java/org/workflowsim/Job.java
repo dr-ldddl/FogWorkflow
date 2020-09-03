@@ -113,28 +113,33 @@ public class Job extends Task {
     public void setProcessingCost(double cost){
     	this.Processingcost = cost;
     }
+
     public int getoffloading(){
     	return offloading;
     }
     public void setoffloading(int id){
     	this.offloading = id;
     }
+
     public double getInputsize(){
     	return Inputsize;
     }
     public void setInputsize(double size){
     	this.Inputsize = size;
     }
+
     public double getOutputsize(){
     	return Outputsize;
     }
     public void setOutputsize(double size){
     	this.Outputsize = size;
     }
+
     public double getFileSize(){
     	return FileSize;
     }
     public void setFileSize(double size){
     	this.FileSize = size;
     }
+
 }

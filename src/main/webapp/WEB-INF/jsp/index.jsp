@@ -54,8 +54,8 @@
 
 <div class="foot-QRCode">
     <div id="clustrmap" class="clustrmap">
-        <script type="text/javascript" id="clustrmaps" src="/jquery/clustrmaps.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
-        <%--<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>--%>
+        <%--<script type="text/javascript" id="clustrmaps" src="/jquery/clustrmaps.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>--%>
+        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
     </div>
     <div class="foot-QRCode1">
         <%--<div class="youtube">
