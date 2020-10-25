@@ -3,6 +3,8 @@ package com.ccis.fog;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jcraft.jsch.JSchException;
+import engine.DockerLink;
 import org.cloudbus.cloudsim.*;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.power.PowerHost;
@@ -52,6 +54,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+//import static engine.DockerLink.setRealWorkLoad;
 
 
 @Service
@@ -61,7 +64,8 @@ public class IndexService {
 //    static boolean Flag = true;//表示需要画图
 //    static boolean Flag1 = true;//判断FogEnvironmentUI需不需要重新绘制
     static List<FogDevice> fogDevices = new ArrayList<>();
-    static List<Double[]> record=new ArrayList<>();
+    public static List<Double[]> record=new ArrayList<>();
+//    public static List<Double[]> record_double = new ArrayList<>();
     final static int numOfDepts = 1;
     final static int numOfMobilesPerDept = 1;
     static int nodeSize;
@@ -76,6 +80,7 @@ public class IndexService {
 
     private static String daxPath;
     private static String customPath;
+//    private static String realEnviorment;
 //    private static File XMLFile;
 
     @Value("${sim.xml_path}")
@@ -106,6 +111,9 @@ public class IndexService {
     static public int ga_repeat;
     static public long pso_time;
     static public long ga_time;
+
+
+    public static Map<String, String> devicesInfo = new HashMap<String, String>();
 
 
 
@@ -297,6 +305,7 @@ public class IndexService {
      * @return
      */
     public JSONObject doSim(JSONObject json) {
+//        System.out.println(json);
         outputMap.clear();
         parseParams(json);
         record.clear();
@@ -325,7 +334,8 @@ public class IndexService {
                 record.add(algomean);
                 if(wfEngine.getoffloadingEngine().getOffloadingStrategy() != null)
                     System.out.println("Average offloading Strategy time = " + wfEngine.getAverageOffloadingTime());
-                long averageTime = GetAverageTime(times);times=null;
+                long averageTime = GetAverageTime(times);
+                times=null;
                 System.out.println("Average "+scheduler_method+" algorithm execution time = " + averageTime);
 //                displayTime(averageTime);
                 pso_time = averageTime;
@@ -374,6 +384,35 @@ public class IndexService {
         retJson.put("record", record);
         retJson.put("pso_time", pso_time);
         retJson.put("ga_time", ga_time);
+
+        retJson.put("mobileNumber", mobileNumber);
+        retJson.put("fogNumber", fogNumber);
+        retJson.put("cloudNumber", cloudNumber);
+//        record_double.clear();
+        DockerLink dockerLink = new DockerLink();
+        dockerLink.setRealWorkLoad();
+        /*if(realFlag.equals("1")){
+            try {
+                DockerLink.getSimulationDate();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSchException e) {
+                e.printStackTrace();
+            }
+        }*/
+//        retJson.put("record_double" , record_double);
+
+        System.out.println(retJson);
+//        for (Double[] item: record_double) {
+//            System.out.println(item[0]);
+//            System.out.println(item[1]);
+//            System.out.println(item[2]);
+//            System.out.println(item[3]);
+//            System.out.println(item[4]);
+//            System.out.println(item[5]);
+//            System.out.println(item[6]);
+//        }
+
         return retJson;
     }
     /*public JSONObject doSim(JSONObject json) {
@@ -536,8 +575,28 @@ public class IndexService {
             } else if (job.getCloudletStatus() == Cloudlet.FAILED) {
                 outputEntity.setStatus("FAILED");
             }
+            outputEntity.setRealStatus("FAILED");
             outputList.add(outputEntity);
         }
+        //对outputEntityList排序
+        Collections.sort(outputList, new Comparator<OutputEntity>() {
+            @Override
+            public int compare(OutputEntity outputEntity1, OutputEntity outputEntity2) {
+                int jobId1 = Integer.parseInt(outputEntity1.getJobId());
+                int jobId2 = Integer.parseInt(outputEntity2.getJobId());
+                int diff = jobId1 - jobId2;
+                if(diff > 0){
+                    return 1;
+                }else if(diff < 0){
+                    return -1;
+                }else{
+                    return 0;
+                }
+
+            }
+        });
+//        System.out.println("ddddd");
+//        System.out.println(outputList);
         outputMap.put(curMethod, outputList);
 
 //            printJobList(outputList0);
@@ -547,6 +606,7 @@ public class IndexService {
         record.add(a);
         return wfEngine.algorithmTime;
     }
+
 
     public void simulate(double deadline) {
         System.out.println("Starting Task...");
@@ -616,7 +676,6 @@ public class IndexService {
             /**
              * Set a offloading Strategy for OffloadingEngine
              */
-
             switch (strategy) {
                 case "All-in-Fog":
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategyAllinFog());
@@ -631,7 +690,6 @@ public class IndexService {
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(null);
                     break;
             }
-
             /**
              * Set a deadline of workflow for WorkflowEngine
              */
@@ -660,6 +718,7 @@ public class IndexService {
                 System.out.println(fogdevice.getName()+": ");
                 for (PowerHost host : list){
                     System.out.print(host.getId()+":Mips("+host.getTotalMips()+"),"+"cost("+host.getcostPerMips()+")  ");
+                    devicesInfo.put((host.getId() - 1) + "",host.getTotalMips() + "");
                 }
                 System.out.println();
             }
@@ -1246,5 +1305,57 @@ public class IndexService {
         User user_return = userList.get(0);
         System.out.println(user_return);
         return "";
+    }
+
+    //在真实环境中执行单个任务
+    public String realOperate(OutputEntity outputEntity) throws IOException, JSchException {
+        DockerLink dockerLink = new DockerLink();
+        String res_real = dockerLink.getSingleData(outputEntity);
+        return res_real;
+    }
+
+    //获取真实环境中执行的总时间，能耗，成本
+    public String getRealTotal(JSONObject outputJson) {
+        System.out.println(outputJson);
+
+        List<OutputEntity> outputEntityList = new ArrayList<>();
+
+        int count = outputJson.getInteger("count");
+        for(int i = 0 ; i < count ; i++){
+            OutputEntity outputItem = outputJson.getObject(i + "" , OutputEntity.class);
+            System.out.println(outputItem);
+            outputEntityList.add(outputItem);
+        }
+        System.out.println("outputEntityList:" + outputEntityList);
+        //统计真实环境下的执行总时间和终端设备执行时间和执行总成本
+        int realTotalTime = 0;
+        int mobileRealTotalTime = 0;
+        double realTotalCost = 0;
+
+        for (OutputEntity outputEntity: outputEntityList) {
+
+            Double realTime_item = Double.parseDouble(outputEntity.getRealTime());
+            Double realCost_item = Double.parseDouble(outputEntity.getRealCost());
+
+            //计算执行总时间
+            realTotalTime += realTime_item;
+            //计算执行总成本
+            realTotalCost += realCost_item;
+
+            //筛选出终端设备执行时间
+            String dataCenterId = outputEntity.getDataCenterId();
+            if(dataCenterId.contains("m")){
+                mobileRealTotalTime += realTime_item;
+            }
+        }
+        //计算终端执行能耗
+        int energy = 1;
+        int mobileTotalEnergy = mobileRealTotalTime * energy;
+        JSONObject resultThree = new JSONObject();
+        resultThree.put("realTotalTime" , realTotalTime);
+        resultThree.put("realTotalCost" , realTotalCost);
+        resultThree.put("mobileTotalEnergy" , mobileTotalEnergy);
+
+        return resultThree.toJSONString();
     }
 }

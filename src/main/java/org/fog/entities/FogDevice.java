@@ -805,4 +805,24 @@ public class FogDevice extends PowerDatacenter {
 			total += host.getTotalMips();
 		return total / getHostList().size();
 	}
+
+	@Override
+	public String toString() {
+		return "FogDevice{" +
+				"lockTime=" + lockTime +
+				", parentId=" + parentId +
+				", controllerId=" + controllerId +
+				", childrenIds=" + childrenIds +
+				", uplinkBandwidth=" + uplinkBandwidth +
+				", downlinkBandwidth=" + downlinkBandwidth +
+				", uplinkLatency=" + uplinkLatency +
+				", energyConsumption=" + energyConsumption +
+				", lastUtilizationUpdateTime=" + lastUtilizationUpdateTime +
+				", lastUtilization=" + lastUtilization +
+				", ExecutionTime=" + ExecutionTime +
+				", level=" + level +
+				", ratePerMips=" + ratePerMips +
+				", totalCost=" + totalCost +
+				'}';
+	}
 }

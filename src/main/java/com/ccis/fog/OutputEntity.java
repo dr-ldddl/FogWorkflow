@@ -12,6 +12,12 @@ public class OutputEntity {
     private String depth;
     private String cost;
     private String parents;
+    private String realTime;
+    private String realCost;
+    private String realStartTime;
+    private String realFinishTime;
+    private String realStatus;
+    private String workLoad;
 
     public String getJobId() {
         return jobId;
@@ -45,9 +51,7 @@ public class OutputEntity {
         this.dataCenterId = dataCenterId;
     }
 
-    public String getVmId() {
-        return vmId;
-    }
+    public String getVmId() { return vmId; }
 
     public void setVmId(String vmId) {
         this.vmId = vmId;
@@ -99,5 +103,68 @@ public class OutputEntity {
 
     public void setParents(String parents) {
         this.parents = parents;
+    }
+
+    public String getRealTime() { return realTime; }
+
+    public void setRealTime(String realTime) { this.realTime = realTime; }
+
+    public String getRealCost() { return realCost; }
+
+    public void setRealCost(String realCost) { this.realCost = realCost; }
+
+    public String getWorkLoad() {
+        return workLoad;
+    }
+
+    public void setWorkLoad(String workLoad) {
+        this.workLoad = workLoad;
+    }
+
+    public String getRealStartTime() {
+        return realStartTime;
+    }
+
+    public void setRealStartTime(String realStartTime) {
+        this.realStartTime = realStartTime;
+    }
+
+    public String getRealFinishTime() {
+        return realFinishTime;
+    }
+
+    public void setRealFinishTime(String realFinishTime) {
+        this.realFinishTime = realFinishTime;
+    }
+
+    public String getRealStatus() {
+        return realStatus;
+    }
+
+    public void setRealStatus(String realStatus) {
+        this.realStatus = realStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "OutputEntity{" +
+                "jobId='" + jobId + '\'' +
+                ", taskId='" + taskId + '\'' +
+                ", status='" + status + '\'' +
+                ", dataCenterId='" + dataCenterId + '\'' +
+                ", vmId='" + vmId + '\'' +
+                ", time='" + time + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", FinishTime='" + FinishTime + '\'' +
+                ", depth='" + depth + '\'' +
+                ", cost='" + cost + '\'' +
+                ", parents='" + parents + '\'' +
+                ", realTime='" + realTime + '\'' +
+                ", realCost='" + realCost + '\'' +
+                ", realStartTime='" + realStartTime + '\'' +
+                ", realFinishTime='" + realFinishTime + '\'' +
+                ", realStatus='" + realStatus + '\'' +
+                ", workLoad='" + workLoad + '\'' +
+                '}';
     }
 }

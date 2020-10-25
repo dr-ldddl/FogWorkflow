@@ -138,10 +138,10 @@ public class Controller extends SimEntity{
 		List<Job> jobList = wfEngine.getJobsReceivedList();
 		for(Job job : jobList){
 			//task runtime
-			List<Task> taskList = job.getTaskList();
-			for (Task task: taskList) {
-				System.out.println(task.getRunlength());
-			}
+//			List<Task> taskList = job.getTaskList();
+//			for (Task task: taskList) {
+//				System.out.println(task.getRunlength());
+//			}
 
 			if(getDC(job.getVmId()) == getcloud().getId()){
 				count1++;

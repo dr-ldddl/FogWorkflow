@@ -1,8 +1,16 @@
 body {
-    background: #F0F0F0;
+    background: #FFFFFF;
     font-family: sans-serif;
     font-size: 14px;
     font-family:"微软雅黑";
+
+    /*overflow-x: scroll; !*x轴禁止滚动*!*/
+    overflow-y: scroll;/*y轴滚动*/
+
+}
+/*隐藏div的滚动条*/
+body::-webkit-scrollbar{
+    width:0;
 }
 /*三个小图标的样式*/
 .imgs {
@@ -52,9 +60,11 @@ body {
     margin:0 auto;
 }
 .left-div {
-    width: 539px;
-    height: 370px;
-    float: left;
+    position: relative;
+    width: 100%;
+    height: 50%;
+    /*float: left;*/
+    border: #00FF00 1px solid;
 }
 .line-sep-div {
     background: #aab9c3;
@@ -66,28 +76,32 @@ body {
     margin-top: 5px;
 }
 .right-div {
-    width: 449px;
-    height: 380px;
-    float: left;
+    position: relative;
+    width: 100%;
+    height: 49%;
+    margin-left: 20px;
+    /*border: 1px solid #00FF00;*/
 }
-.number-div {
+.machine_div {
     height: 50px;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 .more-btn {
-    width: 480px;
+    width: 91%;
     margin-left: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    /*margin-top: 10px;*/
+    /*margin-bottom: 10px;*/
 }
 button {
     height: 30px;
-    font-size: 10px;
+    font-size: 1em;
 }
 .action-btn {
-    width: 234px;
-    margin-left: 30px;
+    width: 70%;
+    margin-left: 33px;
     margin-top: 0px;
+    font-size: 1em !important;
+    font-family:"微软雅黑";
 }
 
 #simulation {
@@ -114,11 +128,12 @@ button {
 
 #draw_workflow {
     background-color: #75dbed;
-    margin-left:-30px;
-    margin-top:-4px;
-    width:127px;
+    width:95%;
     height:30px;
     line-height: 1.5;
+    margin-top: 10px;
+    font-size: 1em !important;
+    font-family:"微软雅黑";
 }
 #trans_workflow {
     background-color: #75dbed;
@@ -130,39 +145,47 @@ button {
 }
 
 #strategy {
-    width:150px;
+    position: relative;
+    width:50%;
     height:24px;
     border-radius:11px 11px 11px 11px;
     color:#9ca0a6;
-    margin-top:-5px;
+    margin-top: 5px;
 
 }
 
 .setting-title-div {
     border-radius:0 15px 0 0;
-    height: 25px;
+    /*height: 25px;*/
     font-weight: bold;
     padding-left: 10px;
     padding-top: 10px;
+    padding-bottom: 5px;
     background: white;
     font-family:"微软雅黑";
 }
 .fog-environment-div {
-    width: 530px;
-    height: 290px;
-    /*background: #aab9c3;*/
+    position: relative;
+    width: 97%;
+    height: 77%;
     margin-left: 10px;
 }
 .number-left-div {
     float: left;
     background-color:#F0F0F0;
     border-radius:10px 10px 10px 10px;
+    position: relative;
+    width: 96% !important;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 .fog-top-div {
     float: left;
+    width: 98%;
 }
 .number-label {
-    width: 170px;
+    /*width: 170px;*/
     margin-top: 20px;
     margin-left: 20px;
     float: left;
@@ -170,7 +193,7 @@ button {
 }
 
 .number_div{
-    width: 70px;
+    /*width: 70px;*/
     float: left;
 }
 
@@ -180,6 +203,7 @@ button {
     /*margin-top: 10px;*/
     border-radius:10px 10px 10px 10px;
     color:#9ca0a6;
+    height: 20px;
 }
 
 .number_input {
@@ -198,7 +222,8 @@ button {
 }
 
 .show-imgs {
-    width: 245px;
+    position: relative;
+    width: 80%;
     height: 50px;
     float: left;
     margin-left: 18px;
@@ -213,7 +238,10 @@ button {
     width:0;
 }
 .action-div {
+    position: relative;
+    width: 97%;
     height: 100px;
+    margin-left: 10px;
 }
 .action-div-1 {
     height: 40px;
@@ -228,23 +256,24 @@ button {
     margin-top:20px;
 }
 .strategy-content-div {
-    width: 450px;
+    width: 100%;
     height: 20px;
     float: top;
     margin-top: 15px;
 }
 .strategy-label {
-    width: 150px;
-    margin: 0 0 0 10px;
+    /*width: 150px;*/
+    margin: 10px 0px 0px 0px;
     float: left;
 }
 .scheduling-div {
-    width: 100%;
+    /*width: 100%;*/
     height: 30px;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-left: 10px;
     float: left;
     font-family:"微软雅黑";
+    font-size: 14px;
 }
 .minmin-input {
     width: 90px;
@@ -268,9 +297,10 @@ button {
      float: left;
  }
 .objective-label {
-    width: 90px;
+    /*width: 90px;*/
     float: left;
     padding-bottom: 0;
+    margin-top: 10px;
     margin-left: 10px;
 }
 .ga-input {
@@ -287,27 +317,42 @@ button {
     font-family:"微软雅黑";
 }
 .type-select {
-    width: 120px;
+    width: 77%;
     height: 30px;
     float: left;
-    margin-left:40px;
-    margin-top:-5px;
+    /*margin-left:40px;*/
+    /*margin-top:10px;*/
     border-radius:15px 15px 15px 15px;
     color:#9ca0a6;
     text-indent: 10px;
 }
-.amount-label {
-    width: 50px;
-    height: 20px;
-    margin-left: 20px;
+
+.custom-select{
+    width: 77%;
+    height: 30px;
     float: left;
+    /*margin-left:40px;*/
+    /*margin-top:10px;*/
+    border-radius:15px 15px 15px 15px;
+    color:#9ca0a6;
+    text-indent: 10px;
+    margin-top: 10px;
+}
+
+.amount-label {
+    /*width: 50%;*/
+    height: 20px;
+    /*margin-left: 20px;*/
+    margin-top: 5px;
+    float: left;
+    font-size: 1em !important;
     font-family:"微软雅黑";
 }
 .amount-select {
-    width: 62px;
+    width: 50%;
     height: 30px;
-    margin-top:-5px;
-    margin-left: 18px;
+    /*margin-top:-5px;*/
+    margin-left: 5px;
     float: left;
     border-radius:15px 15px 15px 15px;
     color:#9ca0a6;
@@ -343,14 +388,14 @@ button {
 
 }
 .deadline-label {
-    width: 70px;
-    height: 30px;
-    margin-top: 15px;
+    /*width: 70px;*/
+    /*height: 30px;*/
+    margin-top: 20px;
     margin-left: 10px;
     float: left;
 }
 .deadline-input {
-    width: 120px;
+    width: 50%;
     height: 30px;
     float: left;
     margin-top: 10px;
@@ -358,54 +403,42 @@ button {
     border-style:none;
     outline: none;
     text-indent: 10px;
-    border: 1px solid #DBDBDB;
+    border: 1px solid #9ca0a6;
     color:#9ca0a6;
 }
 .output-div {
+    /*border: 1px red solid;*/
     height: 30px;
     margin-bottom: 10px;
 }
 .output-label {
-    width: 190px;
-    height: 20px;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 5px;
     float: left;
     font-family:"微软雅黑";
 }
 .output-time {
-    float: left;
-    height: 20px;
-    margin-left: 70px;
-    margin-top: 10px;
+    float: right;
+    /*height: 20px;*/
+    /*margin-left: 70px;*/
+    margin-top: 5px;
+    margin-right: 10px;
 }
 .output-input {
     width: 120px;
     height: 30px;
-    margin-top: 5px;
     float: left;
+    margin-left: 5px;
     border-radius:15px 15px 15px 15px;
     color:#9ca0a6;
 }
-/*.table {*/
-    /*margin-left: 5px;*/
-    /*margin-right: 5px;*/
-    /*width: 990px;*/
-    /*!*table-layout: fixed;*!*/
-/*}*/
+
 table{
     border: 1px solid #aab9c3;
     /*border-collapse: collapse;*/
 }
 
-/*table th {
-    border: 1px solid #aab9c3;
-    !*color: red;*!
-    font-weight: normal;
-    font-size: 12px;
-    height: 20px;
-    width: 30px;
-}*/
+
 
 table tr {
     height: 20px;
@@ -422,7 +455,7 @@ table td{
 
 .title-bar{
     width: 100%;
-    height:140px;
+    height:100px;
     background-color:#4597E6;
     text-align:center;
 }
@@ -441,7 +474,7 @@ table td{
 
 .title-line1 {
     color:white;
-    font-size: 35px;
+    font-size: 35vh;
     position: relative;
     top:15px;
     font-family:"微软雅黑";
@@ -449,14 +482,14 @@ table td{
 
 .title-line2 {
     color:white;
-    font-size: 35px;
+    font-size: 35vh;
     margin-top:30px;
     font-family:"微软雅黑";
 }
 
 .title-line3 {
     color:white;
-    font-size: 20px;
+    font-size: 20vh;
     margin-top:8px;
     font-family:"微软雅黑";
 }
@@ -484,9 +517,9 @@ table td{
     background-color: white;
     text-align: center;
     /*color: #bc8f8f;*/
-    position: fixed;
+    /*position: fixed;*/
     width:100%;
-    height:40px;
+    height:35px;
     bottom: 0px;
     z-index: 2;
     font-family:"微软雅黑";
@@ -500,9 +533,10 @@ table td{
 }*/
 /*修改复选框样式*/
 .al_check {
+    margin-left: 20px;
     width: 14px;
     height: 14px;
-    margin-top: 0;
+    margin-top: 3px;
     background-color: #fff;
     border: 1px solid #c9c9c9;
     border-radius: 2px;
@@ -533,14 +567,16 @@ table td{
 
 /*修改单选框样式*/
 .radio_input {
-    width: 90px;
-    height: 30px;
-    top:-5px;
+    /*width: 90px;*/
+    /*height: 30px;*/
+    /*top:-5px;*/
     /*margin: 0 0 0 10px;*/
     float: left;
     position: relative;
-    line-height: 30px;
+    /*line-height: 30px;*/
     font-family:"微软雅黑";
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
 input[name='radioGroup'] {
@@ -612,20 +648,23 @@ input:checked+label::after {
 
 .radio_option {
     position: relative;
-    top:25px;
-    left:20px;
+    margin-top:10px;
+    margin-left:20px;
     font-family:"微软雅黑";
 }
 
 .workflow_example{
     position: relative;
-    left:-400px;
-    top: -8px;
+    /*margin-left: 10px !important;*/
+    float: left;
+    margin: 0px auto auto 10px !important;
 }
+
+
 .workflow_custom{
     position: relative;
-    left:-249px;
-    top: -3px;
+    float: left;
+    margin: 10px auto auto 10px !important;
 }
 
 .youtube {
@@ -646,9 +685,11 @@ input:checked+label::after {
 
 .developer{
     color: #FFFFFF;
-    position: absolute;
-    top: 30px;
-    right:60px;
+    /*position: absolute;*/
+    /*top: 30px;*/
+    /*right:60px;*/
+    padding-top: 10px;
+    /*float: right;*/
 }
 
 .input_odd {
@@ -678,14 +719,18 @@ input:checked+label::after {
     top: -200px;
     width: 300px;
     height: 150px;
-
 }
 
 .user{
-    position: absolute;
+    /*position: absolute;
     right: 150px;
     top: 50px;
-    z-index: 1;
+    z-index: 1;*/
+
+    position: relative;
+    padding-top: 30px;
+    float: right;
+
 }
 
 .advices{
@@ -695,11 +740,19 @@ input:checked+label::after {
 }
 
 #user_login{
-    width:85px ;
+    position: relative;
+    width:50% ;
+    background-color: #4597E6;
+    color: #FFFFFF;
+    border-color: #4597E6;
 }
 
 #user_register{
-    width:85px ;
+    position: relative;
+    width:50% ;
+    background-color: #4597E6;
+    color: #FFFFFF;
+    border-color: #4597E6;
 }
 
 /*******************************/
@@ -734,4 +787,411 @@ input:checked+label::after {
     font-weight: bold;
     position: absolute;
     z-index: 2001;
+}
+
+.realenviorment-div{
+    float: left;
+    margin-top: 18px;
+    margin-left: 20px;
+}
+.realenviorment-div:hover {
+    border-color: #43adea;
+}
+
+.realenviorment-div:checked {
+    color: #fff;
+    background-color: #43adea;
+    border: 1px solid #43adea;
+}
+
+/*.realenviorment-div:after {*/
+    /*content: "✔";*/
+/*}*/
+
+#detailInfo{
+    /*border: solid #00FF00 1px;*/
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 100% !important;
+    height: 310px !important;
+    background-color: #8D8D8D ;
+    background: white url("/images/back_show.jpg");
+    background-size:100% 100%;
+}
+
+.cloudrow{
+    background-color: #00F7DE;
+     width: 30%;
+     height: 100%;
+     overflow-y: scroll;
+ }
+
+.cloudrow::-webkit-scrollbar{
+    display: none;
+}
+
+#cloudInfo{
+    background-color: rgba(255,255,255,0);
+    width: 88%;
+    height: 100%;
+    margin-left: 6%;
+}
+
+.fogrow{
+    background-color: #00F7DE;
+    width: 30%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.fogrow::-webkit-scrollbar{
+    display: none;
+}
+
+#fogInfo{
+    background-color: rgba(255,255,255,0);
+    width: 88%;
+    height: 100%;
+    margin-left: 6%;
+}
+
+.mobilerow{
+    background-color: #00F7DE;
+    width: 30%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.mobilerow::-webkit-scrollbar{
+    display: none;
+}
+
+#mobileInfo{
+    background-color: rgba(255,255,255,0);
+    width: 88%;
+    height: 100%;
+    margin-left: 6%;
+}
+
+#cloudDetail{
+    text-align: center;
+    overflow-y: scroll;
+    height: 100%;
+}
+#cloudDetail::-webkit-scrollbar{
+    display: none;
+}
+
+#fogDetail{
+    text-align: center;
+    overflow-y: scroll;
+    height: 100%;
+}
+#fogDetail::-webkit-scrollbar{
+    display: none;
+}
+
+#mobileDetail{
+    text-align: center;
+    overflow-y: scroll;
+    height: 100%;
+}
+#mobileDetail::-webkit-scrollbar{
+    display: none;
+}
+
+#runTime{
+    background-color: #FFFFFF;
+    width: 88%;
+    height: 100%;
+    margin-left: 6%;
+    background-color:rgba(255,255,255,0);
+    text-align: center;
+}
+
+#realOperate{
+    position: relative;
+    float: left;
+    margin-left: 10px;
+    /*margin-top: 3px;*/
+    background-color: #75dbed;
+    width:140px;
+    height:30px;
+    line-height: 1.5;
+}
+
+#system_logo{
+    float: left;
+    padding: 30px 0px 30px 90px;
+}
+
+#ahu_logo{
+    float: left;
+    padding: 15px 0px 10px 0px;
+}
+
+#deakin_logo{
+    float: left;
+    padding: 15px 0px 10px 0px;
+}
+
+#swinburne_logo{
+    float: left;
+    padding: 20px 0px 10px 20px;
+}
+
+#monash_logo{
+    float: left;
+    padding: 22px 0px 0px 0px;
+}
+
+
+
+
+#visit_logo{
+    /*position: absolute;
+    width: 120px;
+    height: 60px;
+    top: 30px;
+    left: 65%;*/
+
+    position: relative;
+    width: 80%;
+    height: 80%;
+    padding-top: 10px;
+}
+
+.main-left{
+    background-color: #FFFFFF;
+    float: left;
+    width: 25%;
+    height: 80%;
+    /*border: solid 1px red;*/
+}
+
+.main-right{
+    float: left;
+    width: 74%;
+    height: 80%;
+    /*border: solid 1px red;*/
+}
+
+.line-sep{
+    background: #aab9c3;
+    width: 90%;
+    height: 1px;
+    margin-left: 5%;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.main-right-div {
+    height: auto;
+    width: 100%;
+    /*margin: 0px auto 60px auto;*/
+    background:  white;
+    opacity:0.9;
+    z-index:10;
+    border-radius:15px 15px 15px 15px;
+
+}
+
+#overview_data{
+    position: relative;
+    width: 100%;
+    height: 54%;
+    /*border: 1px solid #0C0C0C;*/
+}
+
+.table-div{
+    position: relative;
+    width: 100%;
+    height: 40%;
+    /*border: 1px solid #0C0C0C;*/
+    /*overflow-y: scroll;!*y轴滚动*!*/
+}
+/*隐藏div的滚动条*/
+/*.table-div::-webkit-scrollbar{
+    width:0;
+}*/
+
+#table-data-div{
+    position: relative;
+    width: 100%;
+    height: 67%;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+/*隐藏div的滚动条*/
+#table-data-div::-webkit-scrollbar{
+    width:0;
+}
+
+#output-table-tbody{
+    margin: 0px 0px 0px 0px;
+    border:0px solid #FFFFFF;
+}
+
+.chart_item{
+    border: solid 1px #aab9c3;
+    position: relative;
+    width: 50%;
+    height: 50%;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#lineChartMain{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#barChartMain{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#pieChartMain{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#ganttChartMain{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#table-thead-div{
+    border-collapse: separate;
+    border-spacing: 0;
+    position: relative;
+    width: 100%;
+    /*border: solid 1px #aab9c3;*/
+    border-radius: 10px 10px 0px 0px;
+}
+
+#output-table{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px #000;
+    /*border-radius: 10px 10px 0px 0px;*/
+    /*border: solid 1px blue;*/
+    /*height: 89%;*/
+    /*overflow-y: scroll;*/
+ }
+#output-table tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#output-table tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#output-table tr td:first-child,
+#output-table tr td:nth-child(2),
+#output-table tr td:nth-child(3),
+#output-table tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#output-table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#output-table tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#output-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#output-table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+
+#real_loading_div{
+    /*display: none;*/
+    float: left;
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
+#real_loading{
+    display: none;
+    /*display: block;*/
+
+}
+
+.btn_realStatus_failed{
+    width: 20px;
+    height: 20px;
+    border-radius:10px 10px 10px 10px;
+    border: solid 1px #aab9c3;
+    background-color: #0000FF;
+
+}
+
+.btn_realStatus_success{
+    width: 20px;
+    height: 20px;
+    border-radius:10px 10px 10px 10px;
+    border: solid 1px #aab9c3;
+    background-color: #00FF00;
+}
+
+#data_tbody tr td{
+    position: relative;
+    width: 7.1%;
+}
+
+#output-table thead th{
+    position: relative;
+    width: 7.1%;
+}
+
+.mainContainer{
+    width: 100% !important;
+    height: 910px !important;
+    /*border: 1px solid #00ff00;*/
+    padding: 0px 0px 0px 0px !important;
+}
+
+.main_title{
+    width: 100%;
+    height:120px;
+    background-color:#4597E6;
+    text-align:center;
+
+}
+.main_middle{
+    position: relative;
+    width: 100%;
+    height: 773px;
+    /*border: 1px red solid;*/
+}
+.main_foot{
+    /*border:solid  1px red;*/
+    /*position: relative;*/
+    /*float: bottom;*/
+
+}
+
+.title_item{
+    /*border: 1px solid red;*/
+}
+
+.right_title{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.four_btn{
+    margin-top: 10px;
 }
