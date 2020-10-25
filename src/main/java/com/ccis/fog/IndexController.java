@@ -4,6 +4,7 @@ import java.util.Calendar;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jcraft.jsch.JSchException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.dom4j.Document;
@@ -201,7 +202,7 @@ public class IndexController {
         visitAddress = "";
         visitIp = "";
 
-        return "redirect:/FogWorkflowSim";
+        return "redirect:/FogWorkflowReal";
     }
 //    @ResponseBody
     @RequestMapping(value = "login_success")
@@ -225,15 +226,15 @@ public class IndexController {
         visitcount.setVisitIp(visitip);
 //        System.out.println("visitcount"+visitcount);
 //        String result = indexService.updateCount(visitcount);
-        return "redirect:/FogWorkflowSim";
+        return "redirect:/FogWorkflowReal";
 
     }
 
 
 
 //    实际上的初始化界面
-    @RequestMapping("FogWorkflowSim")
-    public String fogWorkflowSim(Model model,HttpServletRequest request){
+    @RequestMapping("FogWorkflowReal")
+    public String fogWorkflowReal(Model model,HttpServletRequest request){
         /*System.out.println(userName);
         User user = indexService.getUser(userName);
         String userJson = JSONObject.toJSONString(user);
@@ -259,7 +260,9 @@ public class IndexController {
         System.out.println(ipAddress);
         String result = indexService.updateCount(ipAddress,currentTime);
 
-        return "index";
+//        return "index";
+//        return "indextmp";
+        return "indextemp";
     }
 
 //    获取algorithms的参数
@@ -720,5 +723,29 @@ public class IndexController {
         else
             System.out.println("current_use表中账户密码增加失败");
     }
+
+    //在真实环境中执行单个任务
+    @ResponseBody
+    @RequestMapping(value = "realOperate")
+    public String realOperate(@RequestBody OutputEntity outputEntity) throws IOException, JSchException {
+
+        String real_result = indexService.realOperate(outputEntity);
+
+        System.out.println(real_result);
+        return real_result;
+    }
+
+    //获取真实环境中执行的总时间，能耗，成本
+    @ResponseBody
+    @RequestMapping(value = "getRealTotal")
+    public String getRealTotal(@RequestBody JSONObject outputJson){
+
+        String real_result = indexService.getRealTotal(outputJson);
+
+//        System.out.println(real_result);
+        return real_result;
+    }
+
+
 }
 
