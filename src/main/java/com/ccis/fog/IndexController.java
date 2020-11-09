@@ -260,9 +260,7 @@ public class IndexController {
         System.out.println(ipAddress);
         String result = indexService.updateCount(ipAddress,currentTime);
 
-//        return "index";
-//        return "indextmp";
-        return "indextemp";
+        return "index";
     }
 
 //    获取algorithms的参数
@@ -747,5 +745,82 @@ public class IndexController {
     }
 
 
+    //版本信息
+    @RequestMapping("versionInfo")
+    public String versionInfo(){
+
+        return "systemVersions";
+    }
+
+    //开发人员信息
+    @RequestMapping("developersInfo")
+    public String developersInfo(){
+
+        return "developerInformation";
+    }
+
+    //帮助文档
+    @RequestMapping("documentsInfo")
+    public String documentsInfo(){
+
+        return "documentInfo";
+    }
+
+    //更新用户的plan
+    @ResponseBody
+    @RequestMapping(value = "updatePlan")
+    public String updatePlan(@RequestParam("json") String plan){
+
+        JSONObject planJson = JSON.parseObject(plan);
+        String result = indexService.updatePlan(planJson);
+
+//        System.out.println(real_result);
+        return result;
+    }
+
+    //删除用户的plan
+    @ResponseBody
+    @RequestMapping(value = "delPlan")
+    public String delPlan(@RequestParam("json") String plan){
+
+        JSONObject planJson = JSON.parseObject(plan);
+        String result = indexService.delPlan(planJson);
+
+        return result;
+    }
+    //获取用户所有的plan
+    @ResponseBody
+    @RequestMapping(value = "getPlans")
+    public String getPlans(@RequestParam("email") String email){
+
+        String result = indexService.getPlans(email);
+
+        return result;
+    }
+
+    //设置参数弹窗
+    @RequestMapping("setMEC")
+    public String setMEC(){
+
+        return "setStep";
+    }
+
+    //获得Dag图片
+    @ResponseBody
+    @RequestMapping(value = "getDag")
+    public String getDag(@RequestParam("dagXml") String dagXml , @RequestParam("customXml") String customXml){
+
+
+        String result = indexService.getDag(dagXml, customXml);
+
+        return result;
+    }
+
+    //展示Dag图
+    @RequestMapping("showDag")
+    public String showDag(){
+
+        return "DagStructure";
+    }
 }
 

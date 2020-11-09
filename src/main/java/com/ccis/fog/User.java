@@ -14,6 +14,8 @@ public class User {
 
     private String xmlfiles;
 
+    private String plan;
+
     public String getUsername() {
         return username;
     }
@@ -62,6 +64,14 @@ public class User {
         this.xmlfiles = xmlfiles;
     }
 
+    public String getPlan() {
+        return plan;
+    }
+
+    public void setPlan(String plan) {
+        this.plan = plan;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -71,6 +81,7 @@ public class User {
                 ", organization='" + organization + '\'' +
                 ", subscribe='" + subscribe + '\'' +
                 ", xmlfiles='" + xmlfiles + '\'' +
+                ", plan='" + plan + '\'' +
                 '}';
     }
 }

@@ -1,739 +1,611 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<!DOCTYPE html>--%>
 <html>
 <head>
-    <title>FogWorkflowSim</title>
+    <title>FogWorkflow</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" href="/images/ahu_logo.png">
     <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-
-<%--标题栏start--%>
-<div class="title-bar">
-
-    <div class="title-logo">
-        <img src="/images/titleLog.png" alt="...">
-    </div>
-    <div class="developer">
-        <div class="developer_logo">
-            <img src="/images/developers.png">
+<%--------------------------标题栏开始------------------------------%>
+<div class="layui-container title_main">
+    <div class="layui-row">
+        <div class="layui-col-xs4">
+            <div class="logo_div"><img src="/images/edge_logo.png" class="edge_img"></div>
         </div>
-        <div class="developer_png">
-            System<br>Informations
+        <div class="layui-col-xs1">
+            <div id="doc_div" class="doc_div">Document</div>
+        </div>
+        <div class="layui-col-xs2">
+            <div id="developer_div" class="developer_div" >Developers</div>
+        </div>
+        <div class="layui-col-xs2">
+            <div id="version_info" class="version_info">Versions</div>
+        </div>
+
+        <div class="layui-col-xs3">
+            <div id="login_div" class="buttons">
+                <div class="layui-btn-group">
+                    <button id="user_login" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Login </button>
+                    <button id="user_register" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Register</button>
+                </div>
+            </div>
+
+            <div id="userinfo_div" hidden>
+                <ul class="layui-nav" style="background-color: #FFFFFF">
+                    <li class="layui-nav-item">
+                        <a id="username_a"><img src="/images/userlogo.jpg" class="layui-nav-img">me</a>
+                        <dl class="layui-nav-child">
+                            <dd><a  id="logout" href="javascript:;">Logout</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<%--------------------------标题栏结束------------------------------%>
+
+<%--------------------------自定义方案表格开始------------------------------%>
+<div class="layui-container plan_main">
+    <div class="layui-row">
+        <%--标题--%>
+        <div class="layui-col-xs10">
+            <div class="plan_title" style="display: inline-block">
+                Scientific Workflow & MEC Environment Setting
+            </div>
+            <div id="sim_loading_div" style="display: inline-block">
+                <i id="sim_loading" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
+            </div>
+        </div>
+
+        <div class="layui-col-xs2">
+            <button id="plan_add" class="layui-btn layui-btn-radius">
+                Add +
+            </button>
+        </div>
+        <%--表格--%>
+        <div class="layui-col-xs12 layui-row plan_padding">
+            <div class="layui-col-xs12">
+                <table id="plan_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                    <thead>
+                        <th class="plan_no">No.</th>
+                        <th class="plan_name">Project Name</th>
+                        <th class="plan_mec">MEC Environment</th>
+                        <th class="plan_strategy">Offloading Strategy</th>
+                        <th class="plan_algo">Scheduling Algorithm</th>
+                        <th class="plan_opti">Optimization Object</th>
+                        <th class="plan_deadline">Deadline</th>
+                        <th class="plan_workflow">Workflow Type</th>
+                        <th class="plan_editTime">Last Modified</th>
+                        <th class="plan_action">Action</th>
+                    </thead>
+                </table>
+            </div>
+            <div class="layui-col-xs12 plan_data_div">
+                <table id="plan_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                    <thead hidden>
+                        <th>No.</th>
+                        <th>Plan Name</th>
+                        <th>MEC Environment</th>
+                        <th>Offloading Strategy</th>
+                        <th>Scheduling Algorithm</th>
+                        <th>Optimization Object</th>
+                        <th>Deadline</th>
+                        <th>Workflow Type</th>
+                        <th>Last Modified</th>
+                        <th>Ation</th>
+                    </thead>
+                    <tbody id="plan_tbody" class="plan_tbody">
+                        <tr>
+                            <td class="plan_no">1</td>
+                            <td class="plan_name">example1</td>
+                            <td class="plan_mec">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4">
+                                        <div class="img_cloud">
+                                            <div class="cloud_topnum">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs4">
+                                        <div class="img_fog">
+                                            <div class="fog_topnum">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs4">
+                                        <div class="img_mobile">
+                                            <div class="mobile_topnum">1</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="plan_strategy">simple</td>
+                            <td class="plan_algo">MINMIN,MAXMIN,FCFS,ROUNDROBIN</td>
+                            <td class="plan_opti">Time</td>
+                            <td class="plan_deadline">--</td>
+                            <td class="plan_workflow">Montage_20.xml</td>
+                            <td class="plan_editTime">2020-11-05 10:30:53</td>
+                            <td class="plan_action">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-sm btns run_sim"><i class="layui-icon"></i></button>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns edit_plan"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan"><i class="layui-icon"></i></button>--%>
+                                </div>
+                            </td>
+                            <td hidden>
+                                {"nodeSize":"20","daxPath":"Montage_20.xml","planName":"example1","custom":"","pi":[],"kmp":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],"levenshtein":[],"selectsort":[],"cloudServer":1,"fogServer":1,"mobile":1,"setting_json":{"cloud_mips_list":[1600],"cloud_cost_list":[0.96],"fog_mips_list":[1300],"fog_cost_list":[0.48],"mobile_mips_list":[1000],"cloud_number":1,"fog_number":1,"mobile_number":1,"GA":{"GA-popsize":20,"GA-gmax":100,"GA-crossoverProb":0.8,"GA-mutationRate":0.01,"GA-repeat":1},"PSO":{"PSO-particleNum":20,"PSO-iterateNum":100,"PSO-c1":1.37,"PSO-c2":1.37,"PSO-w":0.73,"PSO-repeat":1}},"strategy":"","alSet":["MINMIN","MAXMIN","FCFS","ROUNDROBIN"],"optimize_objective":"Time","deadline":"","editTime":"2020-11-06 10:42:01"}
+                                    <%--{"nodeSize":"100","daxPath":"Epigenomics_100.xml","planName":"ddd","custom":"","pi":[],"kmp":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100"],"levenshtein":[],"selectsort":[],"cloudServer":2,"fogServer":3,"mobile":2,"setting_json":{"cloud_mips_list":[1600,1600],"cloud_cost_list":[0.96,0.96],"fog_mips_list":[1300,1300,1300],"fog_cost_list":[0.48,0.48,0.48],"mobile_mips_list":[1000,1000],"cloud_number":2,"fog_number":3,"mobile_number":2,"GA":{"GA-popsize":20,"GA-gmax":100,"GA-crossoverProb":0.8,"GA-mutationRate":0.01,"GA-repeat":1},"PSO":{"PSO-particleNum":20,"PSO-iterateNum":100,"PSO-c1":1.37,"PSO-c2":1.37,"PSO-w":0.73,"PSO-repeat":1}},"strategy":"All-in-Cloud","alSet":["PSO","GA"],"optimize_objective":"Energy","deadline":"12","editTime":"2020-11-06 16:14:03"}--%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="plan_no">2</td>
+                            <td class="plan_name">example2</td>
+                            <td class="plan_mec">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4">
+                                        <div class="img_cloud">
+                                            <div class="cloud_topnum">2</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs4">
+                                        <div class="img_fog">
+                                            <div class="fog_topnum">3</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs4">
+                                        <div class="img_mobile">
+                                            <div class="mobile_topnum">2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="plan_strategy">simple</td>
+                            <td class="plan_algo">MINMIN,MAXMIN</td>
+                            <td class="plan_opti">Time</td>
+                            <td class="plan_deadline">--</td>
+                            <td class="plan_workflow">CyberShake_30.xml</td>
+                            <td class="plan_editTime">2020-11-05 11:01:53</td>
+                            <td class="plan_action">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-sm btns run_sim"><i class="layui-icon"></i></button>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns edit_plan"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan"><i class="layui-icon"></i></button>--%>
+                                </div>
+                            </td>
+                            <td hidden>
+                                {"nodeSize":"30","daxPath":"CyberShake_30.xml","planName":"example2","custom":"","pi":[],"kmp":[],"levenshtein":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],"selectsort":[],"cloudServer":2,"fogServer":3,"mobile":2,"setting_json":{"cloud_mips_list":[1600,1600],"cloud_cost_list":[0.96,0.96],"fog_mips_list":[1300,1300,1300],"fog_cost_list":[0.48,0.48,0.48],"mobile_mips_list":[1000,1000],"cloud_number":2,"fog_number":3,"mobile_number":2,"GA":{"GA-popsize":20,"GA-gmax":100,"GA-crossoverProb":0.8,"GA-mutationRate":0.01,"GA-repeat":1},"PSO":{"PSO-particleNum":20,"PSO-iterateNum":100,"PSO-c1":1.37,"PSO-c2":1.37,"PSO-w":0.73,"PSO-repeat":1}},"strategy":"","alSet":["MINMIN","MAXMIN"],"optimize_objective":"Time","deadline":"","editTime":"2020-11-06 10:46:39"}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="plan_no">3</td>
+                            <td class="plan_name">example3</td>
+                            <td class="plan_mec">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs4">
+                                        <div class="img_cloud">
+                                            <div class="cloud_topnum">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs4">
+                                        <div class="img_fog">
+                                            <div class="fog_topnum">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs4">
+                                        <div class="img_mobile">
+                                            <div class="mobile_topnum">2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="plan_strategy">simple</td>
+                            <td class="plan_algo">MINMIN,MAXMIN,PSO</td>
+                            <td class="plan_opti">Time</td>
+                            <td class="plan_deadline">--</td>
+                            <td class="plan_workflow">Epigenomics_24.xml</td>
+                            <td class="plan_editTime">2020-11-05 11:01:53</td>
+                            <td class="plan_action">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-sm btns run_sim"><i class="layui-icon"></i></button>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns run_sim">Simulation</button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan">Delete</button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns edit_plan"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan"><i class="layui-icon"></i></button>--%>
+                                </div>
+                            </td>
+                            <td hidden>
+                                {"nodeSize":"24","daxPath":"Epigenomics_24.xml","planName":"example3","custom":"","pi":[],"kmp":[],"levenshtein":[],"selectsort":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],"cloudServer":1,"fogServer":1,"mobile":2,"setting_json":{"cloud_mips_list":[1600],"cloud_cost_list":[0.96],"fog_mips_list":[1300],"fog_cost_list":[0.48],"mobile_mips_list":[1000,1000],"cloud_number":1,"fog_number":1,"mobile_number":2,"GA":{"GA-popsize":20,"GA-gmax":100,"GA-crossoverProb":0.8,"GA-mutationRate":0.01,"GA-repeat":1},"PSO":{"PSO-particleNum":20,"PSO-iterateNum":100,"PSO-c1":1.37,"PSO-c2":1.37,"PSO-w":0.73,"PSO-repeat":1}},"strategy":"Simple","alSet":["MINMIN","MAXMIN","PSO"],"optimize_objective":"Time","deadline":"","editTime":"2020-11-06 10:51:39"}
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <%--<div class="layui-btn-group">--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns run_sim"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns edit_plan"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan"><i class="layui-icon"></i></button>--%>
+                                <%--</div>--%>
+                            </td>
+                            <td hidden></td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <%--<div class="layui-btn-group">--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns run_sim"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns edit_plan"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan"><i class="layui-icon"></i></button>--%>
+                                <%--</div>--%>
+                            </td>
+                            <td hidden></td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <%--<div class="layui-btn-group">--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns run_sim"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns edit_plan"><i class="layui-icon"></i></button>--%>
+                                    <%--<button type="button" class="layui-btn layui-btn-sm btns del_plan"><i class="layui-icon"></i></button>--%>
+                                <%--</div>--%>
+                            </td>
+                            <td hidden></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <%--进度条--%>
+        <div class="layui-col-xs12 layui-row outputTitle">
+            <div class="layui-col-xs1 output_label">
+                Result display area:
+            </div>
+            <div class="layui-col-xs2">
+                <select class="output-input" id="output">
+                    <option value='0'>MINMIN</option>
+                </select>
+                <button id="realOperate" class = "layui-btn layui-btn-radius">
+                    Real Enviorment
+                </button>
+            </div>
+
+            <div class="layui-col-xs8">
+                <div id="real_loading_div">
+                    <i id="real_loading" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
+                </div>
+                <div id="operate_percent"></div>
+                <%--<div class="output_progress">
+                    <div class="layui-progress layui-progress-small" lay-showpercent="true" lay-filter="realProgress">
+                        <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+                    </div>
+                    &lt;%&ndash;<div class="site-demo-button">&ndash;%&gt;
+                    &lt;%&ndash;<button class="layui-btn site-demo-active" data-type="setPercent">设置50%</button>&ndash;%&gt;
+                    &lt;%&ndash;<button class="layui-btn site-demo-active" data-type="loading">模拟loading</button>&ndash;%&gt;
+                    &lt;%&ndash;</div>&ndash;%&gt;
+                </div>--%>
+            </div>
+            <div class="layui-col-xs1">
+                <div id="output-time" class="output-time"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<%--------------------------自定义方案表格结束------------------------------%>
+
+<%--------------------------柱状图&饼图&折线图&甘特图开始------------------------------%>
+<div class="layui-container chart_main">
+    <div class="layui-row">
+        <div id="bar-chart-div" class="layui-col-md6 chart_item">
+            <div id="barChartMain"></div>
+        </div>
+        <div id="pie-chart-div"  class="layui-col-md6 chart_item">
+            <div id="pieChartMain"></div>
+        </div>
+        <div id="line-chart-div"  class="layui-col-md12 chart_item">
+            <div id="lineChartMain"></div>
+        </div>
+        <div id="gantt-chart-div"  class="layui-col-md12 chart_item">
+            <div id="ganttChartMain"></div>
         </div>
     </div>
-    <div id="login_div" class="user buttons">
-        <div class="layui-btn-group">
-            <button id="user_login" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Login </button>
-            <button id="user_register" type="button" class="layui-btn layui-btn-radius layui-btn-primary">Register</button>
+</div>
+
+<%--------------------------柱状图&饼图&折线图&甘特图结束------------------------------%>
+
+<%--------------------------分类表格开始------------------------------%>
+<div class="layui-container table_main">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">Standby</li>
+                    <li>Running</li>
+                    <li>Successed</li>
+                    <li>Failed</li>
+                    <li>Detail</li>
+                </ul>
+                <div class="layui-row layui-tab-content">
+                    <div class="layui-col-md12 layui-tab-item layui-show layui-row">
+                        <div class="layui-col-xs12">
+                            <table  id="standby_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Sim-Time</th>
+                                    <th>Sim-Cost</th>
+                                    <th>Depth</th>
+                                    <th>Parents</th>
+                                    <th>Sim-Status</th>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="layui-col-xs12 standby_data_div">
+                            <table id="standby_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead hidden>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Sim-Time</th>
+                                    <th>Sim-Cost</th>
+                                    <th>Depth</th>
+                                    <th>Parents</th>
+                                    <th>Sim-Status</th>
+                                </thead>
+                                <tbody id="standby_tbody" class="standby_tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-tab-item layui-row">
+                        <div class="layui-col-xs12">
+                            <table  id="running_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                    <th>Depth</th>
+                                    <th>Real-Time</th>
+                                    <th>Real-Cost</th>
+                                    <th>Parents</th>
+                                    <th>Real-Status</th>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="layui-col-xs12 running_data_div">
+                            <table id="running_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead hidden>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                    <th>Depth</th>
+                                    <th>Real-Time</th>
+                                    <th>Real-Cost</th>
+                                    <th>Parents</th>
+                                    <th>Real-Status</th>
+                                </thead>
+                                <tbody id="running_tbody" class="running_tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-tab-item layui-row">
+                        <div class="layui-col-xs12">
+                            <table  id="successed_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                    <th>Depth</th>
+                                    <th>Real-Time</th>
+                                    <th>Real-Cost</th>
+                                    <th>Parents</th>
+                                    <th>Real-Status</th>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="layui-col-xs12 successed_data_div">
+                            <table id="successed_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead hidden>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                    <th>Depth</th>
+                                    <th>Real-Time</th>
+                                    <th>Real-Cost</th>
+                                    <th>Parents</th>
+                                    <th>Real-Status</th>
+                                </thead>
+                                <tbody id="successed_tbody" class="successed_tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-tab-item layui-row">
+                        <div class="layui-col-xs12">
+                            <table  id="failed_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                    <th>Depth</th>
+                                    <th>Real-Time</th>
+                                    <th>Real-Cost</th>
+                                    <th>Parents</th>
+                                    <th>Real-Status</th>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="layui-col-xs12 failed_data_div">
+                            <table id="failed_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead hidden>
+                                    <th>Job ID</th>
+                                    <th>Computing Resource Type</th>
+                                    <th>VM ID</th>
+                                    <th>Start Time</th>
+                                    <th>Finish Time</th>
+                                    <th>Depth</th>
+                                    <th>Real-Time</th>
+                                    <th>Real-Cost</th>
+                                    <th>Parents</th>
+                                    <th>Real-Status</th>
+                                </thead>
+                                <tbody id="failed_tbody" class="failed_tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-tab-item layui-row">
+                        <div class="layui-col-xs12">
+                            <table  id="detail_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead>
+                                    <th class="detail_job">Job ID</th>
+                                    <th class="detail_task">Task ID</th>
+                                    <th class="detail_simStus">Sim-Status</th>
+                                    <th class="detail_resource">Computing Resource Type</th>
+                                    <th class="detail_vm">VM ID</th>
+                                    <th class="detail_simTime">Sim-Time</th>
+                                    <th class="detail_simCost">Sim-Cost</th>
+                                    <th class="detail_start">Start Time</th>
+                                    <th class="detail_finish">Finish Time</th>
+                                    <th class="detail_depth">Depth</th>
+                                    <th class="detail_realTime">Real-Time</th>
+                                    <th class="detail_realCost">Real-Cost</th>
+                                    <th class="detail_parents">Parents</th>
+                                    <th class="detail_realStus">Real-Status</th>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="layui-col-xs12 detail_data_div">
+                            <table id="detail_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
+                                <thead hidden>
+                                    <th class="detail_job">Job ID</th>
+                                    <th class="detail_task">Task ID</th>
+                                    <th class="detail_simStus">Sim-Status</th>
+                                    <th class="detail_resource">Computing Resource Type</th>
+                                    <th class="detail_vm">VM ID</th>
+                                    <th class="detail_simTime">Sim-Time</th>
+                                    <th class="detail_simCost">Sim-Cost</th>
+                                    <th class="detail_start">Start Time</th>
+                                    <th class="detail_finish">Finish Time</th>
+                                    <th class="detail_depth">Depth</th>
+                                    <th class="detail_realTime">Real-Time</th>
+                                    <th class="detail_realCost">Real-Cost</th>
+                                    <th class="detail_parents">Parents</th>
+                                    <th class="detail_realStus">Real-Status</th>
+                                </thead>
+                                <tbody id="detail_tbody" class="detail_tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <%--<table class="layui-hide" id="detailTable" lay-filter="test"></table>--%>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="userinfo_div" class="user" hidden>
-        <ul class="layui-nav" style="background-color: #4597E6">
-            <%--<li class="layui-nav-item">
-                <a href="">个人中心<span class="layui-badge-dot"></span></a>
-            </li>--%>
-            <li class="layui-nav-item">
-                <a id="username_a"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
-                <dl class="layui-nav-child">
-                    <%--<dd><a id="changeInfo" href="javascript:;">修改信息</a></dd>--%>
-                    <dd><a  id="logout" href="javascript:;">Logout</a></dd>
-                </dl>
-            </li>
-        </ul>
-    </div>
-    <div class="title-line1">FogWorkflowReal: An Automated Simulation Toolkit for</div>
-    <div class="title-line2">Workflow Performance Evaluation in Fog Computing</div>
-</div>
-<%--标题栏end--%>
-
-<%--底部logo start--%>
-<div class="foot-logo">
-    <img id="schoolLogo" src="/images/schoolLogo.png">
 </div>
 
-<div class="foot-QRCode">
-    <div id="clustrmap" class="clustrmap">
-        <%--<script type="text/javascript" id="clustrmaps" src="/jquery/clustrmaps.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>--%>
-        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
-    </div>
-    <div class="foot-QRCode1">
-        <%--<div class="youtube">
-            <span>Scan QR code to enter</span>
-        </div>--%>
-        <a href="https://youtu.be/AsMovcuSkx8">
-            <img id="QRCode01" src="/images/QRCode01.png">
-        </a>
-    </div>
-    <div class="foot-QRCode2">
-        <%--<div class="github">
-            <span>Scan QR code to enter</span>
-        </div>--%>
-        <a href="https://github.com/ISEC-AHU/FogWorkflowSim">
-            <img id="QRCode02" src="/images/QRCode02.png">
-        </a>
+<%--------------------------分类表格结束------------------------------%>
+
+<%--------------------------尾部栏开始------------------------------%>
+<div class="layui-container footer_main">
+    <div class="layui-row">
+        <div class="layui-col-xs4">
+            <div id="ahu_logo"><img src="/images/ahu_logo.png"></div>
+        </div>
+        <div class="layui-col-xs1">
+            <div id="deakin_logo"><img src="/images/deakin_logo.png"></div>
+        </div>
+        <div class="layui-col-xs1">
+            <div id="swinburne_logo"><img src="/images/swinburne_logo.png"></div>
+        </div>
+        <div class="layui-col-xs2">
+            <div id="monash_logo"><img class="monash_img" src="/images/monash_logo.png"></div>
+        </div>
+        <div class="layui-col-xs1">
+            <div id="visit_logo">
+                <script type="text/javascript" id="clustrmaps" src="/jquery/clustrmaps.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>
+                <%--<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=OZ5USxbSCBbe0YwvtXfxIlsvW6PMudDLV8qXCA4EX4M&cl=ffffff&w=a"></script>--%>
+            </div>
+        </div>
+        <div class="layui-col-xs12">
+            <div class="bottom-sep" ></div>
+        </div>
+        <div class="layui-col-xs12">
+            <div class="foot-bar">
+                <div>Copyright ©  Intelligent Software and Edge Computing Lab, Anhui University</div>
+                <div id="versions">Version:--</div>
+                <div class="advices layui-icon layui-icon-survey" style="font-size: 30px; color: #1E9FFF;"></div>
+            </div>
+        </div>
     </div>
 </div>
-<%--底栏 start--%>
-<div class="foot-bar">
-    <div>Copyright ©  Intelligent Software and Edge Computing Lab, Anhui University</div>
-    <div id="versions">Version:--</div>
-    <div id="visitcount">
-        <span>Total number of visits：-- || </span>
-        <span>Total number of visits today：--  </span>
-    </div>
-    <div class="advices layui-icon layui-icon-survey" style="font-size: 30px; color: #1E9FFF;"></div>
-</div>
-<%--底栏 start--%>
-<div style="display: none" id="parent_cloud_tips"></div>
+
+<%--------------------------尾部栏结束------------------------------%>
+
+<%--------------------------隐藏内容开始------------------------------%>
+<%--<div style="display: none" id="parent_cloud_tips"></div>--%>
 <div style="display: none" id="chart_content"></div>
-<%--<div style="display: none" id="chart_doubleContent"></div>--%>
-<div class="main-div">
-    <div class="middle-div">
-        <%--左边--%>
-        <div class="left-div">
-            <div class="fog-environment-div">
-                <div class="setting-title-div">
-                    Fog Computing Environment Setting
-                </div>
-                <div class="number-left-div">
-                    <div class="fog-top-div">
-                        <div class="number-div">
-                            <div class="number-label">Number of Cloud Servers:</div>
-                            <div class="number_div">
-                                <input id="cloudServer_input" type="text" class="number_input">
-                                <select id="cloudServer" class="choose-imgs">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="show-imgs" id="cloudServerImgs"></div>
-                        </div>
-                        <div class="number-div">
-                            <div class="number-label">Number of Fog Nodes:</div>
-                            <div class="number_div">
-                                <input id="fogServer_input" type="text" class="number_input">
-                                <select id="fogServer" class="choose-imgs">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="show-imgs" id="fogServerImgs"></div>
-                        </div>
-                        <div class="number-div">
-                            <div class="number-label">Number of End Devices:</div>
-                            <div class="number_div">
-                                <input id="mobile_input" type="text" class="number_input">
-                                <select id="mobile" class="choose-imgs">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="show-imgs" id="mobileImgs"></div>
-                        </div>
-                    </div>
-                    <%--<button class="more-btn layui-btn layui-btn-radius layui-btn-primary" id="more">More Details</button>--%>
-                    <button class="more-btn layui-btn layui-btn-radius layui-btn-normal" id="more">More Details</button>
-                </div>
-            </div>
-            <div class="action-div">
-                <div class="action-div-1">
-                    <%--<button class="action-btn layui-btn layui-btn-radius layui-btn-primary" id="simulation">Start Simulation</button>
-                    <button class="action-btn layui-btn layui-btn-radius layui-btn-primary" id="compare">Compare</button>--%>
-                    <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" id="simulation">Start Simulation</button>
-                    <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" id="compare">Compare</button>
-                </div>
-                <div class="action-div-1">
-                    <%--<button class="action-btn layui-btn layui-btn-radius layui-btn-primary" id="setting">Algorithms Setting</button>
-                    <button id="export" class="action-btn layui-btn layui-btn-radius layui-btn-primary">Export</button>--%>
-                    <button class="action-btn layui-btn layui-btn-radius layui-btn-primary" id="setting">Algorithms Setting</button>
-                    <button id="export" class="action-btn layui-btn layui-btn-radius layui-btn-primary">Export</button>
-                </div>
-            </div>
-        </div>
-        <div class="line-sep-div"></div>
-        <%--右边--%>
-
-        <div class="right-div">
-            <div class="strategy-div">
-                <div class="setting-title-div">
-                    Strategy & Algorithms & Objective
-                </div>
-                <div class="strategy-content-div">
-                    <div class="strategy-label">Offloading Strategies:</div>
-                    <div class="strategy-label">
-                        <select id="strategy">
-                            <option value="0"></option>
-                            <option value="1">All-in-Fog</option>
-                            <option value="2">All-in-Cloud</option>
-                            <option value="3">Simple</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="scheduling-div">
-                    Scheduling Algorithms:
-                </div>
-                <div class="strategy-content-div">
-                    <div class="minmin-input">
-                        <input id="minmin" type="checkbox" value="0" class="al_check" checked/> MINMIN
-                    </div>
-                    <div class="minmin-input">
-                        <input type="checkbox" value="1" class="al_check"/> MAXMIN
-                    </div>
-                    <div class="minmin-input">
-                        <input type="checkbox" value="2" class="al_check"/> FCFS
-                    </div>
-                    <div class="round-input">
-                        <input type="checkbox" value="3" class="al_check"/> ROUDROBIN
-                    </div>
-                </div>
-                <div class="strategy-content-div">
-                    <div class="minmin-input">
-                        <input type="checkbox" value="4" class="al_check"/> PSO
-                    </div>
-                    <div class="ga-input">
-                        <input type="checkbox" value="5" class="al_check"/> GA
-                    </div>
-                </div>
-                <div class="strategy-content-div">
-                    <div class="objective-label">Objective:</div>
-
-                    <%--<div class="minmin-input">
-                        <input id="time" type="radio" value="0" name="radioGroup" checked="checked"/> Time
-                    </div>
-                    <div class="minmin-input">
-                        <input id="energy" type="radio" value="1" name="radioGroup"/> Energy
-                    </div>
-                    <div class="minmin-input">
-                        <input id="cost" type="radio" value="2" name="radioGroup"/> Cost
-                    </div>--%>
-                    <div class="radio_option">
-                        <div class="radio_input" style="margin-left:-110px;">
-                            <input id="time" type="radio" value="0" name="radioGroup" checked="checked" value="Time"/>
-                            <label for="time"></label>
-                            &nbsp;<span>Time</span>
-                        </div>
-                        <div class="radio_input">
-                            <input id="energy" type="radio" value="1" name="radioGroup"/>
-                            <label for="energy"></label>
-                            &nbsp;<span>Energy</span>
-                        </div>
-                        <div class="radio_input" style="margin-left:30px;">
-                            <input id="cost" type="radio" value="2" name="radioGroup"/>
-                            <label for="cost"></label>
-                            &nbsp;<span>Cost</span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="strategy-content-div">
-                <div class="deadline-label">Deadline:</div>
-                <div>
-                    <input class="deadline-input" type="text" id="deadline"/>
-                    <input  style="display: none" type="file" id="import-file"/>
-                </div>
-                <div class="realenviorment-div">
-                    <input id="real" type="checkbox" value="real" class="realEnviorment" /> Real Enviorment
-                </div>
-            </div>
-            <div class="workflow-div">
-                <div class="setting-title-div">
-                    Workflow Setting
-                </div>
-                <div class="strategy-content-div">
-                    <div class="workflow_example layui-unselect layui-form-radio layui-form-radioed "><i class="layui-anim layui-icon layui-anim-scaleSpring"></i><div></div></div>
-                    <div class="type-label">
-                        &nbsp;&nbsp;&nbsp;&nbsp;Example&nbsp;&nbsp;Type:
-                    </div>
-                    <select id="sType" class="type-select"></select>
-                    <div class="amount-label">Amount:</div>
-                    <select class="amount-select" id="amount">
-                        <option value="1">20</option>
-                        <option value="1">20</option>
-                        <option value="1">20</option>
-                    </select>
-                </div>
-                <div class="strategy-content-div">
-                    <div class="workflow_custom layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div></div></div>
-                    <div class="custom-checkbox">
-                        <%--<input id="custom" type="checkbox"/>--%>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom&nbsp;&nbsp;&nbsp;Type:
-                    </div>
-                    <select id="customXML" class="type-select" style="margin-top:2px;margin-left:43px;" disabled></select>
-                    <%--<input class="custom-input" id="custom_input" type="text" disabled="disabled"/>
-                    <input class="custom-input" style="display: none" type="file" id="select-file"/>--%>
-                    <%--<button class="layui-btn layui-btn-radius layui-btn-primary" id="select_file_btn" disabled="disabled" style="margin-left:10px;margin-top:-4px;">Select File</button>--%>
-                    <%--<button id="select_file_btn" class="layui-btn layui-btn-radius layui-btn-normal" disabled="disabled" >Select</button>--%>
-                    <button id="draw_workflow" class = "layui-btn layui-btn-radius">Draw Workflow</button>
-                </div>
-                <%--<div class="strategy-content-div">
-                    <div class="deadline-label">Deadline:</div>
-                    <div>
-                        <input class="deadline-input" type="text" id="deadline"/>
-                        &lt;%&ndash;<button id="draw_workflow" class="layui-btn layui-btn-radius layui-btn-normal">Draw Workflow</button>
-                        <button id="trans_workflow"  class="layui-btn layui-btn-radius layui-btn-normal" style="width:110px;" >Transform</button>&ndash;%&gt;
-                        <input  style="display: none" type="file" id="import-file"/>
-                    </div>
-                </div>--%>
-            </div>
-        </div>
-    </div>
-    <%--<div class="middle-sep-div"></div>--%>
-</div>
-<div class="main-bottom-div">
-    <div class="bottom-div">
-        <div class="output-div">
-            <div class="output-label">Output result display area:</div>
-            <select class="output-input" id="output"></select>
-            <div id="output-time" class="output-time"></div>
-            <button id="realOperate" class = "layui-btn layui-btn-radius">Real Enviorment</button>
-        </div>
-    </div>
-    <table class="layui-table table" lay-size="sm" lay-even lay-skin="nob" id="output-table">
-        <thead>
-        <th>Job ID</th>
-        <th>Task ID</th>
-        <th>Status</th>
-        <th>Datacenter ID</th>
-        <th>VM ID</th>
-        <th>Time</th>
-        <th>Start Time</th>
-        <th>Finish Time</th>
-        <th>Depth</th>
-        <th>Cost</th>
-        <th>realTime</th>
-        <th>realCost</th>
-        <th>Parents</th>
-        </thead>
-        <tbody id="data_tbody">
-
-
-        </tbody>
-    </table>
-
-    <div id="detailInfo" class="layui-carousel" hidden>
-        <div carousel-item>
-            <div id="runTime" class="layui-row">
-                <%--<button id="runTime_btn" class="layui-btn layui-btn-primary">runtimes info</button>--%>
-                <div id="speedChart" style="display: block;">
-                    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-                    <div id="speedChartMain" style="width: 850px; height: 300px;"></div>
-                </div>
-        <%--<div></div>--%>
-
-            </div>
-            <div id="cloudInfo" class="layui-row">
-                    <%--<div class="layui-col-xs3 cloudrow">
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_0" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_1" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_2" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_3" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_4" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_5" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_6" class="servers" src="/images/cloudServer.png">
-                        </div>
-                        <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                            <input value="1600" hidden>
-                            <input value="0.96" hidden>
-                            <img id="cloudServer_7" class="servers" src="/images/cloudServer.png">
-                        </div>
-
-                    </div>
-                    <div id="cloudDetail" class="layui-col-xs9">
-                        <div class="layui-row">
-                            <div class="layui-col-xs3">
-                                <input value="jobId_item" hidden>
-                                <input value="taskId_item" hidden>
-                                <input value="status_item" hidden>
-                                <input value="dataCenterId_item" hidden>
-                                <input value="vmId_item" hidden>
-                                <input value="time_item" hidden>
-                                <input value="startTime_item" hidden>
-                                <input value="finishTime_item" hidden>
-                                <input value="depth_item" hidden>
-                                <input value="cost_item" hidden>
-                                <input value="parents_item" hidden>
-                                <input value="realCost_item" hidden>
-                                <input value="realTime_item" hidden>
-                                <img id="cloudTask_0" src="/images/task.jpg" class="tasks" style="width: 25%; height: auto">
-                            </div>
-                            <div class="layui-col-xs3">
-                                <input value="jobId_item" hidden>
-                                <input value="taskId_item" hidden>
-                                <input value="status_item" hidden>
-                                <input value="dataCenterId_item" hidden>
-                                <input value="vmId_item" hidden>
-                                <input value="time_item" hidden>
-                                <input value="startTime_item" hidden>
-                                <input value="finishTime_item" hidden>
-                                <input value="depth_item" hidden>
-                                <input value="cost_item" hidden>
-                                <input value="parents_item" hidden>
-                                <input value="realCost_item" hidden>
-                                <input value="realTime_item" hidden>
-                                <img id="cloudTask_1" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                            </div>
-                            <div class="layui-col-xs3">
-                                <input value="jobId_item" hidden>
-                                <input value="taskId_item" hidden>
-                                <input value="status_item" hidden>
-                                <input value="dataCenterId_item" hidden>
-                                <input value="vmId_item" hidden>
-                                <input value="time_item" hidden>
-                                <input value="startTime_item" hidden>
-                                <input value="finishTime_item" hidden>
-                                <input value="depth_item" hidden>
-                                <input value="cost_item" hidden>
-                                <input value="parents_item" hidden>
-                                <input value="realCost_item" hidden>
-                                <input value="realTime_item" hidden>
-                                <img id="cloudTask_2" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                            </div>
-                            <div class="layui-col-xs3">
-                                <input value="jobId_item" hidden>
-                                <input value="taskId_item" hidden>
-                                <input value="status_item" hidden>
-                                <input value="dataCenterId_item" hidden>
-                                <input value="vmId_item" hidden>
-                                <input value="time_item" hidden>
-                                <input value="startTime_item" hidden>
-                                <input value="finishTime_item" hidden>
-                                <input value="depth_item" hidden>
-                                <input value="cost_item" hidden>
-                                <input value="parents_item" hidden>
-                                <input value="realCost_item" hidden>
-                                <input value="realTime_item" hidden>
-                                <img id="cloudTask_3" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                            </div>
-                            <div class="layui-col-xs3">
-                                <input value="jobId_item" hidden>
-                                <input value="taskId_item" hidden>
-                                <input value="status_item" hidden>
-                                <input value="dataCenterId_item" hidden>
-                                <input value="vmId_item" hidden>
-                                <input value="time_item" hidden>
-                                <input value="startTime_item" hidden>
-                                <input value="finishTime_item" hidden>
-                                <input value="depth_item" hidden>
-                                <input value="cost_item" hidden>
-                                <input value="parents_item" hidden>
-                                <input value="realCost_item" hidden>
-                                <input value="realTime_item" hidden>
-                                <img id="cloudTask_4" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                            </div>
-                        </div>
-                    </div>--%>
-            </div>
-
-            <div id="fogInfo" class="layui-row">
-                <%--<div class="layui-col-xs3 fogrow">
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_0" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_1" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_2" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_3" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_4" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_5" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_6" class="servers" src="/images/fogServer.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1300" hidden>
-                        <input value="0.48" hidden>
-                        <img id="fogServer_7" class="servers" src="/images/fogServer.png">
-                    </div>
-
-                </div>
-                <div id="fogDetail" class="layui-col-xs9">
-                    <div class="layui-row">
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="fogTask_0" src="/images/task.jpg" class="tasks" style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="fogTask_1" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="fogTask_2" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="fogTask_3" src="/images/task.jpg" class="tasks" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="fogTask_4" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                    </div>
-                </div>--%>
-            </div>
-            <div id="mobileInfo" class="layui-row">
-                <%--<div class="layui-col-xs3 mobilerow">
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_0" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_1" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_2" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_3" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_4" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_5" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_6" class="servers" src="/images/mobile.png">
-                    </div>
-                    <div class="layui-col-md12" style="border: 1px red solid; text-align: center;">
-                        <input value="1000" hidden>
-                        <input value="0" hidden>
-                        <img id="mobile_7" class="servers" src="/images/mobile.png">
-                    </div>
-
-                </div>
-                <div id="mobileDetail" class="layui-col-xs9">
-                    <div class="layui-row">
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="mobileTask_0" src="/images/task.jpg" class="tasks" style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="mobileTask_1" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="mobileTask_2" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="mobileTask_3" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                        <div class="layui-col-xs3">
-                            <input value="jobId_item" hidden>
-                            <input value="taskId_item" hidden>
-                            <input value="status_item" hidden>
-                            <input value="dataCenterId_item" hidden>
-                            <input value="vmId_item" hidden>
-                            <input value="time_item" hidden>
-                            <input value="startTime_item" hidden>
-                            <input value="finishTime_item" hidden>
-                            <input value="depth_item" hidden>
-                            <input value="cost_item" hidden>
-                            <input value="parents_item" hidden>
-                            <input value="realCost_item" hidden>
-                            <input value="realTime_item" hidden>
-                            <img id="mobileTask_4" src="/images/task.jpg" class="tasks"  style="width: 25%; height: auto">
-                        </div>
-                    </div>
-                </div>--%>
-            </div>
-            <%--<div id="timeCompare" style="background-color: #FF00FF">runtimes info</div>
-            <div style="background-color: #FFB300">条目5</div>--%>
-        </div>
-    </div>
-</div>
-</div>
-
-<div id="background" class="background" style="display: none; "></div>
-<div id="progressBar" class="progressBar" style="display: none; ">Data loading, please wait...</div>
 
 <input type="hidden" id="emailAddress" value='${emailAddress}'>
+<input type="hidden" id="customXmlFile" value="">
+<input type="hidden" id="editPlanJson" value="">
+<button id="flushPlan" hidden>flushPlan</button>
+<input type="hidden" id="dagParam" value="">
+<button hidden id="showDag" hidden>show Dag</button>
+<%--<button id="test">test</button>--%>
+<div id="background" class="background" style="display: none; "></div>
+<div id="progressBar" class="progressBar" style="display: none; ">Data loading, please wait...</div>
+<%--------------------------隐藏内容结束------------------------------%>
 
 </body>
 <script src="/jquery/jquery-1.9.1.min.js"></script>
@@ -743,8 +615,9 @@
 <script type="text/javascript" src="/js/jquery.table2excel.js"></script>
 <script type="text/javascript" src="/jquery/jsencrypt.js"></script>
 <%--<script type="text/javascript" src="/js/global.js"></script>--%>
-<script type="text/javascript" src="/jquery/canvas-nest.min.js"></script>
+<%--<script type="text/javascript" src="/jquery/canvas-nest.min.js"></script>--%>
 <script type="text/javascript" src="/echarts/echarts.min.js"></script> 　　
+<script type="text/javascript" src="/echarts/echarts-en.min.js"></script> 　　
 <script type="text/javascript" src="/js/index.js"></script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作

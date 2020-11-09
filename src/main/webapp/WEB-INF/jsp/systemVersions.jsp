@@ -13,12 +13,9 @@
     <link rel="stylesheet" type="text/css" href="/layui/css/jquery-ui-1.10.4.min.css">
 </head>
 <style>
-    .systemVersion{
-        width:580px;
-        margin-left:10px;
-        margin-right:10px;
+    body{
+        padding: 20px 20px 20px 20px;
     }
-
 </style>
 <body>
 

@@ -399,15 +399,12 @@ public class DockerLink {
     //在真实环境中执行单个任务
     public String getSingleData(OutputEntity output) throws IOException, JSchException {
 
-        String jobId = output.getJobId();
-        String workLoad = output.getWorkLoad();
-        String dataCenterId = output.getDataCenterId();
-
         //连接本地虚拟机
-        String host = "192.168.81.138";
+        String host = "192.168.81.131";
         int port = 22;
         String user = "root";
         String password = "root";
+
 
         //连接isec服务器
         /*String host = "47.74.84.61";
@@ -421,11 +418,29 @@ public class DockerLink {
         String user = "root";
         String password = "ccis@2020";*/
 
+        String workLoad = output.getWorkLoad();
+        String workType = output.getWorkType();
+
+
 
         //设置使用cpu百分比
         double cpu_percent = 1.0;
         //使用镜像名称
-        String image = "count";
+//        String image = "pi";
+        String image = "";
+        if(workType.equals("pi")){
+            System.out.println("pi");
+            image = "pi";
+        }else if(workType.equals("kmp")){
+            System.out.println("kmp");
+            image = "kmp";
+        }else if(workType.equals("levenshtein")){
+            System.out.println("levenshtein");
+            image = "levenshtein";
+        }else if(workType.equals("selectsort")){
+            System.out.println("selectsort");
+            image = "selectsort";
+        }
 
         System.out.println("dockerlink out:");
         String command = "cd workspace\n" +
@@ -441,7 +456,7 @@ public class DockerLink {
         realTime = realTime.substring(0,realTime.length() - 1);
         double price = 1.0;
         String realCost = Integer.parseInt(realTime) * price + "";
-//        System.out.println("reaTime:" + realTime);
+        System.out.println("reaTime:" + realTime);
 //        System.out.println("realCost:" + realCost);
 
         //修改真实环境下的执行参数

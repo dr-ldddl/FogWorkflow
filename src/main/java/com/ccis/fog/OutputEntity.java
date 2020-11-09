@@ -18,6 +18,7 @@ public class OutputEntity {
     private String realFinishTime;
     private String realStatus;
     private String workLoad;
+    private String workType;
 
     public String getJobId() {
         return jobId;
@@ -145,6 +146,14 @@ public class OutputEntity {
         this.realStatus = realStatus;
     }
 
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
     @Override
     public String toString() {
         return "OutputEntity{" +
@@ -165,6 +174,8 @@ public class OutputEntity {
                 ", realFinishTime='" + realFinishTime + '\'' +
                 ", realStatus='" + realStatus + '\'' +
                 ", workLoad='" + workLoad + '\'' +
+                ", workType='" + workType + '\'' +
                 '}';
     }
+
 }

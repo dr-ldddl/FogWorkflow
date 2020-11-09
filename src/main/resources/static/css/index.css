@@ -1,10 +1,10 @@
-body {
-    background: #FFFFFF;
-    font-family: sans-serif;
+.tt{
+    border: #00FF00 1px solid;
+}
+
+body{
     font-size: 14px;
     font-family:"微软雅黑";
-
-    /*overflow-x: scroll; !*x轴禁止滚动*!*/
     overflow-y: scroll;/*y轴滚动*/
 
 }
@@ -12,505 +12,77 @@ body {
 body::-webkit-scrollbar{
     width:0;
 }
-/*三个小图标的样式*/
-.imgs {
-    margin-left: 15px;
-    width: 30px;
-    height: 46px;
-    margin-top:2px;
-}
 
-.main-div {
-    /*border:solid 1px red;*/
-    height: auto;
-    width: 1000px;
-    margin: 10px auto 10px auto;
-    background:  white;
-    opacity:0.9;
-    z-index:10;
-    border-radius:15px 15px 15px 15px;
-    /*box-shadow:2px 2px 10px #909090;*/
-}
-
-.main-bottom-div {
-    height: auto;
-    width: 1000px;
-    margin: 0px auto 60px auto;
-    background:  white;
-    opacity:0.9;
-    z-index:10;
-    border-radius:15px 15px 15px 15px;
-
-}
-
-
-.middle-div {
-    width: 1000px;
-    height: 390px;
-    margin:0 auto;
-}
-.middle-sep-div {
-    height: 1px;
-    background: #aab9c3;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-.bottom-div {
-    width: 1000px;
-    margin:0 auto;
-}
-.left-div {
-    position: relative;
-    width: 100%;
-    height: 50%;
-    /*float: left;*/
-    border: #00FF00 1px solid;
-}
-.line-sep-div {
-    background: #aab9c3;
-    width: 1px;
-    height: 380px;
-    float: left;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-}
-.right-div {
-    position: relative;
-    width: 100%;
-    height: 49%;
-    margin-left: 20px;
-    /*border: 1px solid #00FF00;*/
-}
-.machine_div {
-    height: 50px;
-    margin-bottom: 15px;
-}
-.more-btn {
-    width: 91%;
-    margin-left: 20px;
-    /*margin-top: 10px;*/
-    /*margin-bottom: 10px;*/
-}
-button {
-    height: 30px;
-    font-size: 1em;
-}
-.action-btn {
-    width: 70%;
-    margin-left: 33px;
-    margin-top: 0px;
-    font-size: 1em !important;
-    font-family:"微软雅黑";
-}
-
-#simulation {
-    background-color: #75dbed;
-}
-
-#compare {
-    background-color: #75dbed;
-}
-
-#select_file_btn {
-    background-color: #75dbed;
-    /*style="margin-left:10px;margin-top:-4px;width:184px;"*/
-    margin-left:-40px;
-    margin-top:-4px;
-    width:75px;
-    height:30px;
-    line-height: 1.5;
-    /*position: relative;*/
-    /*padding: 0.1rem 0.1rem 1.8rem;*/
-    /*border-left: .1rem solid #d0d0d0;*/
-}
-
-
-#draw_workflow {
-    background-color: #75dbed;
-    width:95%;
-    height:30px;
-    line-height: 1.5;
-    margin-top: 10px;
-    font-size: 1em !important;
-    font-family:"微软雅黑";
-}
-#trans_workflow {
-    background-color: #75dbed;
-    margin-left:15px;
-    margin-top:8px;
-    width:150px;
-    height:30px;
-    line-height: 1.5;
-}
-
-#strategy {
-    position: relative;
-    width:50%;
-    height:24px;
-    border-radius:11px 11px 11px 11px;
-    color:#9ca0a6;
-    margin-top: 5px;
-
-}
-
-.setting-title-div {
-    border-radius:0 15px 0 0;
-    /*height: 25px;*/
-    font-weight: bold;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    background: white;
-    font-family:"微软雅黑";
-}
-.fog-environment-div {
-    position: relative;
-    width: 97%;
-    height: 77%;
-    margin-left: 10px;
-}
-.number-left-div {
-    float: left;
-    background-color:#F0F0F0;
-    border-radius:10px 10px 10px 10px;
-    position: relative;
-    width: 96% !important;
-    margin-left: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-.fog-top-div {
-    float: left;
-    width: 98%;
-}
-.number-label {
-    /*width: 170px;*/
-    margin-top: 20px;
-    margin-left: 20px;
-    float: left;
-    /*font-family:"微软雅黑";*/
-}
-
-.number_div{
-    /*width: 70px;*/
-    float: left;
-}
-
-.choose-imgs {
-    width: 70px;
-    float: left;
-    /*margin-top: 10px;*/
-    border-radius:10px 10px 10px 10px;
-    color:#9ca0a6;
-    height: 20px;
-}
-
-.number_input {
-    position: relative;
-    top:20px;
-    left:0px;
-    width: 50px;
-    height: 20px;
-    border-radius:10px 0px 0px 10px;
-    border-style:none;
-    outline: none;
-    text-indent: 10px;
-    border: 1px solid #9ca0a6;
-    color:#9ca0a6;
-    border-right: solid 0px #FFFFFF;
-}
-
-.show-imgs {
-    position: relative;
-    width: 80%;
-    height: 50px;
-    float: left;
-    margin-left: 18px;
-    background: white;
-    border: 1px solid #9ca0a6;
-    border-radius:5px 5px 5px 5px;
-    /*overflow-x: hidden; !*x轴禁止滚动*!*/
-    overflow-y: scroll;/*y轴滚动*/
-}
-/*隐藏div的滚动条*/
-.show-imgs::-webkit-scrollbar{
-    width:0;
-}
-.action-div {
-    position: relative;
-    width: 97%;
+.title_main{
     height: 100px;
-    margin-left: 10px;
-}
-.action-div-1 {
-    height: 40px;
-    margin-top: 5px;
-}
-.strategy-div {
-    border-radius:0 15px 0 0;
-    height: 200px;
-}
-.workflow-div {
-    height: 150px;
-    margin-top:20px;
-}
-.strategy-content-div {
-    width: 100%;
-    height: 20px;
-    float: top;
-    margin-top: 15px;
-}
-.strategy-label {
-    /*width: 150px;*/
-    margin: 10px 0px 0px 0px;
-    float: left;
-}
-.scheduling-div {
-    /*width: 100%;*/
-    height: 30px;
-    margin-top: 5px;
-    margin-left: 10px;
-    float: left;
-    font-family:"微软雅黑";
-    font-size: 14px;
-}
-.minmin-input {
-    width: 90px;
-    height: 30px;
-    top:-5px;
-    margin: 0 0 0 10px;
-    float: left;
+    width: 100% !important;
     position: relative;
-    line-height: 30px;
+    /*border: #261eff 1px solid;*/
+    border-bottom: #aab9c3 1px solid;
 }
-.round-input {
-    width: 140px;
-    height: 30px;
-    margin: 0 0 0 10px;
-    float: left;
+
+.plan_main{
+    /*height: 500px;*/
+    width: 100% !important;
+    position: relative;
+    /*border: #261eff 1px solid;*/
+    padding: 0px !important;
 }
-.alg-input {
-     width: 120px;
-     height: 30px;
-     margin: 0 0 0 10px;
-     float: left;
- }
-.objective-label {
-    /*width: 90px;*/
-    float: left;
-    padding-bottom: 0;
+
+.edge_img{
+    padding-top: 6px;
+    position: relative;
+    width: 10%;
+    height: auto;
+}
+
+.plan_title{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    margin-left: 10px;
     margin-top: 10px;
+    display: inline-block;
+}
+#sim_loading_div{
+    display: inline-block;
     margin-left: 10px;
 }
-.ga-input {
-    width: 280px;
-    height: 30px;
-    margin: 0 0 0 10px;
-    float: left;
-}
-.type-label {
-    width: 80px;
-    height: 20px;
-    margin: 0 0 0 10px;
-    float: left;
-    font-family:"微软雅黑";
-}
-.type-select {
-    width: 77%;
-    height: 30px;
-    float: left;
-    /*margin-left:40px;*/
-    /*margin-top:10px;*/
-    border-radius:15px 15px 15px 15px;
-    color:#9ca0a6;
-    text-indent: 10px;
+
+#sim_loading{
+    color: #FF0000;
+    display: none;
 }
 
-.custom-select{
-    width: 77%;
-    height: 30px;
-    float: left;
-    /*margin-left:40px;*/
-    /*margin-top:10px;*/
-    border-radius:15px 15px 15px 15px;
-    color:#9ca0a6;
-    text-indent: 10px;
-    margin-top: 10px;
+.progress{
+    margin: 10px 10px 10px 10px;
 }
 
-.amount-label {
+.chart_main{
+    width: 100% !important;
+    position: relative;
+    /*border: #261eff 1px solid;*/
+    /*padding: 0px !important;*/
+    padding: 0px 10px 10px 10px;
+}
+
+.chart_item{
+    border: solid 1px #aab9c3;
+    position: relative;
     /*width: 50%;*/
-    height: 20px;
-    /*margin-left: 20px;*/
-    margin-top: 5px;
-    float: left;
-    font-size: 1em !important;
-    font-family:"微软雅黑";
-}
-.amount-select {
-    width: 50%;
-    height: 30px;
-    /*margin-top:-5px;*/
-    margin-left: 5px;
-    float: left;
-    border-radius:15px 15px 15px 15px;
-    color:#9ca0a6;
-    text-indent: 10px;
-}
-.custom-checkbox {
-    width: 80px;
-    height: 20px;
-    margin-top: 7px;
-    margin-left: 7px;
-    float: left;
-    font-family:"微软雅黑";
-}
-.custom-input {
-    width: 120px;
-    height: 30px;
-    margin-top: 0px;
-    margin-left: 3px;
-    float: left;
-    border-radius:15px 15px 15px 15px;
-    border-style:none;
-    outline: none;
-    text-indent: 10px;
-    border: 1px solid #DBDBDB;
-    color: #9ca0a6;
-
-}
-.select-file {
-    width: 130px;
-    height: 20px;
-    margin-left: 20px;
-    float: left;
-
-}
-.deadline-label {
-    /*width: 70px;*/
-    /*height: 30px;*/
-    margin-top: 20px;
-    margin-left: 10px;
-    float: left;
-}
-.deadline-input {
-    width: 50%;
-    height: 30px;
-    float: left;
-    margin-top: 10px;
-    border-radius:15px 15px 15px 15px;
-    border-style:none;
-    outline: none;
-    text-indent: 10px;
-    border: 1px solid #9ca0a6;
-    color:#9ca0a6;
-}
-.output-div {
-    /*border: 1px red solid;*/
-    height: 30px;
-    margin-bottom: 10px;
-}
-.output-label {
-    margin-left: 10px;
-    margin-top: 5px;
-    float: left;
-    font-family:"微软雅黑";
-}
-.output-time {
-    float: right;
-    /*height: 20px;*/
-    /*margin-left: 70px;*/
-    margin-top: 5px;
-    margin-right: 10px;
-}
-.output-input {
-    width: 120px;
-    height: 30px;
-    float: left;
-    margin-left: 5px;
-    border-radius:15px 15px 15px 15px;
-    color:#9ca0a6;
+    height: 50%;
+    border-radius: 10px 10px 10px 10px;
 }
 
-table{
-    border: 1px solid #aab9c3;
-    /*border-collapse: collapse;*/
-}
-
-
-
-table tr {
-    height: 20px;
-    width:300px;
-}
-
-table td{
-    border: 1px solid #aab9c3;
-    text-align: left;
-    font-size: 12px;
-    height: 20px;
-    width: 30px;
-}
-
-.title-bar{
-    width: 100%;
-    height:100px;
-    background-color:#4597E6;
-    text-align:center;
-}
-
-.title-logo {
-   position: absolute;
-    top:40px;
-    left:40px;
-}
-
-.title_userinfo{
-    position: absolute;
-    top: 30px;
-    right:200px;
-}
-
-.title-line1 {
-    color:white;
-    font-size: 35vh;
+.table_main{
+    width: 100% !important;
     position: relative;
-    top:15px;
-    font-family:"微软雅黑";
+    /*border: #261eff 1px solid;*/
 }
 
-.title-line2 {
-    color:white;
-    font-size: 35vh;
-    margin-top:30px;
-    font-family:"微软雅黑";
-}
-
-.title-line3 {
-    color:white;
-    font-size: 20vh;
-    margin-top:8px;
-    font-family:"微软雅黑";
-}
-
-.foot-logo {
-    z-index: 1;
-    position: fixed;
-    left:30px;
-    bottom: 30px;
-}
-
-.foot-QRCode {
-    z-index: 1;
-    position: fixed;
-    right: 30px;
-    bottom:30px;
-}
-
-.foot-QRCode2 {
-    z-index: 1;
-   margin-top: 75px;
+.footer_main{
+    width: 100% !important;
+    position: relative;
+    /*border: #261eff 1px solid;*/
 }
 
 .foot-bar {
@@ -525,520 +97,126 @@ table td{
     font-family:"微软雅黑";
 }
 
-/*#versions{
-    font-family:"微软雅黑";
-    position: relative;
-    float: right;
-    top: 0px;
-}*/
-/*修改复选框样式*/
-.al_check {
-    margin-left: 20px;
-    width: 14px;
-    height: 14px;
-    margin-top: 3px;
-    background-color: #fff;
-    border: 1px solid #c9c9c9;
-    border-radius: 2px;
-    color: #fff;
-    text-align: center;
-    line-height: 15px;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    -ms-appearance:none;
-    -o-appearance:none;
-    appearance:none;
-    outline: none;
-}
-
-.al_check:hover {
-    border-color: #43adea;
-}
-
-.al_check:checked {
-    color: #fff;
-    background-color: #43adea;
-    border: 1px solid #43adea;
-}
-
-.al_check:after {
-    content: "✔";
-}
-
-/*修改单选框样式*/
-.radio_input {
-    /*width: 90px;*/
-    /*height: 30px;*/
-    /*top:-5px;*/
-    /*margin: 0 0 0 10px;*/
-    float: left;
-    position: relative;
-    /*line-height: 30px;*/
-    font-family:"微软雅黑";
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-input[name='radioGroup'] {
-    width: 16px;
-    height: 16px;
-    opacity: 0;
-}
-
-label {
-    position: absolute;
-    left: 0px;
-    top: 3px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 1px solid #999;
-}
-
-input:checked+label {
-    background-color: #43adea;
-    border: 1px solid #43adea;
-}
-
-input:checked+label::after {
-    position: absolute;
-    content: '';
-    width: 5px;
-    height: 10px;
-    top: 0px;
-    left: 6px;
-    border: 2px solid #fff;
-    border-top: none;
-    border-left: none;
-    transform: rotate(45deg);
-}
-
-/*修改custom复选框样式*/
-#custom {
-    width: 14px;
-    height: 14px;
-    margin-top: 0;
-    background-color: #fff;
-    border: 1px solid #c9c9c9;
-    border-radius: 2px;
-    color: #fff;
-    text-align: center;
-    line-height: 15px;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    -ms-appearance:none;
-    -o-appearance:none;
-    appearance:none;
-    outline: none;
-}
-
-#custom:hover {
-    border-color: #43adea;
-}
-
-#custom:checked {
-    color: #fff;
-    background-color: #43adea;
-    border: 1px solid #43adea;
-}
-
-#custom:after {
-    content: "✔";
-}
-
-.radio_option {
-    position: relative;
-    margin-top:10px;
-    margin-left:20px;
-    font-family:"微软雅黑";
-}
-
-.workflow_example{
-    position: relative;
-    /*margin-left: 10px !important;*/
-    float: left;
-    margin: 0px auto auto 10px !important;
-}
-
-
-.workflow_custom{
-    position: relative;
-    float: left;
-    margin: 10px auto auto 10px !important;
-}
-
-.youtube {
-    position: fixed;
-    right:34px;
-    bottom: 348px;
-    background-color: #FFFFFF;
-    font-family:"微软雅黑";
-}
-
-.github {
-    position: fixed;
-    right:34px;
-    bottom: 64px;
-    background-color: #FFFFFF;
-    font-family:"微软雅黑";
-}
-
-.developer{
-    color: #FFFFFF;
-    /*position: absolute;*/
-    /*top: 30px;*/
-    /*right:60px;*/
-    padding-top: 10px;
-    /*float: right;*/
-}
-
-.input_odd {
-    position: relative;
-    width: 100%;
-    height:100%;
-    border:none;
-    background-color: #F1F1F1;
-
-}
-.input_even {
-    position: relative;
-    width: 100%;
-    height:100%;
-    border:none;
-    background-color: #FFFFFF;
-}
-
-.input_border {
-    border:solid 1px #c9c9c9;
-}
-
-.clustrmap{
-    position: absolute;
-    /*left: -140px;*/
-    right: 0px;
-    top: -200px;
-    width: 300px;
-    height: 150px;
-}
-
-.user{
-    /*position: absolute;
-    right: 150px;
-    top: 50px;
-    z-index: 1;*/
-
-    position: relative;
-    padding-top: 30px;
-    float: right;
-
-}
-
 .advices{
     position: absolute;
     right: 0px;
     top: 0px;
 }
 
-#user_login{
-    position: relative;
-    width:50% ;
-    background-color: #4597E6;
-    color: #FFFFFF;
-    border-color: #4597E6;
-}
-
-#user_register{
-    position: relative;
-    width:50% ;
-    background-color: #4597E6;
-    color: #FFFFFF;
-    border-color: #4597E6;
-}
-
-/*******************************/
-.background {
-    display: block;
-    width: 100%;
-    height: 100%;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
-    background:white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2000;
-}
-.progressBar {
-    border: solid 2px #86A5AD;
-    background: white url("/images/loading1.gif") no-repeat 10px 10px;
-}
-.progressBar {
-    display: block;
-    width: 200px;
-    height: 28px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -74px;
-    margin-top: -14px;
-    padding: 10px 10px 10px 50px;
-    text-align: left;
-    line-height: 27px;
-    font-weight: bold;
-    position: absolute;
-    z-index: 2001;
-}
-
-.realenviorment-div{
-    float: left;
-    margin-top: 18px;
-    margin-left: 20px;
-}
-.realenviorment-div:hover {
-    border-color: #43adea;
-}
-
-.realenviorment-div:checked {
-    color: #fff;
-    background-color: #43adea;
-    border: 1px solid #43adea;
-}
-
-/*.realenviorment-div:after {*/
-    /*content: "✔";*/
-/*}*/
-
-#detailInfo{
-    /*border: solid #00FF00 1px;*/
-    margin-top: 2px;
-    margin-bottom: 2px;
-    width: 100% !important;
-    height: 310px !important;
-    background-color: #8D8D8D ;
-    background: white url("/images/back_show.jpg");
-    background-size:100% 100%;
-}
-
-.cloudrow{
-    background-color: #00F7DE;
-     width: 30%;
-     height: 100%;
-     overflow-y: scroll;
- }
-
-.cloudrow::-webkit-scrollbar{
-    display: none;
-}
-
-#cloudInfo{
-    background-color: rgba(255,255,255,0);
-    width: 88%;
-    height: 100%;
-    margin-left: 6%;
-}
-
-.fogrow{
-    background-color: #00F7DE;
-    width: 30%;
-    height: 100%;
-    overflow-y: scroll;
-}
-
-.fogrow::-webkit-scrollbar{
-    display: none;
-}
-
-#fogInfo{
-    background-color: rgba(255,255,255,0);
-    width: 88%;
-    height: 100%;
-    margin-left: 6%;
-}
-
-.mobilerow{
-    background-color: #00F7DE;
-    width: 30%;
-    height: 100%;
-    overflow-y: scroll;
-}
-
-.mobilerow::-webkit-scrollbar{
-    display: none;
-}
-
-#mobileInfo{
-    background-color: rgba(255,255,255,0);
-    width: 88%;
-    height: 100%;
-    margin-left: 6%;
-}
-
-#cloudDetail{
-    text-align: center;
-    overflow-y: scroll;
-    height: 100%;
-}
-#cloudDetail::-webkit-scrollbar{
-    display: none;
-}
-
-#fogDetail{
-    text-align: center;
-    overflow-y: scroll;
-    height: 100%;
-}
-#fogDetail::-webkit-scrollbar{
-    display: none;
-}
-
-#mobileDetail{
-    text-align: center;
-    overflow-y: scroll;
-    height: 100%;
-}
-#mobileDetail::-webkit-scrollbar{
-    display: none;
-}
-
-#runTime{
-    background-color: #FFFFFF;
-    width: 88%;
-    height: 100%;
-    margin-left: 6%;
-    background-color:rgba(255,255,255,0);
-    text-align: center;
-}
-
-#realOperate{
-    position: relative;
-    float: left;
-    margin-left: 10px;
-    /*margin-top: 3px;*/
-    background-color: #75dbed;
-    width:140px;
-    height:30px;
-    line-height: 1.5;
-}
-
-#system_logo{
-    float: left;
-    padding: 30px 0px 30px 90px;
-}
-
 #ahu_logo{
-    float: left;
-    padding: 15px 0px 10px 0px;
+    float: right;
+    padding: 10px 0px 5px 0px;
 }
 
 #deakin_logo{
     float: left;
-    padding: 15px 0px 10px 0px;
+    padding: 10px 0px 5px 30px;
 }
 
 #swinburne_logo{
     float: left;
-    padding: 20px 0px 10px 20px;
+    padding: 25px 0px 5px 5px;
 }
 
 #monash_logo{
     float: left;
-    padding: 22px 0px 0px 0px;
+    padding: 27px 0px 0px 20px;
 }
 
-
-
+.monash_img{
+    position: relative;
+    width: 100%;
+    padding: 2px 0px 0px 20px;
+}
 
 #visit_logo{
-    /*position: absolute;
-    width: 120px;
-    height: 60px;
-    top: 30px;
-    left: 65%;*/
 
     position: relative;
     width: 80%;
-    height: 80%;
-    padding-top: 10px;
+    /*height: 80%;*/
+    padding: 10px 0px 0px 0px;
 }
 
-.main-left{
-    background-color: #FFFFFF;
-    float: left;
-    width: 25%;
-    height: 80%;
-    /*border: solid 1px red;*/
+.bottom-sep{
+    position: relative;
+    width: 42%;
+    border: 1px solid #aab9c3;
+    margin-left: 30%;
 }
 
-.main-right{
-    float: left;
-    width: 74%;
-    height: 80%;
-    /*border: solid 1px red;*/
+#doc_div{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 25px;
+    margin-top: 20px;
+    color: #666666;
 }
 
-.line-sep{
-    background: #aab9c3;
-    width: 90%;
-    height: 1px;
-    margin-left: 5%;
-    margin-right: 5px;
+#developer_div{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 25px;
+    margin-top: 20px;
+    padding-left: 60px;
+    color: #666666;
+}
+
+#version_info{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 25px;
+    margin-top: 20px;
+    color: #666666;
+}
+
+#user_login{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 15px;
+    color: #666666;
+}
+
+#user_register{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 15px;
+    color: #666666;
+}
+
+#login_div{
+    float: right;
+    margin-top: 20px;
+}
+
+#userinfo_div{
+    float: right;
+    margin-top: 20px;
+}
+
+#username_a{
+    color: #000;
+}
+
+#plan_add{
+    position: relative;
+    float: right;
+    background-color: #75dbed;
     margin-top: 5px;
+    margin-right: 20px;
 }
 
-.main-right-div {
-    height: auto;
-    width: 100%;
-    /*margin: 0px auto 60px auto;*/
-    background:  white;
-    opacity:0.9;
-    z-index:10;
+.btns{
+    background-color: #FFFFFF !important;
+    color: #aab9c3 !important;
+}
+
+.output-input {
+    width: 120px;
+    height: 30px;
+    float: left;
+    margin-left: 5px;
     border-radius:15px 15px 15px 15px;
-
-}
-
-#overview_data{
-    position: relative;
-    width: 100%;
-    height: 54%;
-    /*border: 1px solid #0C0C0C;*/
-}
-
-.table-div{
-    position: relative;
-    width: 100%;
-    height: 40%;
-    /*border: 1px solid #0C0C0C;*/
-    /*overflow-y: scroll;!*y轴滚动*!*/
-}
-/*隐藏div的滚动条*/
-/*.table-div::-webkit-scrollbar{
-    width:0;
-}*/
-
-#table-data-div{
-    position: relative;
-    width: 100%;
-    height: 67%;
-    overflow-y: scroll;/*y轴滚动*/
-    border: solid 1px #aab9c3;
-    border-radius: 0px 0px 10px 10px;
-}
-/*隐藏div的滚动条*/
-#table-data-div::-webkit-scrollbar{
-    width:0;
-}
-
-#output-table-tbody{
-    margin: 0px 0px 0px 0px;
-    border:0px solid #FFFFFF;
-}
-
-.chart_item{
-    border: solid 1px #aab9c3;
-    position: relative;
-    width: 50%;
-    height: 50%;
-    border-radius: 10px 10px 10px 10px;
+    color:#9ca0a6;
 }
 
 #lineChartMain{
@@ -1065,71 +243,42 @@ input:checked+label::after {
     height: 100%;
 }
 
-#table-thead-div{
-    border-collapse: separate;
-    border-spacing: 0;
+#realOperate{
     position: relative;
-    width: 100%;
-    /*border: solid 1px #aab9c3;*/
-    border-radius: 10px 10px 0px 0px;
-}
-
-#output-table{
-    margin: 0px 0px 0px 0px;
-    position: relative;
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 2px #000;
-    /*border-radius: 10px 10px 0px 0px;*/
-    /*border: solid 1px blue;*/
-    /*height: 89%;*/
-    /*overflow-y: scroll;*/
- }
-#output-table tr th:first-child,table tr td:first-child {/*设置table左边边框*/
-    border-left: 2px solid #eaeaea;
-}
-
-#output-table tr th:last-child,table tr td:last-child {/*设置table右边边框*/
-    border-right: 2px solid #eaeaea;
-}
-#output-table tr td:first-child,
-#output-table tr td:nth-child(2),
-#output-table tr td:nth-child(3),
-#output-table tr td:last-child{/*设置table表格每列底部边框*/
-    border-bottom: 2px solid #eaeaea;
-}
-#output-table tr:first-child th:first-child {
-    border-top-left-radius: 10px;
-}
-
-#output-table tr:first-child th:last-child {
-    border-top-right-radius: 10px;
-}
-
-#output-table tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-#output-table tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
-
-
-#real_loading_div{
-    /*display: none;*/
     float: left;
-    margin-left: 15px;
-    margin-top: 7px;
+    margin-left: 10px;
+    /*margin-top: 3px;*/
+    background-color: #75dbed;
+    width:140px;
+    height:30px;
+    line-height: 1.5;
 }
 
-#real_loading{
-    display: none;
-    /*display: block;*/
-
+.output_label{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    margin-top: 5px;
 }
 
-.btn_realStatus_failed{
+
+.output-time{
+    position: relative;
+    float: right;
+    padding-right: 10px;
+}
+
+.outputTitle{
+    padding: 10px 10px 10px 10px;
+}
+
+.output_progress{
+    position: relative;
+    padding-top: 10px;
+    width: 50%;
+    display: block;
+}
+
+.btn_status_failed{
     width: 20px;
     height: 20px;
     border-radius:10px 10px 10px 10px;
@@ -1138,7 +287,7 @@ input:checked+label::after {
 
 }
 
-.btn_realStatus_success{
+.btn_status_success{
     width: 20px;
     height: 20px;
     border-radius:10px 10px 10px 10px;
@@ -1146,52 +295,646 @@ input:checked+label::after {
     background-color: #00FF00;
 }
 
-#data_tbody tr td{
-    position: relative;
-    width: 7.1%;
-}
-
-#output-table thead th{
-    position: relative;
-    width: 7.1%;
-}
-
-.mainContainer{
-    width: 100% !important;
-    height: 910px !important;
-    /*border: 1px solid #00ff00;*/
-    padding: 0px 0px 0px 0px !important;
-}
-
-.main_title{
-    width: 100%;
-    height:120px;
-    background-color:#4597E6;
-    text-align:center;
-
-}
-.main_middle{
+.input_odd {
     position: relative;
     width: 100%;
-    height: 773px;
-    /*border: 1px red solid;*/
-}
-.main_foot{
-    /*border:solid  1px red;*/
-    /*position: relative;*/
-    /*float: bottom;*/
+    height:100%;
+    border:none;
+    background-color: #F2F2F2;
+    text-align: center;
 
 }
+.input_even {
+    position: relative;
+    width: 100%;
+    height:100%;
+    border:none;
+    background-color: #FFFFFF;
+    text-align: center;
+}
 
-.title_item{
+/**************plan表格开始****************/
+.plan_padding{
+    padding: 5px 20px 0px 20px;
+}
+
+#plan_table1 thead th{
+    position: relative;
+    text-align: center;
+    /*width: 10%;*/
     /*border: 1px solid red;*/
 }
 
-.right_title{
-    margin-top: 3px;
-    margin-bottom: 3px;
+#plan_tbody tr td{
+    /*border: 1px solid red;*/
+    position: relative;
+    height: 50px;
+    /*width: 10%;*/
 }
 
-.four_btn{
-    margin-top: 10px;
+#plan_table1{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    /*border: 2px #000;*/
 }
+#plan_table1 tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#plan_table1 tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#plan_table1 tr td:first-child,
+#plan_table1 tr td:nth-child(2),
+#plan_table1 tr td:nth-child(3),
+#plan_table1 tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#plan_table1 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#plan_table1 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#plan_table1 tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#plan_table1 tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#plan_table2{
+    margin: 0px 0px 0px 0px;
+}
+
+.plan_data_div{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+.plan_data_div::-webkit-scrollbar{
+    width:0;
+}
+/**************plan表格结束****************/
+
+/**************Standby表格开始****************/
+#standby_table1 thead th{
+    position: relative;
+    width: 12.5%;
+    text-align: center;
+}
+
+#standby_tbody tr td{
+    position: relative;
+    width: 12.5%;
+    text-align: center;
+}
+
+#standby_table1{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    /*border: 2px #000;*/
+}
+#standby_table1 tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#standby_table1 tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#standby_table1 tr td:first-child,
+#standby_table1 tr td:nth-child(2),
+#standby_table1 tr td:nth-child(3),
+#standby_table1 tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#standby_table1 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#standby_table1 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#standby_table1 tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#standby_table1 tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#standby_table2{
+    margin: 0px 0px 0px 0px;
+}
+
+.standby_data_div{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+.standby_data_div::-webkit-scrollbar{
+    width:0;
+}
+/**************Standby表格结束****************/
+
+/**************Running表格开始****************/
+#running_table1 thead th{
+    position: relative;
+    width: 10%;
+    text-align: center;
+}
+
+#running_tbody tr td{
+    position: relative;
+    width: 10%;
+    text-align: center;
+}
+
+#running_table1{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    /*border: 2px #000;*/
+}
+#running_table1 tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#running_table1 tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#running_table1 tr td:first-child,
+#running_table1 tr td:nth-child(2),
+#running_table1 tr td:nth-child(3),
+#running_table1 tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#running_table1 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#running_table1 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#running_table1 tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#running_table1 tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#running_table2{
+    margin: 0px 0px 0px 0px;
+}
+
+.running_data_div{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+.running_data_div::-webkit-scrollbar{
+    width:0;
+}
+/**************Running表格结束****************/
+
+/**************Successed表格开始****************/
+#successed_table1 thead th{
+    position: relative;
+    width: 10%;
+    text-align: center;
+}
+
+#successed_tbody tr td{
+    position: relative;
+    width: 10%;
+    text-align: center;
+}
+
+#successed_table1{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    /*border: 2px #000;*/
+}
+#successed_table1 tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#successed_table1 tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#successed_table1 tr td:first-child,
+#successed_table1 tr td:nth-child(2),
+#successed_table1 tr td:nth-child(3),
+#successed_table1 tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#successed_table1 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#successed_table1 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#successed_table1 tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#successed_table1 tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#successed_table2{
+    margin: 0px 0px 0px 0px;
+}
+
+.successed_data_div{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+.successed_data_div::-webkit-scrollbar{
+    width:0;
+}
+/**************Successed表格结束****************/
+
+/**************Failed表格开始****************/
+#failed_table1 thead th{
+    position: relative;
+    width: 10%;
+    text-align: center;
+}
+
+#failed_tbody tr td{
+    position: relative;
+    width: 10%;
+    text-align: center;
+}
+
+#failed_table1{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    /*border: 2px #000;*/
+}
+#failed_table1 tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#failed_table1 tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#failed_table1 tr td:first-child,
+#failed_table1 tr td:nth-child(2),
+#failed_table1 tr td:nth-child(3),
+#failed_table1 tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#failed_table1 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#failed_table1 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#failed_table1 tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#failed_table1 tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#failed_table2{
+    margin: 0px 0px 0px 0px;
+}
+
+.failed_data_div{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+.failed_data_div::-webkit-scrollbar{
+    width:0;
+}
+/**************Failed表格结束****************/
+
+/**************Detail表格开始****************/
+#detail_table1 thead th{
+    position: relative;
+    /*width: 7.14%;*/
+    /*border:1px red solid;*/
+}
+
+#detail_tbody tr td{
+    position: relative;
+    /*width: 7.14%;*/
+    /*border:1px red solid;*/
+}
+
+.detail_job{
+    width: 5%;
+    text-align: center !important;
+}
+
+.detail_task{
+    width: 5%;
+    text-align: center !important;
+}
+
+.detail_simStus{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_resource{
+    width: 10%;
+    text-align: center !important;
+}
+
+.detail_vm{
+    width: 5%;
+    text-align: center !important;
+}
+
+.detail_simTime{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_simCost{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_start{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_finish{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_depth{
+    width: 5%;
+    text-align: center !important;
+}
+
+.detail_realTime{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_realCost{
+    width: 7%;
+    text-align: center !important;
+}
+
+.detail_parents{
+    width: 14%;
+    text-align: center !important;
+}
+
+.detail_realStus{
+    width: 7%;
+    text-align: center !important;
+}
+
+#detail_table1{
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    /*border: 2px #000;*/
+}
+#detail_table1 tr th:first-child,table tr td:first-child {/*设置table左边边框*/
+    border-left: 2px solid #eaeaea;
+}
+
+#detail_table1 tr th:last-child,table tr td:last-child {/*设置table右边边框*/
+    border-right: 2px solid #eaeaea;
+}
+#detail_table1 tr td:first-child,
+#detail_table1 tr td:nth-child(2),
+#detail_table1 tr td:nth-child(3),
+#detail_table1 tr td:last-child{/*设置table表格每列底部边框*/
+    border-bottom: 2px solid #eaeaea;
+}
+#detail_table1 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#detail_table1 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#detail_table1 tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#detail_table1 tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#detail_table2{
+    margin: 0px 0px 0px 0px;
+}
+
+.detail_data_div{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;/*y轴滚动*/
+    border: solid 1px #aab9c3;
+    border-radius: 0px 0px 10px 10px;
+}
+.detail_data_div::-webkit-scrollbar{
+    width:0;
+}
+/**************Detail表格结束****************/
+
+
+
+.img_cloud{
+    width: 21px;
+    height: 31px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url("/images/cloudServer.png");
+    display: inline-block;
+}
+
+.img_fog{
+    width: 23px;
+    height: 30px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url("/images/fogServer.png");
+    display: inline-block;
+}
+
+.img_mobile{
+    width: 18px;
+    height: 30px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url("/images/mobile.png");
+    display: inline-block;
+}
+
+.cloud_topnum{
+    position: relative;
+    float: right;
+    color: #FFFFFF;
+    background-color: #FF5722;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    margin-right: -10px;
+    margin-top: -10px;
+    padding-top: 0px;
+    /*padding-left: 5px;*/
+    /*padding-bottom: 2px;*/
+    text-align: center;
+    font-size: 2px;
+}
+
+.fog_topnum{
+    position: relative;
+    float: right;
+    color: #FFFFFF;
+    background-color: #FF5722;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    margin-right: -10px;
+    margin-top: -10px;
+    /*padding-left: 5px;*/
+    /*padding-bottom: 5px;*/
+    text-align: center;
+}
+
+.mobile_topnum{
+    position: relative;
+    float: right;
+    color: #FFFFFF;
+    background-color: #FF5722;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    margin-right: -10px;
+    margin-top: -10px;
+    /*padding-left: 5px;*/
+    /*padding-bottom: 5px;*/
+    text-align: center;
+}
+
+#real_loading_div{
+    float: left;
+    /*margin-left: 15px;*/
+    margin-top: 7px;
+}
+
+
+#operate_percent{
+    margin-top: 7px;
+    margin-left: 20px;
+}
+
+#real_loading{
+    color: #FF0000;
+    display: none;
+    /*display: block;*/
+
+}
+
+
+/*plan表格中的每一列*/
+.plan_no{
+    text-align: center;
+    width: 5%;
+}
+
+.plan_name{
+    text-align: center;
+    width: 8%;
+}
+
+.plan_mec{
+    text-align: center;
+    width: 12%;
+}
+
+.plan_strategy{
+    text-align: center;
+    width: 10%;
+}
+
+.plan_algo{
+    text-align: center;
+    width: 20%;
+}
+
+.plan_opti{
+    text-align: center;
+    width: 10%;
+}
+
+.plan_deadline{
+    text-align: center;
+    width: 5%;
+}
+
+.plan_workflow{
+    text-align: center;
+    width: 10%;
+}
+
+.plan_editTime{
+    text-align: center;
+    width: 10%;
+}
+
+.plan_action{
+    text-align: center;
+    width: 10%;
+}
+

@@ -10,16 +10,13 @@
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <style>
-.developInfo{
-    width:580px;
-    margin-left:10px;
-    margin-right:10px;
-}
-
+    body{
+        padding: 20px 20px 20px 20px;
+    }
 </style>
 <body>
 
-<table class="developInfo layui-table">
+<table class="layui-table">
     <colgroup>
         <col width="150">
         <col width="200">

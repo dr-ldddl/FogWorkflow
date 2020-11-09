@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jcraft.jsch.JSchException;
+import engine.DagGraphUtil;
 import engine.DockerLink;
+import engine.ParseXML;
 import org.cloudbus.cloudsim.*;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.power.PowerHost;
@@ -114,6 +116,12 @@ public class IndexService {
 
 
     public static Map<String, String> devicesInfo = new HashMap<String, String>();
+
+
+    static List<String> pi = new ArrayList<>();
+    static List<String> kmp = new ArrayList<>();
+    static List<String> levenshtein = new ArrayList<>();
+    static List<String> selectsort = new ArrayList<>();
 
 
 
@@ -244,6 +252,29 @@ public class IndexService {
 
         initFogSetting(json.getJSONObject("setting_json"));
         initAlSetting(json.getJSONObject("setting_json"));
+
+        JSONArray pi_json= json.getJSONArray("pi");
+        JSONArray kmp_json = json.getJSONArray("kmp");
+        JSONArray levenshtein_json = json.getJSONArray("levenshtein");
+        JSONArray selectsort_json = json.getJSONArray("selectsort");
+
+        for(int i = 0; i < pi_json.size() ; i++){
+            pi.add(pi_json.getString(i));
+        }
+        for(int i = 0; i < kmp_json.size() ; i++){
+            kmp.add(kmp_json.getString(i));
+        }
+        for(int i = 0; i < levenshtein_json.size() ; i++){
+            levenshtein.add(levenshtein_json.getString(i));
+        }
+        for(int i = 0; i < selectsort_json.size() ; i++){
+            selectsort.add(selectsort_json.getString(i));
+        }
+
+        /*System.out.println(pi);
+        System.out.println(kmp);
+        System.out.println(levenshtein);
+        System.out.println(selectsort);*/
     }
 
     /**
@@ -305,7 +336,8 @@ public class IndexService {
      * @return
      */
     public JSONObject doSim(JSONObject json) {
-//        System.out.println(json);
+        System.out.println(json);
+
         outputMap.clear();
         parseParams(json);
         record.clear();
@@ -551,6 +583,8 @@ public class IndexService {
             outputEntity.setJobId(String.valueOf(job.getCloudletId()));
             if (job.getClassType() == Parameters.ClassType.STAGE_IN.value) {
                 outputEntity.setTaskId("Stage-in");
+                outputEntity.setWorkType("pi");
+                System.out.println("ttttttt:" + outputEntity);
             } else {
                 outputEntity.setTaskId(String.valueOf(job.getClassType()));
             }
@@ -575,7 +609,39 @@ public class IndexService {
             } else if (job.getCloudletStatus() == Cloudlet.FAILED) {
                 outputEntity.setStatus("FAILED");
             }
+            //初始化真实执行状态
             outputEntity.setRealStatus("FAILED");
+
+            /*System.out.println("kmp");
+            System.out.println(pi);
+            System.out.println(kmp);
+            System.out.println(levenshtein);
+            System.out.println(selectsort);*/
+
+            //设置任务类型
+            String JobId = outputEntity.getJobId();
+            for (String piItem: pi) {
+                if(JobId.equals(piItem)){
+                    outputEntity.setWorkType("pi");
+                }
+            }
+            for (String kmpItem: kmp) {
+                if(JobId.equals(kmpItem)){
+                    outputEntity.setWorkType("kmp");
+                }
+            }
+            for (String levenshteinItem: levenshtein) {
+                if(JobId.equals(levenshteinItem)){
+                    outputEntity.setWorkType("levenshtein");
+                }
+            }
+            for (String selectsortItem: selectsort) {
+                if(JobId.equals(selectsortItem)){
+                    outputEntity.setWorkType("selectsort");
+                }
+            }
+
+
             outputList.add(outputEntity);
         }
         //对outputEntityList排序
@@ -596,7 +662,7 @@ public class IndexService {
             }
         });
 //        System.out.println("ddddd");
-//        System.out.println(outputList);
+        System.out.println(outputList);
         outputMap.put(curMethod, outputList);
 
 //            printJobList(outputList0);
@@ -677,8 +743,10 @@ public class IndexService {
              * Set a offloading Strategy for OffloadingEngine
              */
             switch (strategy) {
-                case "All-in-Fog":
+//                case "All-in-Fog":
+                case "All-in-Edge":
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategyAllinFog());
+                    System.out.println("ddddddddd:All-in-Edge");
                     break;
                 case "All-in-Cloud":
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategyAllinCloud());
@@ -1069,6 +1137,7 @@ public class IndexService {
                 user.setOrganization(rs.getString("organization"));
                 user.setSubscribe(rs.getString("subscribe"));
                 user.setXmlfiles(rs.getString("xmlfiles"));
+                user.setPlan(rs.getString("plan"));
                 return user;
             }
         });
@@ -1358,4 +1427,116 @@ public class IndexService {
 
         return resultThree.toJSONString();
     }
+
+    //更新用户的plan
+    public String  updatePlan(JSONObject planJson){
+        System.out.println(planJson);
+        String email = planJson.getString("email");
+        JSONObject plan_json = planJson.getJSONObject("plan");
+        String planName = plan_json.getString("planName");
+
+        System.out.println("email:" + email);
+        System.out.println("plan:" + plan_json);
+        System.out.println("planName:" + planName);
+
+        //查询当前用户的所有plan
+        String sql_select = "SELECT plan FROM userinfo WHERE email ='" + email + "'";
+//        System.out.println("sql_select:" + sql_select);
+        String planResult_string =  jdbcTemplate.queryForObject(sql_select,String.class);
+
+        JSONObject planResult_json = JSONObject.parseObject(planResult_string);
+        System.out.println(planResult_string);
+        System.out.println("keys" + planResult_json.keySet());
+
+        //添加新增的plan
+        planResult_json.put(planName, plan_json);
+
+        String sql_update = "update userinfo set plan='" + planResult_json + "' where email='" + email +"'";
+        int insert_flag = jdbcTemplate.update(sql_update);
+        System.out.println(insert_flag);
+
+        return planResult_json.toJSONString();
+    }
+
+    //删除用户的plan
+    public String delPlan(JSONObject planJson){
+        System.out.println(planJson);
+        String email = planJson.getString("email");
+        JSONObject plan_json = planJson.getJSONObject("plan");
+        String planName = plan_json.getString("planName");
+
+        System.out.println("email:" + email);
+        System.out.println("plan:" + plan_json);
+        System.out.println("planName:" + planName);
+
+        //查询当前用户的所有plan
+        String sql_select = "SELECT plan FROM userinfo WHERE email ='" + email + "'";
+        System.out.println("sql_select:" + sql_select);
+        String planResult_string =  jdbcTemplate.queryForObject(sql_select,String.class);
+
+        JSONObject planResult_json = JSONObject.parseObject(planResult_string);
+        System.out.println(planResult_string);
+        System.out.println("keys" + planResult_json.keySet());
+
+        //删除plan
+        planResult_json.remove(planName);
+
+        String sql_update = "update userinfo set plan='" + planResult_json + "' where email='" + email +"'";
+        int del_flag = jdbcTemplate.update(sql_update);
+        System.out.println(del_flag);
+        System.out.println("keys" + planResult_json.keySet());
+
+        return planResult_json.toJSONString();
+    }
+
+    //获取用户所有的plan
+    public String getPlans(String email){
+        //查询当前用户的所有plan
+        String sql_select = "SELECT plan FROM userinfo WHERE email ='" + email + "'";
+        System.out.println("sql_select:" + sql_select);
+        String planResult_string =  jdbcTemplate.queryForObject(sql_select,String.class);
+
+        JSONObject planResult_json = JSONObject.parseObject(planResult_string);
+        System.out.println(planResult_json);
+        return planResult_json.toJSONString();
+    }
+
+    //获得Dag图片
+    public String getDag(String dagXml , String customXml){
+        System.out.println("dagXml:" + dagXml);
+        System.out.println("customXml:" + customXml);
+        String filePath = "";
+
+        List<String> points = new ArrayList<>();
+        List<Map<String,String>> links = new ArrayList<>();
+        if(customXml.equals("")){
+            filePath = xml_path + dagXml;
+            points = ParseXML.getPoints(filePath);
+            links = ParseXML.getLinks(filePath);
+        }else{
+            filePath = dagxmlpath + customXml;
+            points = ParseXML.getCustomPoints(filePath);
+            links = ParseXML.getCustomLinks(filePath);
+
+        }
+
+        // 得到XML文件
+//        String filePath = "E:\\workflow\\Montage_20.xml";
+//        List<String> points = ParseXML.getPoints(filePath);
+//        List<Map<String,String>> links = ParseXML.getLinks(filePath);
+        System.out.println("points: " + points);
+        System.out.println("links:" + links);
+
+        DagGraphUtil dagGraphUtil = new DagGraphUtil(points, links);
+
+        System.out.println(dagGraphUtil.drawDagGraph());
+        System.out.println(dagGraphUtil.drawDagGraph().toString());
+
+        JSONObject jsonObject = new JSONObject(dagGraphUtil.drawDagGraph());
+        System.out.println(jsonObject.toJSONString());
+        return jsonObject.toJSONString();
+
+
+    }
+
 }
