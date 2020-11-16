@@ -51,7 +51,7 @@ $(document).ready(function(){
     var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
     $("#submit").click(function(){
         var context = $("#textMain").val();
-        console.log(context);
+        // console.log(context);
         var currentTime = new Date().Format("yyyy-MM-dd HH:mm:ss");
         var data = JSON.stringify({"date":currentTime,"advices":context});
         $.ajax({
@@ -62,12 +62,15 @@ $(document).ready(function(){
             async:false,
             contentType:"application/json",
             success:function (res) {
-                debugger
                 layer.msg("The recommendations submitted successfully!",
                     {time:1000}
                 );
-                console.log(res);
-                parent.layer.close(index);
+                // console.log(res);
+                setTimeout(function(){
+                    parent.layer.close(index);
+                },1100);
+                // parent.layer.close(index);
+
             },
             error:function(res){
                 layer.msg("Failed to obtain user information!");

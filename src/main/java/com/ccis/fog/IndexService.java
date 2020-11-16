@@ -434,16 +434,16 @@ public class IndexService {
         }*/
 //        retJson.put("record_double" , record_double);
 
-        System.out.println(retJson);
-//        for (Double[] item: record_double) {
-//            System.out.println(item[0]);
-//            System.out.println(item[1]);
-//            System.out.println(item[2]);
-//            System.out.println(item[3]);
-//            System.out.println(item[4]);
-//            System.out.println(item[5]);
-//            System.out.println(item[6]);
-//        }
+        System.out.println("retJson:" + retJson);
+/*        for (Double[] item: record_double) {
+            System.out.println(item[0]);
+            System.out.println(item[1]);
+            System.out.println(item[2]);
+            System.out.println(item[3]);
+            System.out.println(item[4]);
+            System.out.println(item[5]);
+            System.out.println(item[6]);
+        }*/
 
         return retJson;
     }
@@ -667,8 +667,13 @@ public class IndexService {
 
 //            printJobList(outputList0);
         controller.print();
+        double totalExecutionTime = 0.0;
+        for (OutputEntity outputEntity : outputList) {
+            totalExecutionTime += Double.parseDouble(outputEntity.getTime());
+        }
 
-        Double[] a = {getAlgorithm(scheduler_method),controller.TotalExecutionTime,controller.TotalEnergy,controller.TotalCost};
+        Double[] a = {getAlgorithm(scheduler_method), controller.TotalExecutionTime, controller.TotalEnergy, controller.TotalCost};
+//        Double[] a = {getAlgorithm(scheduler_method), totalExecutionTime, controller.TotalEnergy, controller.TotalCost};
         record.add(a);
         return wfEngine.algorithmTime;
     }
@@ -1088,6 +1093,7 @@ public class IndexService {
 //        String telnumber = user.getTelnumber();
         String subscribe = user.getSubscribe();
         JSONArray xmlfiles =new JSONArray();
+        JSONObject plan = new JSONObject();
 
         String sql = "SELECT * FROM userinfo WHERE username = '" + user.getUsername() + "'";
 
@@ -1107,9 +1113,9 @@ public class IndexService {
         if (userList.size() > 0){
             return "existed";
         }
-        sql = "INSERT INTO userinfo (username,password,email,organization,subscribe,xmlfiles) VALUES ('"
+        sql = "INSERT INTO userinfo (username,password,email,organization,subscribe,xmlfiles,plan) VALUES ('"
                 + username +"','"+ password + "','" + email + "','"
-                + organization+ "','" + subscribe +"','" + xmlfiles.toString() +"')";
+                + organization+ "','" + subscribe +"','" + xmlfiles.toString() + "','" + plan.toString() +"')";
 //        System.out.println(sql);
         int insert_flag = jdbcTemplate.update(sql);
 //        System.out.println(insert_flag);

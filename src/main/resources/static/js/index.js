@@ -301,7 +301,7 @@ function pieChart(outputEntityList){
 
     option = {
         title : {
-            text: 'Task Allocation',
+            text: 'Tasks Allocation',
             subtext: 'Number of tasks per machine',
             x:'center'
         },
@@ -355,11 +355,13 @@ function lineChart(list) {
     var simTimes = {};
     var realTimes = {};
     var realFlag = true;
+    var count = 0 ;
     for(var i = 0; i < list.length; i++){
         var item = list[i];
         var jobId = item["jobId"];
         var simTime = item["time"];
         var realTime = item["realTime"];
+        count += parseFloat(simTime);
         jobIds.push(jobId);
         simTimes[jobId] = simTime;
         if(realTime == undefined){
@@ -369,6 +371,7 @@ function lineChart(list) {
         realTimes[jobId] = realTime;
 
     }
+    // console.log("count:" + count);
 
     var legend = [];
     var x_data =[];
@@ -381,9 +384,9 @@ function lineChart(list) {
 
 
     //添加标题
-    legend.push("simTimes");
+    legend.push("simTime");
     if(realFlag){
-        legend.push("realTimes");
+        legend.push("realTime");
     }
     //添加横坐标-任务Id
     for(key in simTimes){
@@ -398,13 +401,13 @@ function lineChart(list) {
 
 
     //添加数据
-    series_simTime['name'] = "simTimes";
+    series_simTime['name'] = "simTime";
     series_simTime['type'] = "line";
     series_simTime['data'] = series_simTime_y;
     series.push(series_simTime);
 
     if(realFlag){
-        series_realTime['name'] = "realTimes";
+        series_realTime['name'] = "realTime";
         series_realTime['type'] = "line";
         series_realTime['data'] = series_realTime_y;
         series.push(series_realTime)
@@ -435,7 +438,7 @@ function lineChart(list) {
             }
         },
         xAxis: {
-            name: "JobId",
+            name: "Job ID",
             type: 'category',
             boundaryGap: false,
             data: x_data
@@ -496,7 +499,7 @@ function ganttChart(outputEntityList){
     var option = {
         title: {
             text: 'Task Progress',
-            subtext: 'Execution time Gantt chart',
+            subtext: 'Execution time gantt chart',
             x:'center'
         },
         legend: {
@@ -510,7 +513,7 @@ function ganttChart(outputEntityList){
         yAxis: {
             //data: ['job1','job2', 'job3','job4'],
             data: jobs,
-            name: 'JobId',
+            name: 'Job ID',
         },
         tooltip: {
             show: true,
@@ -1148,6 +1151,37 @@ $(document).ready(function(){
 
     });
 
+    //意见按钮
+    $(".advices").click(function(){
+
+        var username = userJson['username'];
+        if(username == "root"){
+            layer.open({
+                type: 2
+                , offset: "140px"
+                , title: "All recommendations"
+                , content: "/allRecommendations"
+                , skin: 'title-style'
+                , area: ['600px', '500px']
+                ,cancel: function(){
+                    // feedSetting();
+                }
+            });
+        }else{
+            layer.open({
+                type: 2
+                , offset: "140px"
+                , title: "Submit recommendations"
+                , content: "/recommendations"
+                , skin: 'title-style'
+                , area: ['600px', '500px']
+                ,cancel: function(){
+                    // feedSetting();
+                }
+            });
+        }
+    });
+
 });
 
 //判断是否在前面加0
@@ -1210,36 +1244,7 @@ $("#logout").click(function(){
     window.location.href = "/";
 })
 
-//意见按钮
-$(".advices").click(function(){
 
-    var username = userJson['username'];
-    if(username == "root"){
-        layer.open({
-            type: 2
-            , offset: "140px"
-            , title: "All recommendations"
-            , content: "/allRecommendations"
-            , skin: 'title-style'
-            , area: ['600px', '500px']
-            ,cancel: function(){
-                // feedSetting();
-            }
-        });
-    }else{
-        layer.open({
-            type: 2
-            , offset: "140px"
-            , title: "Submit recommendations"
-            , content: "/recommendations"
-            , skin: 'title-style'
-            , area: ['600px', '500px']
-            ,cancel: function(){
-                // feedSetting();
-            }
-        });
-    }
-});
 
 //标题栏Document
 $("#doc_div").click(function(){
@@ -1254,8 +1259,8 @@ $("#doc_div").click(function(){
 
         }
     });*/
-    window.open("http://127.0.0.1/documentsInfo");
-    // window.open("http://47.98.222.243/documentsInfo");
+    // window.open("http://127.0.0.1/documentsInfo");
+    window.open("http://47.98.222.243/documentsInfo");
 });
 
 //标题栏Developers
@@ -1466,7 +1471,7 @@ function start(url, json_para) {
             layer.open({
                 type: 2
                 , offset: "140px"
-                , title: "FogWorkflowSim simulation result"
+                , title: "FogWorkflow Simulation Result"
                 , content: "/barChart"
                 , skin: 'title-style'
                 , area: ['1000px', '500px']
@@ -2182,10 +2187,20 @@ function getRealThreeObject(key , listReal){
         async: false,
         contentType:"application/json",
         success: function (data) {
+            // console.log(data);
             var totalThree = eval("("+data+")");
             realTotalTime = totalThree['realTotalTime'];
             realTotalCost = totalThree['realTotalCost'];
             mobileTotalEnergy = totalThree['mobileTotalEnergy'];
+            if(realTotalTime == 0){
+                realTotalTime = 1;
+            }
+            if(realTotalCost == 0){
+                realTotalCost = 1;
+            }
+            if(mobileTotalEnergy == 0){
+                mobileTotalEnergy = 1;
+            }
             // console.log(data);
         },
         error: function(data){

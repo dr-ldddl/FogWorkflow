@@ -98,8 +98,8 @@
                             <span class="fontType">CloudType:</span>
                             <select id="clType">
                                 <option value ="Small">Small(MIPS:1600 Cost:0.96)</option>
-                                <option value ="Large">Middle(MIPS:3200 Cost:1.66)</option>
-                                <option value="Super">Large(MIPS:4800 Cost:2.36)</option>
+                                <option value ="Middle">Middle(MIPS:3200 Cost:1.66)</option>
+                                <option value="Large">Large(MIPS:4800 Cost:2.36)</option>
                             </select>
                         </div>
                         <div id="cnum" class="number">Number:
@@ -119,8 +119,8 @@
                             <span class="fontType">EdgeType:</span>
                             <select id="edType">
                                 <option value ="Small">Small(MIPS:1300 Cost:0.48)</option>
-                                <option value ="Large">Middle(MIPS:2600 Cost:0.78)</option>
-                                <option value="Super">Large(MIPS:3900 Cost:1.08)</option>
+                                <option value ="Middle">Middle(MIPS:2600 Cost:0.78)</option>
+                                <option value="Large">Large(MIPS:3900 Cost:1.08)</option>
                             </select>
                         </div>
                         <div id="enum" class="number">Number:
@@ -140,8 +140,8 @@
                             <span class="fontType">EndType:</span>
                             <select id="moType">
                                 <option value ="Small">Small(MIPS:1000)</option>
-                                <option value ="Large">Middle(MIPS:2000)</option>
-                                <option value="Super">Large(MIPS:3000)</option>
+                                <option value ="Middle">Middle(MIPS:2000)</option>
+                                <option value="Large">Large(MIPS:3000)</option>
                             </select>
                         </div>
                         <div id="mnum" class="number">Number:
@@ -196,7 +196,7 @@
         <div id="content2">
             <div id="c2">
                 <div class="strategy-content-div">
-                    <div class="strategy-label" style="width: 170px;font-size:18px;width:180px">Offloading Strategies:</div>
+                    <div class="strategy-label" style="width: 170px;font-size:18px;width:180px">Offloading Strategy:</div>
                     <div class="strategy-label" style="margin-left: 10px;margin-left: 40px">
                         <select id="strategy">
                             <option value="0"></option>
@@ -339,7 +339,7 @@
                     </div>
                     <!---->
                     <div class="strategy-content-div1">
-                        <div class="strategy-label" style="margin-left: 105px;width: 115px">Task Number:</div>
+                        <div class="strategy-label" style="margin-left: 105px;width: 115px">Tasks Number:</div>
                         <div class="strategy-label" style="margin-left:60px">
                             <select id="strategys">
                                 <option value="0">1600</option>
@@ -417,7 +417,7 @@
                 </div>
                 <div class="layui-col-xs12 btn_div">
                     <%--<label class="pkls">selectsort</label>--%>
-                    <label class="pkls">Selectsort Algorithm</label>
+                    <label class="pkls">SelectSort Algorithm</label>
                     <button id="selectsort_left" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
                     <button id="selectsort_right" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
                 </div>

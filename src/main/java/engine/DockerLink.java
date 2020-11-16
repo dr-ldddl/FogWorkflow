@@ -6,11 +6,13 @@ import com.ccis.fog.OutputEntity;
 import org.cloudbus.cloudsim.power.PowerHost;
 import org.fog.entities.Controller;
 import org.fog.entities.FogDevice;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -19,85 +21,160 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import org.springframework.stereotype.Component;
 import org.workflowsim.WorkflowEngine;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jcraft.jsch.JSchException;
 
-
 public class DockerLink {
 
-//    public static void main(String[] args) throws IOException, JSchException {
-////		SpringApplication.run(DockerlinkApplication.class, args);
-//
-//
-//        //java连接linux
-//        String host = "192.168.81.138";
-//        int port = 22;
-//        String user = "root";
-//        String password = "root";
-//
-//        /*String host = "47.74.84.61";
-//        int port = 22;
-//        String user = "root";
-//        String password = "ccis@2019";*/
-//
-//
-//
-//        //设置使用cpu百分比
-//        double cpu_percent = 0.7;
-//        //使用镜像名称
-//        String image = "count";
-//        //任务量
+    //本地运行
+    private static String host = "192.168.81.131";
+    private static int port = 22;
+    private static String user = "root";
+    private static String password = "root";
+    private static double cpu_percent = 1.0;
+
+    //fogworkflow 47.98.222.243
+    /*private static String host = "47.98.222.243";
+    private static int port = 22;
+    private static String user = "root";
+    private static String password = "ccis@2020";
+    private static double cpu_percent = 1.0;*/
+
+    //fogworkflowsim 47.74.84.61
+    /*private static String host = "47.74.84.61";
+    private static int port = 22;
+    private static String user = "root";
+    private static String password = "ccis@2019";
+    private static double cpu_percent = 1.0;*/
+
+
+    public static void main(String[] args) throws IOException, JSchException {
+//		SpringApplication.run(DockerlinkApplication.class, args);
+
+        //使用镜像名称
+        String image = "pi";
+        //任务量
 //        String runtime_arr = "112,13460,18941,30383,13856,10800,32058,10544,10592,10528,10576,7264,767,10810,21398,21671,43840,134416,2400,395744,8192";
-//        String[] runtime_str = runtime_arr.split(",");
-//
-////        字符转int
-//        /*int[] runtime_int = new int[runtime_str.length];
-//        for (int i = 0; i < runtime_str.length; i++) {
-//            runtime_int[i] = Integer.parseInt(runtime_str[i]);
-//        }
-//        for(int i = 0; i < runtime_int.length; i++){
-//            System.out.println("第" + (i+1) + "个元素:");
-//            int item = runtime_int[i];
-//            String command = "cd workspaces\n" +
-//                    "./run.sh" + " " + cpu_percent + " " + image + " " + item;
-//            String res =exeCommand(host,port,user,password,command);
+
+
+        String runtime_arr = "30336,13858,18993,18954,10800,10570,76864,32149,10590,10543,7264,784,21593,21398,10686,10894,44681,2405,130949,2899,112";
+//        String runtime_arr = "19253,30176,13760,13872,18785,13670,13830,10480,10560,10672,10576,43504,10944,10520,10416,32161,21528,10656,10544,10560,10647,10659,32331,43856,10368,10530,10528,24928,2080,21580,10870,43936,10720,43888,21502,10740,235216,4224,482992,10240,112";
+        String[] runtime_str = runtime_arr.split(",");
+
+//        字符转int
+        /*int[] runtime_int = new int[runtime_str.length];
+        for (int i = 0; i < runtime_str.length; i++) {
+            runtime_int[i] = Integer.parseInt(runtime_str[i]);
+        }
+        for(int i = 0; i < runtime_int.length; i++){
+            System.out.println("第" + (i+1) + "个元素:");
+            int item = runtime_int[i];
+            String command = "cd workspaces\n" +
+                    "./run.sh" + " " + cpu_percent + " " + image + " " + item;
+            String res =exeCommand(host,port,user,password,command);
+            System.out.println(res);
+        }*/
+        double sum_10[] = new double[10];
+        for(int i = 0; i < 10; i++){
+            String command = "cd workspace\n" +
+                    "./run.sh" + " " + cpu_percent + " " + image + " " + runtime_arr;
+
+            String res =exeCommand(host,port,user,password,command);
+            String[] res_arr = res.split("\n");
+            String realTime = res_arr[res_arr.length - 2];
+            realTime = realTime.substring(0,realTime.length() - 1);
+            System.out.println("reaTime:" + realTime);
+            String  result_arr[] = realTime.split(" ");
+            double sum_temp = 0.0 ;
+            for (String item : result_arr) {
+                double temp = Double.valueOf(item);
+                sum_temp += temp;
+            }
+            sum_10[i] = sum_temp;
+            System.out.println(sum_10[i]);
+        }
+
+        System.out.println("方差:" + POP_Variance(sum_10));
+        /*String command = "cd workspace\n" +
+                "./run.sh" + " " + cpu_percent + " " + image + " " + runtime_arr;
+
+        String res =exeCommand(host,port,user,password,command);
+        String[] res_arr = res.split("\n");
+        String realTime = res_arr[res_arr.length - 2];
+        realTime = realTime.substring(0,realTime.length() - 1);
+        System.out.println("reaTime:" + realTime);
+        String  result_arr[] = realTime.split(" ");
+        double[] result_double = new double[result_arr.length];
+        int index = 0 ;
+        for (String item : result_arr) {
+//            System.out.println(item);
+            result_double[index] = Double.valueOf(item);
+            index++;
+        }*/
+
+
+        /*double result_arr[] = new double[40];
+        int index = 0;
+        for (String item: runtime_str) {
+            String command = "cd workspace\n" +
+                    "./run.sh" + " " + cpu_percent + " " + image + " " + item;
+
+            String res =exeCommand(host,port,user,password,command);
+
 //            System.out.println(res);
-//        }*/
-//
-//        for (String item: runtime_str) {
-//            String command = "cd workspace\n" +
-//                    "./run.sh" + " " + cpu_percent + " " + image + " " + item;
-//
-//            String res =exeCommand(host,port,user,password,command);
-//
-////            System.out.println(res);
-//            String[] res_arr = res.split("\n");
-//            /*for (String item : res_arr) {
-//                System.out.println("item:");
-//                System.out.println(item);
-//            }*/
-//            String realTime = res_arr[res_arr.length - 2];
-//            realTime = realTime.substring(0,realTime.length() - 1);
-//            System.out.println("reaTime:" + realTime);
-//        }
-//        /*String command = "cd workspace\n" +
-//                "./run.sh" + " " + cpu_percent + " " + image + " " + runtime_arr;
-//
-//        long startTime = System.currentTimeMillis();
-//
-//        String res =exeCommand(host,port,user,password,command);
-//
-//        long endTime = System.currentTimeMillis();
-//
-//        System.out.println("耗时: " + (endTime - startTime) + " ms");
-//
-//        System.out.println(res);*/
-//
-//
-//    }
+            String[] res_arr = res.split("\n");
+            *//*for (String item : res_arr) {
+                System.out.println("item:");
+                System.out.println(item);
+            }*//*
+            String realTime = res_arr[res_arr.length - 2];
+            realTime = realTime.substring(0,realTime.length() - 1);
+            System.out.println("reaTime:" + realTime);
+            result_arr[index] = Double.parseDouble(realTime);
+            index++;
+        }*/
+        /*String command = "cd workspace\n" +
+                "./run.sh" + " " + cpu_percent + " " + image + " " + runtime_arr;
+
+        long startTime = System.currentTimeMillis();
+
+        String res =exeCommand(host,port,user,password,command);
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("耗时: " + (endTime - startTime) + " ms");
+
+        System.out.println(res);*/
+
+
+    }
+
+    public static double Sum(double[] data) {
+        double sum = 0;
+        for (int i = 0; i < data.length; i++)
+            sum = sum + data[i];
+        return sum;
+    }
+
+    public static double Mean(double[] data) {
+        double mean = 0;
+        mean = Sum(data) / data.length;
+        return mean;
+    }
+
+    // population variance 总体方差
+    public static double POP_Variance(double[] data) {
+        double variance = 0;
+        for (int i = 0; i < data.length; i++) {
+            variance = variance + (Math.pow((data[i] - Mean(data)), 2));
+        }
+        variance = variance / data.length;
+        return variance;
+    }
 
     //连接远程主机，执行命令
     public static String exeCommand(String host, int port, String user, String password, String command) throws JSchException, IOException {
@@ -148,12 +225,11 @@ public class DockerLink {
                 System.out.println("workLoad_item:" + workLoad_item);
                 workLoad[i] = workLoad_item;
                 outputEntity.setWorkLoad(workLoad_item + "");
-                System.out.println(outputEntity.toString());
+//                System.out.println(outputEntity.toString());
             }
         }
 
     }
-
 
     //获取outputmap仿真数据
     public static void  getSimulationDate() throws IOException, JSchException {
@@ -166,26 +242,6 @@ public class DockerLink {
             System.out.println();
         }
 
-
-        //连接linux
-        String host = "192.168.81.138";
-        int port = 22;
-        String user = "root";
-        String password = "root";
-
-        /*String host = "47.74.84.61";
-        int port = 22;
-        String user = "root";
-        String password = "ccis@2019";*/
-
-        //临时服务器
-        /*String host = "47.98.222.243";
-        int port = 22;
-        String user = "root";
-        String password = "ccis@2020";*/
-
-        //设置使用cpu百分比
-        double cpu_percent = 1.0;
         //使用镜像名称
         String image = "count";
 
@@ -303,94 +359,6 @@ public class DockerLink {
             System.out.println("realTotalTime:" + realTotalTime);
             System.out.println("mobileRealTotalTime:" + mobileRealTotalTime);
             System.out.println("realTotalCost:" + realTotalCost);
-
-            /*Double[] temp = new Double[7];
-
-            if(key.equals("MINMIN")){
-                for (Double[] item : record) {
-                    double algo = item[0];
-                    if(algo == 1.0){
-                        temp[0] =algo;
-                        temp[1] = item[1];
-                        temp[2] = item[2];
-                        temp[3] = item[3];
-                    }
-
-                }
-            }else if(key.equals("MAXMIN")){
-                for (Double[] item : record) {
-                    double algo = item[0];
-                    if(algo == 2.0){
-                        temp[0] =algo;
-                        temp[1] = item[1];
-                        temp[2] = item[2];
-                        temp[3] = item[3];
-                    }
-
-                }
-            }else if(key.equals("FCFS")){
-                for (Double[] item : record) {
-                    double algo = item[0];
-                    if(algo == 3.0){
-                        temp[0] =algo;
-                        temp[1] = item[1];
-                        temp[2] = item[2];
-                        temp[3] = item[3];
-                    }
-
-                }
-            }else if(key.equals("ROUNDROBIN")){
-                for (Double[] item : record) {
-                    double algo = item[0];
-                    if(algo == 4.0){
-                        temp[0] =algo;
-                        temp[1] = item[1];
-                        temp[2] = item[2];
-                        temp[3] = item[3];
-                    }
-
-                }
-            }else if(key.equals("PSO")){
-                for (Double[] item : record) {
-                    double algo = item[0];
-                    if(algo == 5.0){
-                        temp[0] =algo;
-                        temp[1] = item[1];
-                        temp[2] = item[2];
-                        temp[3] = item[3];
-                    }
-
-                }
-            }else if(key.equals("GA")){
-                for (Double[] item : record) {
-                    double algo = item[0];
-                    if(algo == 6.0){
-                        temp[0] =algo;
-                        temp[1] = item[1];
-                        temp[2] = item[2];
-                        temp[3] = item[3];
-                    }
-
-                }
-            }
-            temp[4] = Double.valueOf(realTotalTime);
-            temp[5] = Double.valueOf(mobileRealTotalTime);
-            temp[6] = realTotalCost;
-            record_double.add(temp);
-
-            //record_double排序
-            Collections.sort(record_double, new Comparator<Double[]>() {
-                @Override
-                public int compare(Double[] item1, Double[] item2) {
-                    Double t1 = item1[0];
-                    Double t2 = item2[0];
-                    System.out.println(t1 + "---" + t2);
-                    return t1.compareTo(t2);
-//                    return 0;
-                }
-            });*/
-
-
         }
 
     }
@@ -399,32 +367,9 @@ public class DockerLink {
     //在真实环境中执行单个任务
     public String getSingleData(OutputEntity output) throws IOException, JSchException {
 
-        //连接本地虚拟机
-        String host = "192.168.81.131";
-        int port = 22;
-        String user = "root";
-        String password = "root";
-
-
-        //连接isec服务器
-        /*String host = "47.74.84.61";
-        int port = 22;
-        String user = "root";
-        String password = "ccis@2019";*/
-
-        //连接临时服务器
-        /*String host = "47.98.222.243";
-        int port = 22;
-        String user = "root";
-        String password = "ccis@2020";*/
-
         String workLoad = output.getWorkLoad();
         String workType = output.getWorkType();
 
-
-
-        //设置使用cpu百分比
-        double cpu_percent = 1.0;
         //使用镜像名称
 //        String image = "pi";
         String image = "";
@@ -454,8 +399,11 @@ public class DockerLink {
             }*/
         String realTime = res_arr[res_arr.length - 2];
         realTime = realTime.substring(0,realTime.length() - 1);
-        double price = 1.0;
-        String realCost = Integer.parseInt(realTime) * price + "";
+        double price = 0.8;
+        BigDecimal bd   =   new   BigDecimal(Double.parseDouble(realTime) * price + "");
+//        String realCost_string   =   bd.setScale(2,BigDecimal.ROUND_HALF_UP) + "";
+//        String realCost = Double.parseDouble(realTime) * price + "";
+        String realCost = bd.setScale(2,BigDecimal.ROUND_HALF_UP) + "";
         System.out.println("reaTime:" + realTime);
 //        System.out.println("realCost:" + realCost);
 

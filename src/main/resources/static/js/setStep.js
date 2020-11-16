@@ -19,7 +19,7 @@ $(document).ready(function(){
     }
     // 初始化参数
     var typeJson = new Object();
-    Type = ["Small","Large","Super"];
+    Type = ["Small","Middle","Large"];
     CloudMips = [1600,3200,4800];
     CloudCost = [0.96,1.66,2.36];
     FogMips = [1300,2600,3900];
@@ -148,9 +148,9 @@ $(document).ready(function(){
             $.cookie("email",email,{ expires: 7});
             //$.cookie("password",password,{ expires: 7});
 
-            parent.window.location.href = "http://127.0.0.1:8089/index";
+            // parent.window.location.href = "http://127.0.0.1:8089/index";
             // parent.window.location.href = 'http://www.iseclab.org.cn:8089/index';
-            // parent.window.location.href = 'http://47.98.222.243:8089/index';
+            parent.window.location.href = 'http://47.98.222.243:8089/index';
         }
     });
 
@@ -163,6 +163,7 @@ $(document).ready(function(){
         }
         var patt = /^[a-zA-Z_][a-zA-Z0-9_]*/;
         var flag = patt.test(planName);
+
 
         if(flag){
             var customTaskNum = 0;
@@ -206,6 +207,10 @@ $(document).ready(function(){
                 html += "<div class=\"layui-col-xs3 item noSelect\">" + i + "</div>";
             }
             $("#main_left").html(html);
+        }else{
+            layer.msg("The plan name format is incorrect!",
+                {icon: 2,offset:['40%', '30%'],time:2000,area:['300px','70px']});
+
         }
     });
 
@@ -621,6 +626,7 @@ $(document).ready(function(){
     $("#setting").click(function(){
         layer.open({
             type: 2
+            ,shade:0
             , offset: "140px"
             , title: "Algorithms Setting"
             , content: "/alg/PSO"

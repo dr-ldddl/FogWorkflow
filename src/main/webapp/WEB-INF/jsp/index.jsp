@@ -293,7 +293,7 @@
                     <option value='0'>MINMIN</option>
                 </select>
                 <button id="realOperate" class = "layui-btn layui-btn-radius">
-                    Real Enviorment
+                    Real Environment
                 </button>
             </div>
 

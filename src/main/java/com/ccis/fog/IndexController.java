@@ -431,8 +431,8 @@ public class IndexController {
 ////////////////////////////////////////////////////////////////////////////
         String fileName = request.getParameter("filename");
         System.out.print(fileName);
-        File file = new File("E:", fileName);
-//        File file = new File("/root/sim/dax/",fileName);
+//        File file = new File("E:", fileName);
+        File file = new File("/root/sim/dax/",fileName);
 //        response.setContentType("application/octet-stream");
 //        response.setHeader("Content-Disposition","attachment;filename=" + fileName);
 //        response.setContentLength((int) file.length());

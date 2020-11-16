@@ -44,7 +44,7 @@
 <body>
 <div class="login_main">
     <fieldset class="layui-elem-field layui-field-title zyl_mar_03">
-        <legend>Welcome to - FogWorkflowSim platform</legend>
+        <legend>Welcome to - FogWorkflow platform</legend>
     </fieldset>
     <%--<form class="layui-form zyl_pad_01" action="">--%>
     <div class="layui-form zyl_pad_01">
@@ -191,9 +191,12 @@
                 }
                 else{
                     layer.msg("This user does not exist. Please register!",
-                        {time:10000}
+                        {time:2000}
                     );
-                    parent.location.href = "/";
+                    /*setTimeout(function(){
+                        parent.location.href = "/";
+                        },3000);*/
+
                 }
             },
             error:function (res) {
