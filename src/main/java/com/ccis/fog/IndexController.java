@@ -202,7 +202,8 @@ public class IndexController {
         visitAddress = "";
         visitIp = "";
 
-        return "redirect:/FogWorkflowReal";
+//        return "redirect:/FogWorkflowReal";
+        return "redirect:/EdgeWorkflowReal";
     }
 //    @ResponseBody
     @RequestMapping(value = "login_success")
@@ -226,14 +227,15 @@ public class IndexController {
         visitcount.setVisitIp(visitip);
 //        System.out.println("visitcount"+visitcount);
 //        String result = indexService.updateCount(visitcount);
-        return "redirect:/FogWorkflowReal";
+//        return "redirect:/FogWorkflowReal";
+        return "redirect:/EdgeWorkflowReal";
 
     }
 
 
 
 //    实际上的初始化界面
-    @RequestMapping("FogWorkflowReal")
+    @RequestMapping("EdgeWorkflowReal")
     public String fogWorkflowReal(Model model,HttpServletRequest request){
         /*System.out.println(userName);
         User user = indexService.getUser(userName);
