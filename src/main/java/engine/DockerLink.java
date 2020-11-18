@@ -78,8 +78,8 @@ public class DockerLink {
             String res =exeCommand(host,port,user,password,command);
             System.out.println(res);
         }*/
-        double sum_10[] = new double[10];
-        for(int i = 0; i < 10; i++){
+        double sum_100[] = new double[100];
+        for(int i = 0; i < 100; i++){
             String command = "cd workspace\n" +
                     "./run.sh" + " " + cpu_percent + " " + image + " " + runtime_arr;
 
@@ -87,18 +87,19 @@ public class DockerLink {
             String[] res_arr = res.split("\n");
             String realTime = res_arr[res_arr.length - 2];
             realTime = realTime.substring(0,realTime.length() - 1);
-            System.out.println("reaTime:" + realTime);
+//            System.out.println("reaTime:" + realTime);
             String  result_arr[] = realTime.split(" ");
             double sum_temp = 0.0 ;
             for (String item : result_arr) {
                 double temp = Double.valueOf(item);
                 sum_temp += temp;
             }
-            sum_10[i] = sum_temp;
-            System.out.println(sum_10[i]);
+            sum_100[i] = sum_temp;
+            System.out.println(sum_100[i]);
         }
 
-        System.out.println("方差:" + POP_Variance(sum_10));
+        System.out.println("方差:" + POP_Variance(sum_100));
+        System.out.println("标准差:" + StandardDiviation(sum_100));
         /*String command = "cd workspace\n" +
                 "./run.sh" + " " + cpu_percent + " " + image + " " + runtime_arr;
 
@@ -152,7 +153,21 @@ public class DockerLink {
 
 
     }
-
+    //标准差σ=sqrt(s^2)
+    public static double StandardDiviation(double[] x) {
+        int m=x.length;
+        double sum=0;
+        for(int i=0;i<m;i++){//求和
+            sum+=x[i];
+        }
+        double dAve=sum/m;//求平均值
+        double dVar=0;
+        for(int i=0;i<m;i++){//求方差
+            dVar+=(x[i]-dAve)*(x[i]-dAve);
+        }
+        //reture Math.sqrt(dVar/(m-1));
+        return Math.sqrt(dVar/m);
+    }
     public static double Sum(double[] data) {
         double sum = 0;
         for (int i = 0; i < data.length; i++)

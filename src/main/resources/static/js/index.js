@@ -834,6 +834,7 @@ function loadPlanTable(planJson){
         var optimize_objective = plan_value["optimize_objective"];
         var deadline = plan_value["deadline"];
         var workflowType = plan_value["daxPath"];
+        var customXml = plan_value["custom"];
         var editTime = plan_value["editTime"];
 
         // console.log("mobile_number:" + mobile_number);
@@ -850,6 +851,13 @@ function loadPlanTable(planJson){
         }
         if(deadline == ""){
             deadline = "--";
+        }
+
+        var xmlFile = "";
+        if(customXml == ""){
+            xmlFile = workflowType;
+        }else{
+            xmlFile = customXml;
         }
 
         plan_html += "<tr>" +
@@ -882,7 +890,7 @@ function loadPlanTable(planJson){
                         "<td class=\"plan_algo\">" + algos + "</td>" +
                         "<td class=\"plan_opti\">" + optimize_objective + "</td>" +
                         "<td class=\"plan_deadline\">" + deadline + "</td>" +
-                        "<td class=\"plan_workflow\">" + workflowType + "</td>" +
+                        "<td class=\"plan_workflow\">" + xmlFile + "</td>" +
                         "<td class=\"plan_editTime\">" + editTime + "</td>";
         plan_html += "<td class=\"plan_action\">" +
                         "<div class=\"layui-btn-group\">" +
@@ -919,6 +927,7 @@ function appendPlanTable(planJson){
         var optimize_objective = plan_value["optimize_objective"];
         var deadline = plan_value["deadline"];
         var workflowType = plan_value["daxPath"];
+        var customXml = plan_value["custom"];
         var editTime = plan_value["editTime"];
 
         // console.log("mobile_number:" + mobile_number);
@@ -935,6 +944,12 @@ function appendPlanTable(planJson){
         }
         if(deadline == ""){
             deadline = "--";
+        }
+        var xmlFile = "";
+        if(customXml == ""){
+            xmlFile = workflowType;
+        }else{
+            xmlFile = customXml;
         }
 
         plan_html += "<tr>" +
@@ -967,7 +982,7 @@ function appendPlanTable(planJson){
             "<td class=\"plan_algo\">" + algos + "</td>" +
             "<td class=\"plan_opti\">" + optimize_objective + "</td>" +
             "<td class=\"plan_deadline\">" + deadline + "</td>" +
-            "<td class=\"plan_workflow\">" + workflowType + "</td>" +
+            "<td class=\"plan_workflow\">" + xmlFile + "</td>" +
             "<td class=\"plan_editTime\">" + editTime + "</td>";
         plan_html += "<td class=\"plan_action\">" +
             "<div class=\"layui-btn-group\">" +
@@ -1259,8 +1274,8 @@ $("#doc_div").click(function(){
 
         }
     });*/
-    // window.open("http://127.0.0.1/documentsInfo");
-    window.open("http://47.98.222.243/documentsInfo");
+    window.open("http://127.0.0.1/documentsInfo");
+    // window.open("http://47.98.222.243/documentsInfo");
 });
 
 //标题栏Developers

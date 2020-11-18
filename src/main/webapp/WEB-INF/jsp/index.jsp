@@ -57,7 +57,7 @@
         <%--标题--%>
         <div class="layui-col-xs10">
             <div class="plan_title" style="display: inline-block">
-                Scientific Workflow & MEC Environment Setting
+                Scientific Workflow & EC Environment Setting
             </div>
             <div id="sim_loading_div" style="display: inline-block">
                 <i id="sim_loading" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
@@ -76,7 +76,7 @@
                     <thead>
                         <th class="plan_no">No.</th>
                         <th class="plan_name">Project Name</th>
-                        <th class="plan_mec">MEC Environment</th>
+                        <th class="plan_mec">EC Environment</th>
                         <th class="plan_strategy">Offloading Strategy</th>
                         <th class="plan_algo">Scheduling Algorithm</th>
                         <th class="plan_opti">Optimization Object</th>
@@ -92,7 +92,7 @@
                     <thead hidden>
                         <th>No.</th>
                         <th>Plan Name</th>
-                        <th>MEC Environment</th>
+                        <th>EC Environment</th>
                         <th>Offloading Strategy</th>
                         <th>Scheduling Algorithm</th>
                         <th>Optimization Object</th>
@@ -589,6 +589,18 @@
         </div>
     </div>
 </div>
+<%--<div class="layui-container testMain">
+    <div class="layui-row">
+
+
+        <div class="layui-col-xs12 tt">
+            <div id="testChartMain"></div>
+        </div>
+
+
+
+    </div>
+</div>--%>
 
 <%--------------------------尾部栏结束------------------------------%>
 

@@ -148,9 +148,9 @@ $(document).ready(function(){
             $.cookie("email",email,{ expires: 7});
             //$.cookie("password",password,{ expires: 7});
 
-            // parent.window.location.href = "http://127.0.0.1:8089/index";
+            parent.window.location.href = "http://127.0.0.1:8089/index";
             // parent.window.location.href = 'http://www.iseclab.org.cn:8089/index';
-            parent.window.location.href = 'http://47.98.222.243:8089/index';
+            // parent.window.location.href = 'http://47.98.222.243:8089/index';
         }
     });
 
@@ -1066,7 +1066,7 @@ function getCurrentTime(){
 function loadDag(points, links){
     var option = {
         title: {
-            text: 'Dag structure'
+            text: 'DAG Structure'
         },
         tooltip: {},
         animationDurationUpdate: 1500,

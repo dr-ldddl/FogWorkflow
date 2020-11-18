@@ -41,7 +41,7 @@
         <ul id="nav">
             <li id="workflow_title1">1.Select Workflow Type</li>
             <li id="document_info1">2.Assign Computing Tasks</li>
-            <li id="environment_title1" style="color: mediumpurple;">3.Setting MEC Environment</li>
+            <li id="environment_title1" style="color: mediumpurple;">3.Setting EC Environment</li>
             <li id="strategy_title1">4.Select Offloading Strategy</li>
         </ul>
         <div id="content1">
@@ -179,8 +179,8 @@
                 </div>
             </div>
             <div id="btn1">
-                <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" style="width: 80px" id="pre1">previous</button>
-                <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" style="width: 80px" id="next1">next</button>
+                <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" id="pre1">previous</button>
+                <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" id="next1">next</button>
             </div>
         </div>
     </div>
@@ -190,7 +190,7 @@
         <ul id="nav2">
             <li id="workflow_title2">1.Select Workflow Type</li>
             <li id="document_info2">2.Assign Computing Tasks</li>
-            <li id="environment_title2">3.Setting MEC Environment</li>
+            <li id="environment_title2">3.Setting EC Environment</li>
             <li id="strategy_title2" style="color: mediumpurple;">4.Select Offloading Strategy</li>
         </ul>
         <div id="content2">
@@ -275,7 +275,7 @@
         <ul id="nav3">
             <li id="workflow_title3" style="color: mediumpurple;">1.Select Workflow Type</li>
             <li id="document_info3">2.Assign Computing Tasks</li>
-            <li id="environment_title3">3.Setting MEC Environment</li>
+            <li id="environment_title3">3.Setting EC Environment</li>
             <li id="strategy_title3">4.Select Offloading Strategy</li>
         </ul>
         <div id="content3">
@@ -365,7 +365,7 @@
                 </div>
             </div>
             <div id="btn3">
-                <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" style="width:80px" id="next3">next</button>
+                <button class="action-btn layui-btn layui-btn-radius layui-btn-normal" id="next3">next</button>
             </div>
         </div>
     </div>
@@ -375,7 +375,7 @@
         <ul id="nav4">
             <li id="workflow_title4">1.Select Workflow Type</li>
             <li id="document_info4"  style="color: mediumpurple;">2.Assign Computing Tasks</li>
-            <li id="environment_title4">3.Seing MEC Environment</li>
+            <li id="environment_title4">3.Setting EC Environment</li>
             <li id="strategy_title4">4.Select Offloading Strategy</li>
         </ul>
         <div id="content4" class=" layui-container layui-row">
@@ -392,7 +392,7 @@
                     <div class="layui-col-xs3 item noSelect">6</div>--%>
                 </div>
                 <div class="layui-col-xs12">
-                    <button id="left_viewDag" type="button" class="layui-btn layui-btn-primary layui-btn-sm">View Dag</button>
+                    <button id="left_viewDag" type="button" class="layui-btn layui-btn-primary layui-btn-sm">View DAG</button>
                 </div>
             </div>
             <div class="layui-col-xs2 layui-row" style="margin-left:45px">
@@ -458,9 +458,11 @@
                 </div>
             </div>
         </div>
+        <div class="unassigned">Unassigned Tasks</div>
+        <div class="assigned"> Assigned Tasks</div>
         <div id="btn4">
-            <button id="pre4" style="position:relative;left:5%;width:80px"  type="button" class="action-btn layui-btn layui-btn-radius layui-btn-normal">previous</button>
-            <button id="submit" style="position:relative;left:8%;width:80px"  type="button" class="action-btn layui-btn layui-btn-radius layui-btn-normal">next</button>
+            <button id="pre4" type="button" class="action-btn layui-btn layui-btn-radius layui-btn-normal">previous</button>
+            <button id="submit" type="button" class="action-btn layui-btn layui-btn-radius layui-btn-normal">next</button>
         </div>
     </div>
 </div>

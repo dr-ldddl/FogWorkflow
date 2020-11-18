@@ -598,7 +598,7 @@ input{
 .tt{
     border: #00FF00 1px solid;
     position: relative;
-    height: 99%;
+    /*height: 99%;*/
 }
 
 .main-container{
@@ -775,10 +775,7 @@ input{
     margin: 0px;
     padding: 0px;
 }
-#btn4{
-    margin: 0 auto;
-    text-align: center;
-}
+
 /**************add弹出框结束****************/
 /*.radioGroup3{
     display: none;
@@ -839,3 +836,46 @@ input{
     display: none;
 }
 
+#next3{
+    width: 80px;
+}
+
+#pre4{
+    position:relative;
+    left:5%;
+    width:80px;
+    margin-top: 15px;
+}
+
+#submit{
+    position:relative;
+    left:8%;
+    width:80px;
+    margin-top: 15px;
+}
+
+#btn4{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.unassigned{
+    position: absolute;
+    left: 170px;
+    top: 480px;
+}
+
+.assigned{
+    position: absolute;
+    left: 775px;
+    top: 480px;
+
+}
+
+#pre1{
+    width: 80px;
+}
+
+#next1{
+    width: 80px;
+}

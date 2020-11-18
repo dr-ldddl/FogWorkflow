@@ -50,7 +50,7 @@ $(document).ready(function(){
 function loadDag(points, links){
     var option = {
         title: {
-            text: 'Dag structure'
+            text: 'DAG Structure'
         },
         tooltip: {},
         animationDurationUpdate: 1500,
