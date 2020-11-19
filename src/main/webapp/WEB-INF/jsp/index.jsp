@@ -2,7 +2,7 @@
 <%--<!DOCTYPE html>--%>
 <html>
 <head>
-    <title>FogWorkflow</title>
+    <title>EdgeWorkflowReal</title>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="/images/ahu_logo.png">
     <link rel="stylesheet" href="/layui/css/layui.css">
@@ -12,11 +12,11 @@
 <%--------------------------标题栏开始------------------------------%>
 <div class="layui-container title_main">
     <div class="layui-row">
-        <div class="layui-col-xs4">
+        <div class="layui-col-xs3">
             <div class="logo_div"><img src="/images/edge_logo.png" class="edge_img"></div>
         </div>
-        <div class="layui-col-xs1">
-            <div id="doc_div" class="doc_div">Document</div>
+        <div class="layui-col-xs2">
+            <div id="doc_div" class="doc_div">Documentation</div>
         </div>
         <div class="layui-col-xs2">
             <div id="developer_div" class="developer_div" >Developers</div>
@@ -24,7 +24,6 @@
         <div class="layui-col-xs2">
             <div id="version_info" class="version_info">Versions</div>
         </div>
-
         <div class="layui-col-xs3">
             <div id="login_div" class="buttons">
                 <div class="layui-btn-group">
@@ -44,9 +43,6 @@
                 </ul>
             </div>
         </div>
-
-
-
     </div>
 </div>
 <%--------------------------标题栏结束------------------------------%>
@@ -288,16 +284,16 @@
             <div class="layui-col-xs1 output_label">
                 Result display area:
             </div>
-            <div class="layui-col-xs2">
+            <div class="layui-col-xs3">
                 <select class="output-input" id="output">
                     <option value='0'>MINMIN</option>
                 </select>
                 <button id="realOperate" class = "layui-btn layui-btn-radius">
-                    Real Environment
+                    Run in Real Environment
                 </button>
             </div>
 
-            <div class="layui-col-xs8">
+            <div class="layui-col-xs6">
                 <div id="real_loading_div">
                     <i id="real_loading" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
                 </div>
@@ -312,7 +308,7 @@
                     &lt;%&ndash;</div>&ndash;%&gt;
                 </div>--%>
             </div>
-            <div class="layui-col-xs1">
+            <div class="layui-col-xs2">
                 <div id="output-time" class="output-time"></div>
             </div>
         </div>
@@ -352,7 +348,7 @@
                 <ul class="layui-tab-title">
                     <li class="layui-this">Standby</li>
                     <li>Running</li>
-                    <li>Successed</li>
+                    <li>Completed</li>
                     <li>Failed</li>
                     <li>Detail</li>
                 </ul>
