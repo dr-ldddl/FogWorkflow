@@ -286,11 +286,11 @@ function pieChart(outputEntityList){
         hostdata.push(cloudInfo[i]);
     }
     for (var i = 0; i < fogInfo.length; i++) {
-        fogInfo[i].name = "Fog"+(i+1);
+        fogInfo[i].name = "Edge"+(i+1);
         hostdata.push(fogInfo[i]);
     }
     for (var i = 0; i < mobileInfo.length; i++) {
-        mobileInfo[i].name = "Mobile"+(i+1);
+        mobileInfo[i].name = "End"+(i+1);
         hostdata.push(mobileInfo[i]);
     }
 
@@ -301,8 +301,8 @@ function pieChart(outputEntityList){
 
     option = {
         title : {
-            text: 'Tasks Allocation',
-            subtext: 'Number of tasks per machine',
+            text: 'Tasks Assignment',
+            subtext: 'Number of tasks per container',
             x:'center'
         },
         tooltip : {
@@ -321,7 +321,7 @@ function pieChart(outputEntityList){
         },
         series : [
             {
-                name: '来源',
+                name: 'Source',
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
@@ -438,7 +438,7 @@ function lineChart(list) {
             }
         },
         xAxis: {
-            name: "Job ID",
+            name: "Job-ID",
             type: 'category',
             boundaryGap: false,
             data: x_data
@@ -656,21 +656,21 @@ function initStandBy(){
     var html = '';
     for (var i=0; i<20; i++) {
         html += '<tr>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>';
+            '<td class="standby_job"></td>'+
+            '<td class="standby_resource"></td>'+
+            '<td class="standby_vm"></td>'+
+            '<td class="standby_simTime"></td>'+
+            '<td class="standby_simCost"></td>'+
+            '<td class="standby_depth"></td>';
 
         var temp = '';
         if(i%2 == 0){
-            temp = '<td><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="standby_parents"><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }else{
-            temp = '<td><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="standby_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }
         html += temp;
-        html += '<td></td>';
+        html += '<td class="standby_simStus"></td>';
         html += '</tr>';
     }
     $("#standby_tbody").html(html);
@@ -681,23 +681,23 @@ function initRunning(){
     var html = "";
     for (var i=0; i<11; i++) {
         html += '<tr>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>';
+            '<td class="running_job"></td>'+
+            '<td class="running_vm"></td>'+
+            '<td class="running_resource"></td>'+
+            '<td class="running_start"></td>'+
+            '<td class="running_finish"></td>'+
+            '<td class="running_realTime"></td>'+
+            '<td class="running_realCost"></td>'+
+            '<td class="running_depth"></td>';
 
         var temp = '';
         if(i%2 == 0){
-            temp = '<td><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="running_parents"><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }else{
-            temp = '<td><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="running_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }
         html += temp;
-        html += '<td></td>';
+        html += '<td class="running_realStus"></td>';
         html += '</tr>';
     }
     $("#running_tbody").html(html);
@@ -708,23 +708,23 @@ function initSuccessed(){
     var html = "";
     for (var i=0; i<20; i++) {
         html += '<tr>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>';
+            '<td class="running_job"></td>'+
+            '<td class="running_vm"></td>'+
+            '<td class="running_resource"></td>'+
+            '<td class="running_start"></td>'+
+            '<td class="running_finish"></td>'+
+            '<td class="running_realTime"></td>'+
+            '<td class="running_realCost"></td>'+
+            '<td class="running_depth"></td>';
 
         var temp = '';
         if(i%2 == 0){
-            temp = '<td><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="running_parents"><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }else{
-            temp = '<td><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="running_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }
         html += temp;
-        html += '<td></td>';
+        html += '<td class="running_realStus"></td>';
         html += '</tr>';
     }
     $("#successed_tbody").html(html);
@@ -735,23 +735,23 @@ function initFailed(){
     var html = "";
     for (var i=0; i<20; i++) {
         html += '<tr>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>'+
-            '<td></td>';
+            '<td class="running_job"></td>'+
+            '<td class="running_vm"></td>'+
+            '<td class="running_resource"></td>'+
+            '<td class="running_start"></td>'+
+            '<td class="running_finish"></td>'+
+            '<td class="running_realTime"></td>'+
+            '<td class="running_realCost"></td>'+
+            '<td class="running_depth"></td>';
 
         var temp = '';
         if(i%2 == 0){
-            temp = '<td><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="running_parents"><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }else{
-            temp = '<td><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp = '<td class="running_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }
         html += temp;
-        html += '<td></td>';
+        html += '<td class="running_realStus"></td>';
         html += '</tr>';
     }
     $("#failed_tbody").html(html);
@@ -764,16 +764,15 @@ function initDetail(){
         html += '<tr>'+
             '<td class="detail_job"></td>'+
             '<td class="detail_task"></td>'+
-            '<td class="detail_simStus"></td>'+
-            '<td class="detail_resource"></td>'+
             '<td class="detail_vm"></td>'+
+            '<td class="detail_resource"></td>'+
             '<td class="detail_simTime"></td>'+
+            '<td class="detail_realTime"></td>'+
             '<td class="detail_simCost"></td>'+
+            '<td class="detail_realCost"></td>'+
             '<td class="detail_start"></td>'+
             '<td class="detail_finish"></td>'+
-            '<td class="detail_depth"></td>'+
-            '<td class="detail_realTime"></td>'+
-            '<td class="detail_realCost"></td>';
+            '<td class="detail_depth"></td>';
 
         var temp = '';
         if(i%2 == 0){
@@ -782,6 +781,7 @@ function initDetail(){
             temp = '<td class="detail_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }
         html += temp;
+        html += '<td class="detail_simStus"></td>';
         html += '<td class="detail_realStus"></td>';
         html += '</tr>';
     }
@@ -1536,6 +1536,7 @@ function loadTable(){
         var time = outputEntity["time"];
         var cost = outputEntity["cost"];
         var parents = outputEntity["parents"];
+        parents = parents.substring(0, parents.length - 1);
         var status = outputEntity["status"];
         var depth = outputEntity["depth"];
 
@@ -1544,24 +1545,31 @@ function loadTable(){
         }else{
             status = '<button class=\'btn_status_failed\'></button>';
         }
+        if(dataCenterId == "cloud"){
+            dataCenterId = "Cloud";
+        }else if(dataCenterId == "f-0"){
+            dataCenterId = "Edge";
+        }else if(dataCenterId == "m-0-0"){
+            dataCenterId = "End";
+        }
 
         var realStatus = outputEntity["realStatus"];
         if(realStatus == "FAILED"){
             html += "<tr>";
-            html +=     "<td>" + jobId + "</td>";
-            html +=     "<td>" + dataCenterId + "</td>";
-            html +=     "<td>" + vmId + "</td>";
-            html +=     "<td>" + time + "</td>";
-            html +=     "<td>" + cost + "</td>";
-            html +=     "<td>" + depth + "</td>";
+            html +=     "<td class=\"standby_job\">" + jobId + "</td>";
+            html +=     "<td class=\"standby_resource\">" + dataCenterId + "</td>";
+            html +=     "<td class=\"standby_vm\">" + vmId + "</td>";
+            html +=     "<td class=\"standby_simTime\">" + time + "</td>";
+            html +=     "<td class=\"standby_simCost\">" + cost + "</td>";
+            html +=     "<td class=\"standby_depth\">" + depth + "</td>";
             var temp_parent = '';
             if(i%2 == 0){
-                temp_parent = '<td><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                temp_parent = '<td class="standby_parents"><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
             }else{
-                temp_parent = '<td><input class="input_odd" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                temp_parent = '<td class="standby_parents"><input class="input_odd" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
             }
             html += temp_parent;
-            html +=     "<td>" + status + "</td>";
+            html +=     "<td class=\"standby_simStus\">" + status + "</td>";
             html += "</tr>";
         }
 
@@ -1590,6 +1598,7 @@ function loadTable(){
         var realTime = outputEntity["realTime"];
         var realCost = outputEntity["realCost"];
         var parents = outputEntity["parents"];
+        parents = parents.substring(0, parents.length - 1);
         var realStatus = outputEntity["realStatus"];
         // console.log("realStatus" + realStatus);
         if(realStartTime == undefined){
@@ -1604,6 +1613,13 @@ function loadTable(){
         if(realCost == undefined){
             realCost = "--";
         }
+        if(dataCenterId == "cloud"){
+            dataCenterId = "Cloud";
+        }else if(dataCenterId == "f-0"){
+            dataCenterId = "Edge";
+        }else if(dataCenterId == "m-0-0"){
+            dataCenterId = "End";
+        }
 
         var realStatus_temp = "";
         if(realStatus == "SUCCESS"){
@@ -1613,23 +1629,23 @@ function loadTable(){
         }
         var temp_parent = '';
         if(i%2 == 0){
-            temp_parent = '<td><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp_parent = '<td class="running_parents"><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }else{
-            temp_parent = '<td><input class="input_odd" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+            temp_parent = '<td class="running_parents"><input class="input_odd" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
         }
 
         if(realStatus == "SUCCESS"){
             html += "<tr>" +
-                '<td>'+ jobId +'</td>'+
-                '<td>'+ dataCenterId +'</td>'+
-                '<td>'+ vmId +'</td>'+
-                '<td>'+ realStartTime +'</td>'+
-                '<td>'+ realFinishTime +'</td>'+
-                '<td>'+ depth +'</td>'+
-                '<td>'+ realTime +'</td>'+
-                '<td>'+ realCost +'</td>'+
+                '<td class="running_job">'+ jobId +'</td>'+
+                '<td class="running_vm">'+ vmId +'</td>'+
+                '<td class="running_resource">'+ dataCenterId +'</td>'+
+                '<td class="running_start">'+ realStartTime +'</td>'+
+                '<td class="running_finish">'+ realFinishTime +'</td>'+
+                '<td class="running_realTime">'+ realTime +'</td>'+
+                '<td class="running_realCost">'+ realCost +'</td>'+
+                '<td class="running_depth">'+ depth +'</td>'+
                  temp_parent +
-                '<td>'+ realStatus_temp +'</td>'+
+                '<td class="running_realStus">'+ realStatus_temp +'</td>'+
                 '</tr>';
         }
 
@@ -1663,6 +1679,7 @@ function loadTable(){
         var realTime = outputEntity["realTime"];
         var realCost = outputEntity["realCost"];
         var parents = outputEntity["parents"];
+        parents = parents.substring(0, parents.length - 1);
         var realStartTime = outputEntity["realStartTime"];
         var realFinishTime = outputEntity["realFinishTime"];
         var realStatus = outputEntity["realStatus"];
@@ -1685,20 +1702,26 @@ function loadTable(){
         }else{
             status = '<button class=\'btn_status_failed\'></button>';
         }
+        if(dataCenterId == "cloud"){
+            dataCenterId = "Cloud";
+        }else if(dataCenterId == "f-0"){
+            dataCenterId = "Edge";
+        }else if(dataCenterId == "m-0-0"){
+            dataCenterId = "End";
+        }
 
         html += '<tr>'+
             '<td class="detail_job">'+ jobId +'</td>'+
             '<td class="detail_task">'+ taskId +'</td>'+
-            '<td class="detail_simStus">'+ status +'</td>'+
-            '<td class="detail_resource">'+ dataCenterId +'</td>'+
             '<td class="detail_vm">'+ vmId +'</td>'+
+            '<td class="detail_resource">'+ dataCenterId +'</td>'+
             '<td class="detail_simTime">'+ time +'</td>'+
+            '<td class="detail_realTime">'+ realTime +'</td>' +
             '<td class="detail_simCost">'+ cost +'</td>' +
+            '<td class="detail_realCost">'+ realCost +'</td>' +
             '<td class="detail_start">'+ realStartTime +'</td>'+
             '<td class="detail_finish">'+ realFinishTime +'</td>'+
-            '<td class="detail_depth">'+ depth +'</td>'+
-            '<td class="detail_realTime">'+ realTime +'</td>' +
-            '<td class="detail_realCost">'+ realCost +'</td>';
+            '<td class="detail_depth">'+ depth +'</td>';
 
         var temp_parent = '';
         if(i%2 == 0){
@@ -1714,6 +1737,7 @@ function loadTable(){
         }else{
             temp_realStatus = "<td class=\"detail_realStus\"><button class='btn_status_success'></button></td>";
         }
+        html += '<td class="detail_simStus">'+ status +'</td>';
         html += temp_realStatus;
 
         html += '</tr>';
@@ -1886,6 +1910,7 @@ $("#realOperate").click(function(){
                 var realTime = outputEntity["realTime"];
                 var realCost = outputEntity["realCost"];
                 var parents = outputEntity["parents"];
+                parents = parents.substring(0, parents.length - 1);
                 var realStatus = outputEntity["realStatus"];
                 // console.log("realStatus" + realStatus);
                 if(realStartTime == undefined){
@@ -1900,6 +1925,13 @@ $("#realOperate").click(function(){
                 if(realCost == undefined){
                     realCost = "--";
                 }
+                if(dataCenterId == "cloud"){
+                    dataCenterId = "Cloud";
+                }else if(dataCenterId == "f-0"){
+                    dataCenterId = "Edge";
+                }else if(dataCenterId == "m-0-0"){
+                    dataCenterId = "End";
+                }
 
                 var realStatus_temp = "";
                 if(realStatus == "SUCCESS"){
@@ -1907,38 +1939,38 @@ $("#realOperate").click(function(){
                 }else{
                     realStatus_temp = '<button class=\'btn_status_failed\'></button>';
                 }
-                var temp_parent = '<td><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                var temp_parent = '<td class="running_parents"><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
 
                 html += "<tr>" +
-                    '<td>'+ jobId +'</td>'+
-                    '<td>'+ dataCenterId +'</td>'+
-                    '<td>'+ vmId +'</td>'+
-                    '<td>'+ realStartTime +'</td>'+
-                    '<td>'+ realFinishTime +'</td>'+
-                    '<td>'+ depth +'</td>'+
-                    '<td>'+ realTime +'</td>'+
-                    '<td>'+ realCost +'</td>'+
+                    '<td class="running_job">'+ jobId +'</td>'+
+                    '<td class="running_vm">'+ vmId +'</td>'+
+                    '<td class="running_resource">'+ dataCenterId +'</td>'+
+                    '<td class="running_start">'+ realStartTime +'</td>'+
+                    '<td class="running_finish">'+ realFinishTime +'</td>'+
+                    '<td class="running_realTime">'+ realTime +'</td>'+
+                    '<td class="running_realCost">'+ realCost +'</td>'+
+                    '<td class="running_depth">'+ depth +'</td>'+
                     temp_parent +
-                    '<td>'+ realStatus_temp +'</td>'+
+                    '<td class="running_realStus">'+ realStatus_temp +'</td>'+
                     '</tr>';
 
                 var html_standby = '';
                 html_standby += '<tr>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>';
+                    '<td class="standby_job"></td>'+
+                    '<td class="standby_resource"></td>'+
+                    '<td class="standby_vm"></td>'+
+                    '<td class="standby_simTime"></td>'+
+                    '<td class="standby_simCost"></td>'+
+                    '<td class="standby_depth"></td>';
 
                 var temp = '';
                 if(currentIndex%2 == 0){
-                    temp = '<td><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                    temp = '<td class="standby_parents"><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
                 }else{
-                    temp = '<td><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                    temp = '<td class="standby_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
                 }
                 html_standby += temp;
-                html_standby += '<td></td>';
+                html_standby += '<td class="standby_simStus"></td>';
                 html_standby += '</tr>';
                 $("#standby_tbody").append(html_standby);
             }
@@ -1953,23 +1985,23 @@ $("#realOperate").click(function(){
             input.css("background-color", input_background);
             for (var i = 1; i < 10; i++) {
                 html += '<tr>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>';
+                    '<td class="running_job"></td>'+
+                    '<td class="running_vm"></td>'+
+                    '<td class="running_resource"></td>'+
+                    '<td class="running_start"></td>'+
+                    '<td class="running_finish"></td>'+
+                    '<td class="running_realTime"></td>'+
+                    '<td class="running_realCost"></td>'+
+                    '<td class="running_depth"></td>';
 
                 var temp = '';
                 if(i%2 == 0){
-                    temp = '<td><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                    temp = '<td class="running_parents"><input class="input_even" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
                 }else{
-                    temp = '<td><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                    temp = '<td class="running_parents"><input class="input_odd" value="" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
                 }
                 html += temp;
-                html += '<td></td>';
+                html += '<td class="running_realStus"></td>';
                 html += '</tr>';
             }
         });
@@ -1982,10 +2014,10 @@ $("#realOperate").click(function(){
             var jobId_td = $(this).children("td").eq(0).text();
             if(jobId == jobId_td){
                 var tr_current = $(this);
-                td_realStartTime = tr_current.children("td").eq(7);
-                td_realFinishTime = tr_current.children("td").eq(8);
-                td_realTime = tr_current.children("td").eq(10);
-                td_realCost = tr_current.children("td").eq(11);
+                td_realStartTime = tr_current.children("td").eq(8);
+                td_realFinishTime = tr_current.children("td").eq(9);
+                td_realTime = tr_current.children("td").eq(5);
+                td_realCost = tr_current.children("td").eq(7);
                 td_realStatus_btn = tr_current.children("td").eq(13).find("button");
 
             }
@@ -2041,6 +2073,7 @@ $("#realOperate").click(function(){
                 var vmId = real_item["vmId"];
                 var depth = real_item["depth"];
                 var parents = real_item["parents"];
+                parents = parents.substring(0, parents.length - 1);
                 var realStatus = real_item["realStatus"];
                 var dataCenterId = real_item["dataCenterId"];
 
@@ -2057,6 +2090,13 @@ $("#realOperate").click(function(){
                 if(realCost == undefined){
                     realCost = "--";
                 }
+                if(dataCenterId == "cloud"){
+                    dataCenterId = "Cloud";
+                }else if(dataCenterId == "f-0"){
+                    dataCenterId = "Edge";
+                }else if(dataCenterId == "m-0-0"){
+                    dataCenterId = "End";
+                }
 
                 var realStatus_temp = "";
                 if(realStatus == "SUCCESS"){
@@ -2067,23 +2107,23 @@ $("#realOperate").click(function(){
 
                 var temp_parent = "";
                 if(currentIndex%2 != 0){
-                    temp_parent = '<td><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                    temp_parent = '<td class="running_parents"><input class="input_even" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
                 }else{
-                    temp_parent = '<td><input class="input_odd" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
+                    temp_parent = '<td class="running_parents"><input class="input_odd" value="'+ parents +'" onblur="parents_blur(this)" onfocus="parents_focus(this)"></td>';
                 }
                 var successed_tbody = $("#successed_tbody");
                 var success_html = "";
                 success_html += "<tr>" +
-                    '<td>'+ jobId +'</td>'+
-                    '<td>'+ dataCenterId +'</td>'+
-                    '<td>'+ vmId +'</td>'+
-                    '<td>'+ realStartTime +'</td>'+
-                    '<td>'+ realFinishTime +'</td>'+
-                    '<td>'+ depth +'</td>'+
-                    '<td>'+ realTime +'</td>'+
-                    '<td>'+ realCost +'</td>'+
+                    '<td class="running_job">'+ jobId +'</td>'+
+                    '<td class="running_vm">'+ vmId +'</td>'+
+                    '<td class="running_resource">'+ dataCenterId +'</td>'+
+                    '<td class="running_start">'+ realStartTime +'</td>'+
+                    '<td class="running_finish">'+ realFinishTime +'</td>'+
+                    '<td class="running_realTime>'+ realTime +'</td>'+
+                    '<td class="running_realCost">'+ realCost +'</td>'+
+                    '<td class="running_depth">'+ depth +'</td>'+
                     temp_parent +
-                    '<td>'+ realStatus_temp +'</td>'+
+                    '<td class="running_realStus">'+ realStatus_temp +'</td>'+
                     '</tr>';
                 successed_tbody.append(success_html);
 

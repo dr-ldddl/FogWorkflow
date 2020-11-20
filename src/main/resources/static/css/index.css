@@ -30,9 +30,9 @@ body::-webkit-scrollbar{
 }
 
 .edge_img{
-    padding-top: 6px;
+    padding-top: 3px;
     position: relative;
-    width: 10%;
+    width: 19%;
     height: auto;
 }
 
@@ -390,13 +390,13 @@ body::-webkit-scrollbar{
 /**************Standby表格开始****************/
 #standby_table1 thead th{
     position: relative;
-    width: 12.5%;
+    /*width: 12.5%;*/
     text-align: center;
 }
 
 #standby_tbody tr td{
     position: relative;
-    width: 12.5%;
+    /*width: 12.5%;*/
     text-align: center;
 }
 
@@ -452,18 +452,59 @@ body::-webkit-scrollbar{
 .standby_data_div::-webkit-scrollbar{
     width:0;
 }
+
+.standby_job{
+    width: 10%;
+    text-align: center !important;
+}
+
+.standby_resource{
+    width: 10%;
+    text-align: center !important;
+}
+
+.standby_vm{
+    width: 10%;
+    text-align: center !important;
+}
+
+.standby_simTime{
+    width: 10%;
+    text-align: center !important;
+}
+
+.standby_simCost{
+    width: 10%;
+    text-align: center !important;
+}
+
+.standby_depth{
+    width: 10%;
+    text-align: center !important;
+}
+
+.standby_parents{
+    width: 30%;
+    text-align: center !important;
+}
+
+.standby_simStus{
+    width: 10%;
+    text-align: center !important;
+}
+
 /**************Standby表格结束****************/
 
 /**************Running表格开始****************/
 #running_table1 thead th{
     position: relative;
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
 }
 
 #running_tbody tr td{
     position: relative;
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
 }
 
@@ -519,18 +560,67 @@ body::-webkit-scrollbar{
 .running_data_div::-webkit-scrollbar{
     width:0;
 }
+
+.running_job{
+    width: 4%;
+    text-align: center !important;
+}
+
+.running_resource{
+    width: 10%;
+    text-align: center !important;
+}
+
+.running_vm{
+    width: 7%;
+    text-align: center !important;
+}
+
+.running_start{
+    width: 7%;
+    text-align: center !important;
+}
+
+.running_finish{
+    width: 7%;
+    text-align: center !important;
+}
+
+.running_depth{
+    width: 7%;
+    text-align: center !important;
+}
+
+.running_realTime{
+    width: 7%;
+    text-align: center !important;
+}
+.running_realCost{
+    width: 7%;
+    text-align: center !important;
+}
+
+.running_parents{
+    width: 37%;
+    text-align: center !important;
+}
+
+.running_realStus{
+    width: 7%;
+    text-align: center !important;
+}
 /**************Running表格结束****************/
 
 /**************Successed表格开始****************/
 #successed_table1 thead th{
     position: relative;
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
 }
 
 #successed_tbody tr td{
     position: relative;
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
 }
 
@@ -591,13 +681,13 @@ body::-webkit-scrollbar{
 /**************Failed表格开始****************/
 #failed_table1 thead th{
     position: relative;
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
 }
 
 #failed_tbody tr td{
     position: relative;
-    width: 10%;
+    /*width: 10%;*/
     text-align: center;
 }
 
@@ -669,17 +759,17 @@ body::-webkit-scrollbar{
 }
 
 .detail_job{
-    width: 5%;
+    width: 4%;
     text-align: center !important;
 }
 
 .detail_task{
-    width: 5%;
+    width: 4%;
     text-align: center !important;
 }
 
 .detail_simStus{
-    width: 7%;
+    width: 5%;
     text-align: center !important;
 }
 
@@ -689,12 +779,12 @@ body::-webkit-scrollbar{
 }
 
 .detail_vm{
-    width: 5%;
+    width: 4%;
     text-align: center !important;
 }
 
 .detail_simTime{
-    width: 7%;
+    width: 5%;
     text-align: center !important;
 }
 
@@ -704,32 +794,32 @@ body::-webkit-scrollbar{
 }
 
 .detail_start{
-    width: 7%;
-    text-align: center !important;
-}
-
-.detail_finish{
-    width: 7%;
-    text-align: center !important;
-}
-
-.detail_depth{
     width: 5%;
     text-align: center !important;
 }
 
+.detail_finish{
+    width: 5%;
+    text-align: center !important;
+}
+
+.detail_depth{
+    width: 2%;
+    text-align: center !important;
+}
+
 .detail_realTime{
-    width: 7%;
+    width: 5%;
     text-align: center !important;
 }
 
 .detail_realCost{
-    width: 7%;
+    width: 5%;
     text-align: center !important;
 }
 
 .detail_parents{
-    width: 14%;
+    width: 32%;
     text-align: center !important;
 }
 

@@ -9,76 +9,274 @@
 <html>
 <head>
     <title>Document Information</title>
+    <link rel="shortcut icon" href="/images/edgeWR_logo.png">
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/layui/css/jquery-ui-1.10.4.min.css">
+    <link rel="stylesheet" href="/css/documentInfo.css">
 </head>
 <body>
-Document Info
-<%--<div class="layui-container">
-    <div class="layui-row main-container">
-        <div id="main_left" class="layui-col-xs5 main_left layui-row">
-            <div class="layui-col-xs12">
-                <button id="left_selectAll" type="button" class="layui-btn layui-btn-primary layui-btn-sm">select all</button>
+<%----------------------------总布局开始----------------------------------------------%>
+<div class="layui-container mainContainer">
+
+    <%------------------------标题栏开始------------------------------%>
+    <div class="layui-container title_main">
+        <div class="layui-row">
+            <div class="layui-col-xs3">
+                <div class="logo_div"><img src="/images/edgeWR_logo.png" class="edge_img"></div>
             </div>
-            &lt;%&ndash;<div class="layui-col-xs3 item noSelect">1</div>
-            <div class="layui-col-xs3 item noSelect">2</div>
-            <div class="layui-col-xs3 item noSelect">3</div>
-            <div class="layui-col-xs3 item noSelect">4</div>
-            <div class="layui-col-xs3 item noSelect">5</div>
-            <div class="layui-col-xs3 item noSelect">6</div>&ndash;%&gt;
-        </div>
-        <div class="layui-col-xs2 main_move layui-row">
-            <div class="layui-col-xs12 btn_div">
-                <label>pipipipipipi</label>
-                <button id="pi_left" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
-                <button id="pi_right" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
-                <button id="submit" type="button" class="layui-btn layui-btn-primary layui-btn-sm">submit</button>
+            <div class="layui-col-xs2">
+                <div id="doc_div" class="doc_div">Documentation</div>
             </div>
-            <div class="layui-col-xs12 btn_div">
-                <label>kmpkmpkmp</label>
-                <button id="kmp_left" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
-                <button id="kmp_right" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+            <div class="layui-col-xs2">
+                <div id="developer_div" class="developer_div" >Developers</div>
             </div>
-            <div class="layui-col-xs12 btn_div">
-                <label>levenshtein</label>
-                <button id="levenshtein_left" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
-                <button id="levenshtein_right" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+            <div class="layui-col-xs2">
+                <div id="version_info" class="version_info">Versions</div>
             </div>
-            <div class="layui-col-xs12 btn_div">
-                <label>selectsort</label>
-                <button id="selectsort_left" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
-                <button id="selectsort_right" type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
-            </div>
-        </div>
-        <div class="layui-col-xs5 main_classify layui-row">
-            <div id="pi" class="layui-col-xs12">
-                <div class="layui-col-xs12">
-                    <button id="pi_selectAll" type="button" class="layui-btn layui-btn-primary layui-btn-sm">select all</button>
-                </div>
-            </div>
-            <div id="kmp" class="layui-col-xs12">
-                <div class="layui-col-xs12">
-                    <button id="kmp_selectAll" type="button" class="layui-btn layui-btn-primary layui-btn-sm">select all</button>
-                </div>
-            </div>
-            <div id="levenshtein" class="layui-col-xs12">
-                <div class="layui-col-xs12">
-                    <button id="levenshtein_selectAll" type="button" class="layui-btn layui-btn-primary layui-btn-sm">select all</button>
-                </div>
-            </div>
-            <div id="selectsort" class="layui-col-xs12">
-                <div class="layui-col-xs12">
-                    <button id="selectsort_selectAll" type="button" class="layui-btn layui-btn-primary layui-btn-sm">select all</button>
-                </div>
+            <div class="layui-col-xs3">
             </div>
         </div>
     </div>
-</div>--%>
+    <%------------------------标题栏结束------------------------------%>
 
-<%--<div data-num='2' class="a1">33333</div>--%>
-<%--<div data-num='3' class="a1">33333</div>--%>
-<%--<div data-num='3' class="a1">33333</div>--%>
-<%--<div data-num='3' class="a1">33333</div>--%>
+    <%------------------------展示区域开始----------------------------%>
+    <div class="main_middle layui-row">
+
+        <div class="layui-row layui-col-space10">
+            <%--            <div class="col-sm-3">--%>
+            <%--                                <div class="list-group">--%>
+            <%--                                    <a href="#Project">Project</a>--%>
+            <%--                                    <a href="#License">License</a>--%>
+            <%--                                    <a href="#Quick">Quick Start</a>--%>
+            <%--                                    <a href="#Tutorial">Tutorial</a>--%>
+
+            <%--                                </div>--%>
+            <%--            </div>--%>
+
+            <div class="layui-col-md2">
+                <div class="sidenav">
+                    <a href="#Project" class="class1">Project</a>
+                    <a href="#Introduction" class="class2">Introduction</a>
+                    <a href="#History" class="class2">History</a>
+                    <a href="#Committers" class="class2">Committers</a>
+
+                    <a href="#Links" class="class1">Resources&Links</a>
+                    <a href="#Mailing" class="class2">Mailing lists</a>
+                    <a href="#GitHub" class="class2">GitHub Link</a>
+                    <a href="#ISEC" class="class2">ISEC Lab Link</a>
+
+                    <%--                    <a href="#License" class="class1">License</a>--%>
+                    <%--                    <a href="#Quick" class="class1">Quick Start</a>--%>
+                    <%--                    <a href="#Tutorial" class="class1">Tutorial</a>--%>
+                </div>
+
+                <%--                <ul class=" layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">--%>
+                <%--                    <li class="layui-nav-item layui-nav-itemed">--%>
+                <%--                    <li class="layui-nav-item"><a href="#Project">Project</a></li>--%>
+                <%--                    <li class="layui-nav-item"><a href="#License">License</a></li>--%>
+                <%--                    <li class="layui-nav-item"><a href="#Quick">Quick Start</a></li>--%>
+                <%--                    <li class="layui-nav-item"><a href="#Tutorial">Tutorial</a></li>--%>
+                <%--                </ul>--%>
+            </div>
+            <div class="layui-col-md9 ">
+
+                <fieldset class="layui-elem-field">
+                    <%--                    <legend ></legend>--%>
+                    <div class="layui-field-box">
+                        <br /><h1 id="Project" style="margin-top: -170px;padding-top: 170px;color:#017cee;">Project</h1>
+                        <br /><h2 id="Introduction" style="margin-top: -150px;padding-top: 150px;">Introduction</h2><br />
+                        <p>This work presents EdgeWorkflowReal, an edge computing based workflow execution engine for smart systems. EdgeWorkflowReal supports:
+                            <br />&nbsp;&nbsp;(1) the real edge computing environment generation;
+                            <br />&nbsp;&nbsp;(2) visualized modelling and binding computing tasks for different workflow structure;
+                            <br />&nbsp;&nbsp;(3) automatic deployment, monitoring and evaluation of various workflow tasks in edge computing environment.
+
+                        </p>
+                        <br /><br />
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/2e7Vm7rM5Zc"
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                                gyroscope; picture-in-picture"
+                                style="width: 960px; height: 645px; max-width: 100%"allowfullscreen>
+                        </iframe>
+                        <br />
+                        <br />
+                        <br />
+                        <iframe src="//player.bilibili.com/player.html?aid=627857443&bvid=BV1Yt4y1a7K9&cid=257341945&page=1"
+                                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+                                style="width: 960px; height: 645px; max-width: 100%">
+                        </iframe>
+                        <br />
+                        <br />
+
+                        <br /><h2 id="History" style="margin-top: -150px;padding-top: 150px;">History</h2><br />
+                        <p>EdgeWorkflowReal was started in November 2020 by Xiao Liu. It was open source from the very first commit and officially brought under the GitHub and announced in December 2020.</p>
+                        <br /><h2 id="Committers" style="margin-top: -150px;padding-top: 150px;">Committers</h2><br />
+                        <p>
+                            @Xiao Liu&nbsp;&nbsp;(Senior Lecturer)<br />
+                            @Xuejun Li&nbsp;&nbsp;(Professor)<br />
+                            @Yun Yang&nbsp;&nbsp;(Professor)<br />
+                            @John Grundy&nbsp;&nbsp;(Professor)<br />
+                            @Ding Ran&nbsp;&nbsp;(Master Degree Candidate)<br />
+                            @Jia Xu&nbsp;&nbsp;(PhD)<br />
+                            @Lingmin Fan&nbsp;&nbsp;(Master Graduate)<br />
+                            @Lina Gong&nbsp;&nbsp;(Master Degree Candidate)<br />
+                            @Gan Li&nbsp;&nbsp;(Master Degree Candidate)<br />
+                            @Liju Chu&nbsp;&nbsp;(Master Degree Candidate)<br />
+                            @Yansong Zhang&nbsp;&nbsp;(Master Degree Candidate)<br />
+                            @Dan Lu&nbsp;&nbsp;(UI Designer)
+                        </p>
+
+
+
+                        <%--                        <br /><h2>Resources & links</h2><br />--%>
+
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="layui-elem-field">
+                    <div class="layui-field-box">
+                        <h1 id="Links" style="margin-top: -150px;padding-top: 150px;color:#017cee;">Resources&Links</h1>
+                        <br>
+                        <h2 id="Mailing" style="margin-top: -150px;padding-top: 150px;">Mailing lists</h2><br />
+                        <table border="1">
+
+                            <tr>
+                                <th>Name</th>
+                                <th>University</th>
+                                <th>Email Address</th>
+                            </tr>
+                            <tr>
+                                <td>Xiao Liu</td>
+                                <td>Deakin University </td>
+                                <td>xiao.liu@deakin.edu.au</td>
+                            </tr>
+                            <tr>
+                                <td> Xuejun Li</td>
+                                <td>Anhui University</td>
+                                <td>xjli@ahu.edu.cn</td>
+                            </tr>
+                            <tr>
+                                <td>Yun Yang</td>
+                                <td>Swinburne University of Technology</td>
+                                <td>yyang@swin.edu.au</td>
+                            </tr>
+                            <tr>
+                                <td>John Grundy</td>
+                                <td>Monash University</td>
+                                <td>john.grundy@monash.edu</td>
+                            </tr>
+                            <tr>
+                                <td>Ran Ding</td>
+                                <td>Anhui University</td>
+                                <td>dingran1012@163.com</td>
+                            </tr>
+                            <tr>
+                                <td>Jia Xu</td>
+                                <td>Anhui University</td>
+                                <td>xujia_ahu@qq.com</td>
+                            </tr>
+                            <tr>
+                                <td>Lingmin Fan</td>
+                                <td>Anhui University</td>
+                                <td>870138190@qq.com</td>
+                            </tr>
+                            <tr>
+                                <td>Lina Gong</td>
+                                <td>Anhui University</td>
+                                <td>Linagln@qq.com</td>
+                            </tr>
+                            <tr>
+                                <td>Gan Li</td>
+                                <td>Anhui University</td>
+                                <td>754439055@qq.com</td>
+                            <tr>
+                            <tr>
+                                <td>Liju Chu</td>
+                                <td>Anhui University</td>
+                                <td>clj1118@163.com</td>
+                            </tr>
+                            <tr>
+                                <td>Yansong Zhang</td>
+                                <td>Anhui University</td>
+                                <td>first.song@qq.com</td>
+                            </tr>
+                            <tr>
+                                <td>Dan Lu</td>
+                                <td>Anhui University</td>
+                                <td>1157136694@qq.com</td>
+                            <tr>
+
+
+
+                        </table>
+
+                        <br />
+                        <h2 id="GitHub" style="margin-top: -150px;padding-top: 150px;">GitHub Link</h2><br />
+                        <a href="https://github.com/ISEC-AHU/EdgeWorkflowReal/" target="_blank" class="class3">https://github.com/ISEC-AHU/EdgeWorkflowReal/</a><br />
+                        <br />
+                        <h2 id="ISEC" style="margin-top: -150px;padding-top: 150px;">ISEC Lab Link</h2><br />
+                        <a href="http://isec.ahu.edu.cn/" target="_blank"class="class3">http://isec.ahu.edu.cn/</a><br />
+
+
+                        <%--                        <p>--%>
+                        <%--                        Xiao Liu	Deakin University	xiao.liu@deakin.edu.au<br />--%>
+                        <%--                        Lingmin Fan	   Anhui University	870138190@qq.com<br />--%>
+                        <%--                        Jia Xu	  Anhui University	xujia_ahu@qq.com<br />--%>
+                        <%--                        Xuejun Li	Anhui University	xjli@ahu.edu.cn<br />--%>
+                        <%--                        Lina Gong	Anhui University	Linagln@qq.com<br />--%>
+                        <%--                        John Grundy	Monash University	john.grundy@monash.edu<br />--%>
+                        <%--                        Yun Yang	Swinburne University of Technology	yyang@swin.edu.au<br />--%>
+                        <%--                        Ran Ding	Anhui University	dingran1012@163.com<br />--%>
+                        <%--                        Liju Chu	Anhui University	clj1118@163.com<br />--%>
+                        <%--                        Yansong Zhang	Anhui University	clj1118@163.com<br />--%>
+                        <%--                        </p>--%>
+
+
+
+                        <%--                        <fieldset id="slicense" class="layui-elem-field">--%>
+                        <%--                        ahahhaahah--%>
+                        <%--                        </fieldset>--%>
+
+
+                    </div>
+                </fieldset>
+
+                <%--                <fieldset class="layui-elem-field">--%>
+                <%--                    <div class="layui-field-box">--%>
+                <%--                        <br /><h1 id="Quick" style="margin-top: -200px;padding-top: 200px;color:#017cee;">Quick Start</h1><br />--%>
+                <%--                        <div>--%>
+                <%--                            <br /><a href="http://www.baidu.com/" target="_blank">Baidu!</a><br />--%>
+                <%--                        </div>--%>
+
+
+                <%--                    </div>--%>
+                <%--                </fieldset>--%>
+
+                <%--                <fieldset class="layui-elem-field">--%>
+                <%--&lt;%&ndash;                    <legend id="Tutorial">Tutorial</legend>&ndash;%&gt;--%>
+                <%--                    <div class="layui-field-box">--%>
+                <%--                        <br /><h1 id="Tutorial" style="margin-top: -200px;padding-top: 200px;color:#017cee;">Tutorial</h1><br />--%>
+                <%--                        1<br />1<br />1<br />1<br />1<br />--%>
+                <%--                        2<br />1<br />1<br />1<br />1<br />--%>
+                <%--                        1<br />1<br />1<br />1<br />1<br />1<br />1<br />1<br />1<br />1<br />--%>
+                <%--                        <br /><br /><br /><br /><br /><br /><br />--%>
+
+                <%--                    </div>--%>
+                <%--                </fieldset>--%>
+                <%--            </div>--%>
+                <%--                    <h3 id="Project">Project</h3>--%>
+                <%--            <h3 id="License">License</h3>--%>
+                <%--            <h3 id="Quick">Quick Start</h3>--%>
+                <%--            <h3 id="Tutorial">Tutorial</h3>--%>
+                <%--            <div class="layui-col-md4">--%>
+                <%--                1/3--%>
+                <%--            </div>--%>
+            </div>
+        </div>
+        <%------------------------展示区域结束----------------------------%>
+
+    </div>
 
 </body>
 <script type="text/javascript" src="/jquery/jquery.min.js"></script>
@@ -91,396 +289,40 @@ Document Info
 
         //…
     });*/
-    /*$(document).ready(function(){
-        var html = "";
-        for(var i = 0; i< 90 ; i++){
-            html += "<div class=\"layui-col-xs3 item noSelect\">" + i + "</div>";
-        }
-        $("#main_left").append(html);
+    //标题栏Developers
+    $("#developer_div").click(function(){
 
-        //work对象点击
-        $(document).on("click", ".item", function(){
-            if($(this).hasClass("noSelect")){
-                $(this).removeClass("noSelect");
-                $(this).addClass("isSelect");
-            }else{
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-            }
+        layer.open({
+            type: 2,
+            offset: "140px",
+            title: "Developers\' Informations",
+            content: "/developersInfo",
+            skin: "title-style",
+            area: ['700px', '500px'],
+            cancel: function(){
 
-        });
-
-        //pi移动
-        $("#pi_left").click(function(){
-            $("#pi").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#main_left").append($(this));
-                // console.log($(this).text());
-            });
-        });
-        $("#pi_right").click(function(){
-            $("#main_left").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#pi").append($(this));
-                // console.log($(this).text());
-            });
-        });
-
-        //kmp移动
-        $("#kmp_left").click(function(){
-            $("#kmp").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#main_left").append($(this));
-                // console.log($(this).text());
-            });
-        });
-        $("#kmp_right").click(function(){
-            $("#main_left").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#kmp").append($(this));
-                // console.log($(this).text());
-            });
-        });
-
-        //levenshtein移动
-        $("#levenshtein_left").click(function(){
-            $("#levenshtein").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#main_left").append($(this));
-                // console.log($(this).text());
-            });
-        });
-        $("#levenshtein_right").click(function(){
-            $("#main_left").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#levenshtein").append($(this));
-                // console.log($(this).text());
-            });
-        });
-
-        //selectsort移动
-        $("#selectsort_left").click(function(){
-            $("#selectsort").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#main_left").append($(this));
-                // console.log($(this).text());
-            });
-        });
-        $("#selectsort_right").click(function(){
-            $("#main_left").find(".isSelect").each(function(){
-                $(this).remove();
-                $(this).removeClass("isSelect");
-                $(this).addClass("noSelect");
-                $("#selectsort").append($(this));
-                // console.log($(this).text());
-            });
-        });
-
-        //全选按钮
-        $("#left_selectAll").click(function(){
-
-            var item = $("#main_left").find(".item").length;
-            var isSelect = $("#main_left").find(".isSelect").length;
-            var noSelect = $("#main_left").find(".noSelect").length;
-            if(item > isSelect){
-                $("#main_left").find(".noSelect").each(function(){
-                    $(this).removeClass("noSelect");
-                    $(this).addClass("isSelect");
-                });
-            }
-            if(item == isSelect){
-                $("#main_left").find(".isSelect").each(function(){
-                    $(this).removeClass("isSelect");
-                    $(this).addClass("noSelect");
-                });
-            }
-            // console.log(item);
-            // console.log(isSelect);
-            // console.log(noSelect);
-        });
-        $("#pi_selectAll").click(function(){
-
-            var item = $("#pi").find(".item").length;
-            var isSelect = $("#pi").find(".isSelect").length;
-            var noSelect = $("#pi").find(".noSelect").length;
-            if(item > isSelect){
-                $("#pi").find(".noSelect").each(function(){
-                    $(this).removeClass("noSelect");
-                    $(this).addClass("isSelect");
-                });
-            }
-            if(item == isSelect){
-                $("#pi").find(".isSelect").each(function(){
-                    $(this).removeClass("isSelect");
-                    $(this).addClass("noSelect");
-                });
             }
         });
-        $("#kmp_selectAll").click(function(){
+    });
 
-            var item = $("#kmp").find(".item").length;
-            var isSelect = $("#kmp").find(".isSelect").length;
-            var noSelect = $("#kmp").find(".noSelect").length;
-            if(item > isSelect){
-                $("#kmp").find(".noSelect").each(function(){
-                    $(this).removeClass("noSelect");
-                    $(this).addClass("isSelect");
-                });
-            }
-            if(item == isSelect){
-                $("#kmp").find(".isSelect").each(function(){
-                    $(this).removeClass("isSelect");
-                    $(this).addClass("noSelect");
-                });
+    //标题栏Versions
+    $("#version_info").click(function(){
+        layer.open({
+            type: 2,
+            offset: "140px",
+            title: "Version Informations",
+            content: "/versionInfo",
+            skin: "title-style",
+            area: ['700px', '500px'],
+            cancel: function(){
+
             }
         });
-        $("#levenshtein_selectAll").click(function(){
+    });
 
-            var item = $("#levenshtein").find(".item").length;
-            var isSelect = $("#levenshtein").find(".isSelect").length;
-            var noSelect = $("#levenshtein").find(".noSelect").length;
-            if(item > isSelect){
-                $("#levenshtein").find(".noSelect").each(function(){
-                    $(this).removeClass("noSelect");
-                    $(this).addClass("isSelect");
-                });
-            }
-            if(item == isSelect){
-                $("#levenshtein").find(".isSelect").each(function(){
-                    $(this).removeClass("isSelect");
-                    $(this).addClass("noSelect");
-                });
-            }
-        });
-        $("#selectsort_selectAll").click(function(){
-
-            var item = $("#selectsort").find(".item").length;
-            var isSelect = $("#selectsort").find(".isSelect").length;
-            var noSelect = $("#selectsort").find(".noSelect").length;
-            if(item > isSelect){
-                $("#selectsort").find(".noSelect").each(function(){
-                    $(this).removeClass("noSelect");
-                    $(this).addClass("isSelect");
-                });
-            }
-            if(item == isSelect){
-                $("#selectsort").find(".isSelect").each(function(){
-                    $(this).removeClass("isSelect");
-                    $(this).addClass("noSelect");
-                });
-            }
-        });
-
-        //保存按钮
-        $("#submit").click(function(){
-            var pi = [];
-            var kmp = [];
-            var levenshtein = [];
-            var selectsort = [];
-            var workItem = $("#main_left").find(".item").length;
-            if(workItem != 0){
-                layer.msg("Please assign the task type first!",
-                    {icon: 2,offset:['40%', '30%'],time:3000,area:['300px','70px']});
-                return;
-            }
-
-            $("#pi").find(".item").each(function(){
-                var jobId = $(this).text();
-                pi.push(jobId);
-            });
-
-            $("#kmp").find(".item").each(function(){
-                var jobId = $(this).text();
-                kmp.push(jobId);
-            });
-
-            $("#levenshtein").find(".item").each(function(){
-                var jobId = $(this).text();
-                levenshtein.push(jobId);
-            });
-
-            $("#selectsort").find(".item").each(function(){
-                var jobId = $(this).text();
-                selectsort.push(jobId);
-            });
-            console.log(pi);
-            console.log(kmp);
-            console.log(levenshtein);
-            console.log(selectsort);
-        });
-
-    });*/
 
 </script>
 <style>
-    /*.a1 {
-        width: 100px;
-        height: 100px;
-        background-color: #333;
-        color: #fff;
-        position: relative;
-        margin-top: 50px;
-    }
 
-    .a1:after {
-        content: attr(data-num);
-        line-height: 50px;
-        text-align: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: red;
-        position: absolute;
-        top: -20px;
-        right: -20px;
-    }
-
-    .tt{
-        border: #00FF00 1px solid;
-    }
-
-    .main-container{
-        position: relative;
-        width: 100%;
-        height: 99%;
-    }
-
-    .main_left{
-        position: relative;
-        height: 100%;
-        border-radius:10px 10px 10px 10px;
-        border: solid 1px #aab9c3;
-        overflow-y: scroll;
-    }
-    .main_left::-webkit-scrollbar{
-        width:0;
-    }
-
-    .main_move{
-        position: relative;
-        height: 100%;
-        border-radius:10px 10px 10px 10px;
-        !*border: solid 1px #aab9c3;*!
-    }
-
-    .main_classify{
-        position: relative;
-        height: 100%;
-        !*border-radius:10px 10px 10px 10px;*!
-        !*border: solid 1px #aab9c3;*!
-    }
-    #pi{
-        position: relative;
-        height: 25%;
-        border-radius:10px 10px 10px 10px;
-        border: solid 1px #aab9c3;
-        overflow-y: scroll;
-    }
-    #pi::-webkit-scrollbar{
-        width:0;
-    }
-    #kmp{
-        position: relative;
-        height: 25%;
-        border-radius:10px 10px 10px 10px;
-        border: solid 1px #aab9c3;
-        overflow-y: scroll;
-    }
-    #kmp::-webkit-scrollbar{
-        width:0;
-    }
-    #levenshtein{
-        position: relative;
-        height: 25%;
-        border-radius:10px 10px 10px 10px;
-        border: solid 1px #aab9c3;
-        overflow-y: scroll;
-    }
-    #levenshtein::-webkit-scrollbar{
-        width:0;
-    }
-    #selectsort{
-        position: relative;
-        height: 25%;
-        border-radius:10px 10px 10px 10px;
-        border: solid 1px #aab9c3;
-        overflow-y: scroll;
-    }
-    #selectsort::-webkit-scrollbar{
-        width:0;
-    }
-    .btn_div{
-        position: relative;
-        height: 25%;
-        border-radius:10px 10px 10px 10px;
-        !*border: solid 1px #aab9c3;*!
-        padding-top: 40%;
-        padding-left: 10%;
-    }
-    .noSelect{
-        position: relative;
-        border: solid 1px #aab9c3;
-        border-radius:10px 10px 10px 10px;
-        text-align: center;
-
-        margin: 2px 2px 2px 2px;
-        height: 20px;
-        width: 20px;
-
-    }
-    .isSelect{
-        position: relative;
-        border: solid 1px #00FF00;
-        border-radius:10px 10px 10px 10px;
-        text-align: center;
-        margin: 2px 2px 2px 2px;
-        height: 20px;
-        width: 20px;
-    }
-
-    #left_selectAll{
-        width: 100%;
-        border-radius: 10px 10px 0px 0px;
-        border: #aab9c3 0px solid;
-        border-bottom: #aab9c3 1px solid;
-    }
-    #pi_selectAll{
-        width: 100%;
-        border-radius: 10px 10px 0px 0px;
-        border: #aab9c3 0px solid;
-        border-bottom: #aab9c3 1px solid;
-    }
-    #kmp_selectAll{
-        width: 100%;
-        border-radius: 10px 10px 0px 0px;
-        border: #aab9c3 0px solid;
-        border-bottom: #aab9c3 1px solid;
-    }
-    #levenshtein_selectAll{
-        width: 100%;
-        border-radius: 10px 10px 0px 0px;
-        border: #aab9c3 0px solid;
-        border-bottom: #aab9c3 1px solid;
-    }
-    #selectsort_selectAll{
-        width: 100%;
-        border-radius: 10px 10px 0px 0px;
-        border: #aab9c3 0px solid;
-        border-bottom: #aab9c3 1px solid;
-    }*/
 </style>
 </html>

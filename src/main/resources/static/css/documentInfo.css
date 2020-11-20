@@ -1,0 +1,280 @@
+body {
+    background: #FFFFFF;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-family:"微软雅黑";
+
+    /*overflow-x: scroll; !*x轴禁止滚动*!*/
+    overflow-y: scroll;/*y轴滚动*/
+
+}
+/*隐藏div的滚动条*/
+body::-webkit-scrollbar{
+    width:0;
+}
+/*三个小图标的样式*/
+
+#doc_div{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 25px;
+    margin-top: 35px;
+    color: #666666;
+}
+
+#developer_div{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 25px;
+    margin-top: 35px;
+    padding-left: 40px;
+    color: #666666;
+}
+
+#version_info{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 25px;
+    margin-top: 35px;
+    color: #666666;
+}
+
+#user_login{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 15px;
+    color: #666666;
+}
+
+#user_register{
+    font-weight: bold;
+    font-family:"微软雅黑";
+    font-size: 15px;
+    color: #666666;
+}
+
+#login_div{
+    float: right;
+    margin-top: 30px;
+}
+
+#userinfo_div{
+    float: right;
+    margin-top: 30px;
+}
+
+.title_main{
+    height: 105px;
+    width: 100% !important;
+    position: fixed;
+    /*border: #261eff 1px solid;*/
+    border-bottom: #aab9c3 1px solid;
+    z-index:1;
+    background-color: #FFFFFF;
+}
+/*.main_title{*/
+/*    position: fixed;*/
+/*    width: 100%;*/
+/*    height:120px;*/
+/*    background-color:#fff;*/
+/*    text-align:center;*/
+/*    box-shadow:#CBCBCB 10px 5px 30px 7px;*/
+/*    z-index:1;*/
+/*}*/
+
+.edge_img{
+    padding-top: 8px;
+    position: relative;
+    width: 19%;
+    height: auto;
+}
+
+#Doc{
+    position: relative;
+    width:25%;
+    font-size: 24px;
+    width: 250px;
+    background-color: #ffffff;
+    color: #222222;
+    border-color: #ffffff;
+    margin-top:35px;
+    border-radius: 50px;
+}
+#Doc:hover {
+    background: #F1F3F4;
+}
+
+
+#System_information{
+    position: relative;
+    width:25%;
+    font-size: 24px;
+    width: 250px;
+    background-color: #ffffff;
+    color: #222222;
+    border-color: #ffffff;
+    margin-top:40px;
+    border-radius: 50px;
+}
+
+#System_information:hover {
+    background: #F1F3F4;
+}
+
+#Version{
+
+    position: relative;
+    width:25%;
+    font-size: 24px;
+    width: 250px;
+    background-color: #ffffff;
+    color: #222222;
+    border-color: #ffffff;
+    margin-top:35px;
+    border-radius: 50px;
+}
+
+#Version:hover {
+    background: #F1F3F4;
+}
+
+
+
+/*******************************/
+.background {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    background:white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+}
+
+/*nav {*/
+/*    margin-top: -65px;*/
+/*    padding-top: 65px;*/
+/*}*/
+.mainContainer{
+    width: 100% !important;
+    height: 910px !important;
+    /*border: 1px solid #00ff00;*/
+    padding: 0px 0px 0px 0px !important;
+}
+
+
+/*.layui-nav-item layui-nav-tree layui-inline{*/
+/*    position: 'fixed';*/
+/*    width:500px;*/
+/*}*/
+.sidenav {
+    height: 100%;
+    width: 230px;
+    position: fixed;
+    z-index: 1;
+    top: 140px;
+    left: 85px;
+    background-color: #F1F3F4;
+    overflow-x: hidden;
+    padding-top: 20px;
+
+}
+.class3{
+    font-size:18px;
+    text-decoration:none;
+
+    color: blue;
+
+}
+
+.class3:hover
+{
+
+    text-decoration:underline;
+    color:blue;
+
+}
+.class1 {
+    padding: 6px 8px 6px 35px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #222222;
+    display: block;
+}
+.class2{
+    padding: 3px 8px 3px 50px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #222222;
+    display: block;
+}
+.sidenav a:hover {
+    color:#017cee;
+}
+
+.main {
+    margin-left: 160px; /* 与sidenav的宽度相同 */
+    font-size: 28px; /* 字体放大，让页面可滚动 */
+    padding: 0px 10px;
+}
+p{
+    /*font-family: "宋体","仿宋",sans-serif;!*若电脑不支持宋体，则用仿宋，若不支持仿宋，则在sans-serif中找*!*/
+    font-weight: bold;
+
+    font:16px roboto, sans-serif;
+    color: #000000;/*字体颜色*/
+    opacity: 0.9;/*字体的透明度：1：默认样式，0：全透明*/
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.layui-elem-field{
+    position: relative;
+    top: 140px;
+    /*display:block;*/
+
+    /*margin-top:-200px;*/
+    /*padding-top:500px;*/
+
+
+}
+table,td,th
+{
+    border:1px solid #CBCBCB;
+}
+table
+{
+    width:50%;
+}
+td{
+    text-align:center;
+    font-weight: bold;
+    font:16px roboto, sans-serif;
+    color: #000000;/*字体颜色*/
+    opacity: 0.9;/*字体的透明度：1：默认样式，0：全透明*/
+}
+
+th
+{
+    height:50px;
+}
+/*#slicense{*/
+/*    width: 50%;*/
+/*    height: 300px;*/
+/*    background: #dddddd;*/
+
+
+/*}*/
+/*.layui-field-box{*/
+/*    position: relative;*/
+/*    padding-top: 170px; !* 50px是导航栏高度 *!*/
+/*    margin-top: -170px;*/
+
+
+
+/*}*/

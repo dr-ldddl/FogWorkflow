@@ -4,7 +4,7 @@
 <head>
     <title>EdgeWorkflowReal</title>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="/images/ahu_logo.png">
+    <link rel="shortcut icon" href="/images/edgeWR_logo.png">
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/index.css">
 </head>
@@ -13,7 +13,7 @@
 <div class="layui-container title_main">
     <div class="layui-row">
         <div class="layui-col-xs3">
-            <div class="logo_div"><img src="/images/edge_logo.png" class="edge_img"></div>
+            <div class="logo_div"><img src="/images/edgeWR_logo.png" class="edge_img"></div>
         </div>
         <div class="layui-col-xs2">
             <div id="doc_div" class="doc_div">Documentation</div>
@@ -71,11 +71,11 @@
                 <table id="plan_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                     <thead>
                         <th class="plan_no">No.</th>
-                        <th class="plan_name">Project Name</th>
+                        <th class="plan_name">Plan Name</th>
                         <th class="plan_mec">EC Environment</th>
                         <th class="plan_strategy">Offloading Strategy</th>
                         <th class="plan_algo">Scheduling Algorithm</th>
-                        <th class="plan_opti">Optimization Object</th>
+                        <th class="plan_opti">Optimization Objective</th>
                         <th class="plan_deadline">Deadline</th>
                         <th class="plan_workflow">Workflow Type</th>
                         <th class="plan_editTime">Last Modified</th>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="plan_strategy">simple</td>
+                            <td class="plan_strategy">Simple</td>
                             <td class="plan_algo">MINMIN,MAXMIN,FCFS,ROUNDROBIN</td>
                             <td class="plan_opti">Time</td>
                             <td class="plan_deadline">--</td>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="plan_strategy">simple</td>
+                            <td class="plan_strategy">Simple</td>
                             <td class="plan_algo">MINMIN,MAXMIN</td>
                             <td class="plan_opti">Time</td>
                             <td class="plan_deadline">--</td>
@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="plan_strategy">simple</td>
+                            <td class="plan_strategy">Simple</td>
                             <td class="plan_algo">MINMIN,MAXMIN,PSO</td>
                             <td class="plan_opti">Time</td>
                             <td class="plan_deadline">--</td>
@@ -357,28 +357,28 @@
                         <div class="layui-col-xs12">
                             <table  id="standby_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Sim-Time</th>
-                                    <th>Sim-Cost</th>
-                                    <th>Depth</th>
-                                    <th>Parents</th>
-                                    <th>Sim-Status</th>
+                                    <th class="standby_job">Job-ID</th>
+                                    <th class="standby_resource">Computing-Resource-Type</th>
+                                    <th class="standby_vm">VM-ID</th>
+                                    <th class="standby_simTime">Sim-Time</th>
+                                    <th class="standby_simCost">Sim-Cost</th>
+                                    <th class="standby_depth">Depth</th>
+                                    <th class="standby_parents">Parents</th>
+                                    <th class="standby_simStus">Sim-Status</th>
                                 </thead>
                             </table>
                         </div>
                         <div class="layui-col-xs12 standby_data_div">
                             <table id="standby_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Sim-Time</th>
-                                    <th>Sim-Cost</th>
-                                    <th>Depth</th>
-                                    <th>Parents</th>
-                                    <th>Sim-Status</th>
+                                    <th class="standby_job">Job-ID</th>
+                                    <th class="standby_resource">Computing-Resource-Type</th>
+                                    <th class="standby_vm">VM-ID</th>
+                                    <th class="standby_simTime">Sim-Time</th>
+                                    <th class="standby_simCost">Sim-Cost</th>
+                                    <th class="standby_depth">Depth</th>
+                                    <th class="standby_parents">Parents</th>
+                                    <th class="standby_simStus">Sim-Status</th>
                                 </thead>
                                 <tbody id="standby_tbody" class="standby_tbody">
 
@@ -390,32 +390,32 @@
                         <div class="layui-col-xs12">
                             <table  id="running_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Start Time</th>
-                                    <th>Finish Time</th>
-                                    <th>Depth</th>
-                                    <th>Real-Time</th>
-                                    <th>Real-Cost</th>
-                                    <th>Parents</th>
-                                    <th>Real-Status</th>
+                                    <th class="running_job">Job-ID</th>
+                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_resource">Computing-Resource-Type</th>
+                                    <th class="running_start">Start-Time</th>
+                                    <th class="running_finish">Finish-Time</th>
+                                    <th class="running_realTime">Real-Time</th>
+                                    <th class="running_realCost">Real-Cost</th>
+                                    <th class="running_depth">Depth</th>
+                                    <th class="running_parents">Parents</th>
+                                    <th class="running_realStus">Real-Status</th>
                                 </thead>
                             </table>
                         </div>
                         <div class="layui-col-xs12 running_data_div">
                             <table id="running_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Start Time</th>
-                                    <th>Finish Time</th>
-                                    <th>Depth</th>
-                                    <th>Real-Time</th>
-                                    <th>Real-Cost</th>
-                                    <th>Parents</th>
-                                    <th>Real-Status</th>
+                                    <th class="running_job">Job-ID</th>
+                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_resource">Computing-Resource-Type</th>
+                                    <th class="running_start">Start-Time</th>
+                                    <th class="running_finish">Finish-Time</th>
+                                    <th class="running_realTime">Real-Time</th>
+                                    <th class="running_realCost">Real-Cost</th>
+                                    <th class="running_depth">Depth</th>
+                                    <th class="running_parents">Parents</th>
+                                    <th class="running_realStus">Real-Status</th>
                                 </thead>
                                 <tbody id="running_tbody" class="running_tbody">
 
@@ -427,32 +427,32 @@
                         <div class="layui-col-xs12">
                             <table  id="successed_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Start Time</th>
-                                    <th>Finish Time</th>
-                                    <th>Depth</th>
-                                    <th>Real-Time</th>
-                                    <th>Real-Cost</th>
-                                    <th>Parents</th>
-                                    <th>Real-Status</th>
+                                    <th class="running_job">Job-ID</th>
+                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_resource">Computing-Resource-Type</th>
+                                    <th class="running_start">Start-Time</th>
+                                    <th class="running_finish">Finish-Time</th>
+                                    <th class="running_realTime">Real-Time</th>
+                                    <th class="running_realCost">Real-Cost</th>
+                                    <th class="running_depth">Depth</th>
+                                    <th class="running_parents">Parents</th>
+                                    <th class="running_realStus">Real-Status</th>
                                 </thead>
                             </table>
                         </div>
                         <div class="layui-col-xs12 successed_data_div">
                             <table id="successed_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Start Time</th>
-                                    <th>Finish Time</th>
-                                    <th>Depth</th>
-                                    <th>Real-Time</th>
-                                    <th>Real-Cost</th>
-                                    <th>Parents</th>
-                                    <th>Real-Status</th>
+                                    <th class="running_job">Job-ID</th>
+                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_resource">Computing-Resource-Type</th>
+                                    <th class="running_start">Start-Time</th>
+                                    <th class="running_finish">Finish-Time</th>
+                                    <th class="running_realTime">Real-Time</th>
+                                    <th class="running_realCost">Real-Cost</th>
+                                    <th class="running_depth">Depth</th>
+                                    <th class="running_parents">Parents</th>
+                                    <th class="running_realStus">Real-Status</th>
                                 </thead>
                                 <tbody id="successed_tbody" class="successed_tbody">
 
@@ -464,32 +464,32 @@
                         <div class="layui-col-xs12">
                             <table  id="failed_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Start Time</th>
-                                    <th>Finish Time</th>
-                                    <th>Depth</th>
-                                    <th>Real-Time</th>
-                                    <th>Real-Cost</th>
-                                    <th>Parents</th>
-                                    <th>Real-Status</th>
+                                    <th class="running_job">Job-ID</th>
+                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_resource">Computing-Resource-Type</th>
+                                    <th class="running_start">Start-Time</th>
+                                    <th class="running_finish">Finish-Time</th>
+                                    <th class="running_realTime">Real-Time</th>
+                                    <th class="running_realCost">Real-Cost</th>
+                                    <th class="running_depth">Depth</th>
+                                    <th class="running_parents">Parents</th>
+                                    <th class="running_realStus">Real-Status</th>
                                 </thead>
                             </table>
                         </div>
                         <div class="layui-col-xs12 failed_data_div">
                             <table id="failed_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
-                                    <th>Job ID</th>
-                                    <th>Computing Resource Type</th>
-                                    <th>VM ID</th>
-                                    <th>Start Time</th>
-                                    <th>Finish Time</th>
-                                    <th>Depth</th>
-                                    <th>Real-Time</th>
-                                    <th>Real-Cost</th>
-                                    <th>Parents</th>
-                                    <th>Real-Status</th>
+                                    <th class="running_job">Job-ID</th>
+                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_resource">Computing-Resource-Type</th>
+                                    <th class="running_start">Start-Time</th>
+                                    <th class="running_finish">Finish-Time</th>
+                                    <th class="running_realTime">Real-Time</th>
+                                    <th class="running_realCost">Real-Cost</th>
+                                    <th class="running_depth">Depth</th>
+                                    <th class="running_parents">Parents</th>
+                                    <th class="running_realStus">Real-Status</th>
                                 </thead>
                                 <tbody id="failed_tbody" class="failed_tbody">
 
@@ -501,19 +501,19 @@
                         <div class="layui-col-xs12">
                             <table  id="detail_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
-                                    <th class="detail_job">Job ID</th>
-                                    <th class="detail_task">Task ID</th>
-                                    <th class="detail_simStus">Sim-Status</th>
-                                    <th class="detail_resource">Computing Resource Type</th>
-                                    <th class="detail_vm">VM ID</th>
+                                    <th class="detail_job">Job-ID</th>
+                                    <th class="detail_task">Task-ID</th>
+                                    <th class="detail_vm">VM-ID</th>
+                                    <th class="detail_resource">Computing-Resource-Type</th>
                                     <th class="detail_simTime">Sim-Time</th>
-                                    <th class="detail_simCost">Sim-Cost</th>
-                                    <th class="detail_start">Start Time</th>
-                                    <th class="detail_finish">Finish Time</th>
-                                    <th class="detail_depth">Depth</th>
                                     <th class="detail_realTime">Real-Time</th>
+                                    <th class="detail_simCost">Sim-Cost</th>
                                     <th class="detail_realCost">Real-Cost</th>
+                                    <th class="detail_start">Start-Time</th>
+                                    <th class="detail_finish">Finish-Time</th>
+                                    <th class="detail_depth">Depth</th>
                                     <th class="detail_parents">Parents</th>
+                                    <th class="detail_simStus">Sim-Status</th>
                                     <th class="detail_realStus">Real-Status</th>
                                 </thead>
                             </table>
@@ -521,19 +521,19 @@
                         <div class="layui-col-xs12 detail_data_div">
                             <table id="detail_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
-                                    <th class="detail_job">Job ID</th>
-                                    <th class="detail_task">Task ID</th>
-                                    <th class="detail_simStus">Sim-Status</th>
-                                    <th class="detail_resource">Computing Resource Type</th>
-                                    <th class="detail_vm">VM ID</th>
+                                    <th class="detail_job">Job-ID</th>
+                                    <th class="detail_task">Task-ID</th>
+                                    <th class="detail_vm">VM-ID</th>
+                                    <th class="detail_resource">Computing-Resource-Type</th>
                                     <th class="detail_simTime">Sim-Time</th>
-                                    <th class="detail_simCost">Sim-Cost</th>
-                                    <th class="detail_start">Start Time</th>
-                                    <th class="detail_finish">Finish Time</th>
-                                    <th class="detail_depth">Depth</th>
                                     <th class="detail_realTime">Real-Time</th>
+                                    <th class="detail_simCost">Sim-Cost</th>
                                     <th class="detail_realCost">Real-Cost</th>
+                                    <th class="detail_start">Start-Time</th>
+                                    <th class="detail_finish">Finish-Time</th>
+                                    <th class="detail_depth">Depth</th>
                                     <th class="detail_parents">Parents</th>
+                                    <th class="detail_simStus">Sim-Status</th>
                                     <th class="detail_realStus">Real-Status</th>
                                 </thead>
                                 <tbody id="detail_tbody" class="detail_tbody">
