@@ -167,7 +167,7 @@ function barChart(threeObject){
 
     option = {
         title : {
-            text: 'Objectives\' Comparison',
+            text: 'Comparison of Objectives',
             subtext: 'Comparison of optimization objectives in different environments',
             x:'center'
         },
@@ -415,8 +415,8 @@ function lineChart(list) {
 
     option = {
         title : {
-            text: 'Scientific Workflow Execution',
-            subtext: 'The execution time of the entire scientific workflow',
+            text: 'Workflow Execution',
+            subtext: 'The execution time of the entire workflow',
             x:'center'
         },
         tooltip: {
@@ -513,7 +513,7 @@ function ganttChart(outputEntityList){
         yAxis: {
             //data: ['job1','job2', 'job3','job4'],
             data: jobs,
-            name: 'Job ID',
+            name: 'Job-ID',
         },
         tooltip: {
             show: true,
@@ -1486,7 +1486,7 @@ function start(url, json_para) {
             layer.open({
                 type: 2
                 , offset: "140px"
-                , title: "FogWorkflow Simulation Result"
+                , title: "EdgeWorkflow Simulation Result"
                 , content: "/barChart"
                 , skin: 'title-style'
                 , area: ['1000px', '500px']

@@ -203,7 +203,8 @@
                             <%--<option value="1">All-in-Fog</option>--%>
                             <option value="1">All-in-Edge</option>
                             <option value="2">All-in-Cloud</option>
-                            <option value="3">Simple</option>
+                            <%--<option value="3">Simple</option>--%>
+                            <option value="3">Energy-Optimal</option>
                         </select>
                     </div>
                 </div>
@@ -282,7 +283,7 @@
             <div id="c3">
                 <%--planName--%>
                 <div class="strategy-content-div">
-                    <div class="deadline-label" style="padding-left:31px;font-size:18px;;width:120px"><span style="color: red">*</span>Plan Name:</div>
+                    <div class="deadline-label" style="padding-left:31px;font-size:18px;;width:197px"><span style="color: red">*</span>Workflow Name:</div>
                     <div>
                         <input class="deadline-input" type="text" name="planName"/>
                     </div>

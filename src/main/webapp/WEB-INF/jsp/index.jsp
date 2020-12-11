@@ -53,7 +53,7 @@
         <%--标题--%>
         <div class="layui-col-xs10">
             <div class="plan_title" style="display: inline-block">
-                Scientific Workflow & EC Environment Setting
+                Workflow & EC Environment Setting
             </div>
             <div id="sim_loading_div" style="display: inline-block">
                 <i id="sim_loading" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
@@ -71,7 +71,7 @@
                 <table id="plan_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                     <thead>
                         <th class="plan_no">No.</th>
-                        <th class="plan_name">Plan Name</th>
+                        <th class="plan_name">Workflow Name</th>
                         <th class="plan_mec">EC Environment</th>
                         <th class="plan_strategy">Offloading Strategy</th>
                         <th class="plan_algo">Scheduling Algorithm</th>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="plan_strategy">Simple</td>
+                            <td class="plan_strategy">Energy-Optimal</td>
                             <td class="plan_algo">MINMIN,MAXMIN,FCFS,ROUNDROBIN</td>
                             <td class="plan_opti">Time</td>
                             <td class="plan_deadline">--</td>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="plan_strategy">Simple</td>
+                            <td class="plan_strategy">Energy-Optimal</td>
                             <td class="plan_algo">MINMIN,MAXMIN</td>
                             <td class="plan_opti">Time</td>
                             <td class="plan_deadline">--</td>
@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="plan_strategy">Simple</td>
+                            <td class="plan_strategy">Energy-Optimal</td>
                             <td class="plan_algo">MINMIN,MAXMIN,PSO</td>
                             <td class="plan_opti">Time</td>
                             <td class="plan_deadline">--</td>
@@ -215,7 +215,7 @@
                                 </div>
                             </td>
                             <td hidden>
-                                {"nodeSize":"24","daxPath":"Epigenomics_24.xml","planName":"example3","custom":"","pi":[],"kmp":[],"levenshtein":[],"selectsort":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],"cloudServer":1,"fogServer":1,"mobile":2,"setting_json":{"cloud_mips_list":[1600],"cloud_cost_list":[0.96],"fog_mips_list":[1300],"fog_cost_list":[0.48],"mobile_mips_list":[1000,1000],"cloud_number":1,"fog_number":1,"mobile_number":2,"GA":{"GA-popsize":20,"GA-gmax":100,"GA-crossoverProb":0.8,"GA-mutationRate":0.01,"GA-repeat":1},"PSO":{"PSO-particleNum":20,"PSO-iterateNum":100,"PSO-c1":1.37,"PSO-c2":1.37,"PSO-w":0.73,"PSO-repeat":1}},"strategy":"Simple","alSet":["MINMIN","MAXMIN","PSO"],"optimize_objective":"Time","deadline":"","editTime":"2020-11-06 10:51:39"}
+                                {"nodeSize":"24","daxPath":"Epigenomics_24.xml","planName":"example3","custom":"","pi":[],"kmp":[],"levenshtein":[],"selectsort":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],"cloudServer":1,"fogServer":1,"mobile":2,"setting_json":{"cloud_mips_list":[1600],"cloud_cost_list":[0.96],"fog_mips_list":[1300],"fog_cost_list":[0.48],"mobile_mips_list":[1000,1000],"cloud_number":1,"fog_number":1,"mobile_number":2,"GA":{"GA-popsize":20,"GA-gmax":100,"GA-crossoverProb":0.8,"GA-mutationRate":0.01,"GA-repeat":1},"PSO":{"PSO-particleNum":20,"PSO-iterateNum":100,"PSO-c1":1.37,"PSO-c2":1.37,"PSO-w":0.73,"PSO-repeat":1}},"strategy":"Energy-Optimal","alSet":["MINMIN","MAXMIN","PSO"],"optimize_objective":"Time","deadline":"","editTime":"2020-11-06 10:51:39"}
                             </td>
                         </tr>
                         <tr style="height: 40px;">
@@ -359,7 +359,7 @@
                                 <thead>
                                     <th class="standby_job">Job-ID</th>
                                     <th class="standby_resource">Computing-Resource-Type</th>
-                                    <th class="standby_vm">VM-ID</th>
+                                    <th class="standby_vm">Container-ID</th>
                                     <th class="standby_simTime">Sim-Time</th>
                                     <th class="standby_simCost">Sim-Cost</th>
                                     <th class="standby_depth">Depth</th>
@@ -373,7 +373,7 @@
                                 <thead hidden>
                                     <th class="standby_job">Job-ID</th>
                                     <th class="standby_resource">Computing-Resource-Type</th>
-                                    <th class="standby_vm">VM-ID</th>
+                                    <th class="standby_vm">Container-ID</th>
                                     <th class="standby_simTime">Sim-Time</th>
                                     <th class="standby_simCost">Sim-Cost</th>
                                     <th class="standby_depth">Depth</th>
@@ -391,7 +391,7 @@
                             <table  id="running_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
                                     <th class="running_job">Job-ID</th>
-                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_vm">Container-ID</th>
                                     <th class="running_resource">Computing-Resource-Type</th>
                                     <th class="running_start">Start-Time</th>
                                     <th class="running_finish">Finish-Time</th>
@@ -407,7 +407,7 @@
                             <table id="running_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
                                     <th class="running_job">Job-ID</th>
-                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_vm">Container-ID</th>
                                     <th class="running_resource">Computing-Resource-Type</th>
                                     <th class="running_start">Start-Time</th>
                                     <th class="running_finish">Finish-Time</th>
@@ -428,7 +428,7 @@
                             <table  id="successed_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
                                     <th class="running_job">Job-ID</th>
-                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_vm">Container-ID</th>
                                     <th class="running_resource">Computing-Resource-Type</th>
                                     <th class="running_start">Start-Time</th>
                                     <th class="running_finish">Finish-Time</th>
@@ -444,7 +444,7 @@
                             <table id="successed_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
                                     <th class="running_job">Job-ID</th>
-                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_vm">Container-ID</th>
                                     <th class="running_resource">Computing-Resource-Type</th>
                                     <th class="running_start">Start-Time</th>
                                     <th class="running_finish">Finish-Time</th>
@@ -465,7 +465,7 @@
                             <table  id="failed_table1" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead>
                                     <th class="running_job">Job-ID</th>
-                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_vm">Container-ID</th>
                                     <th class="running_resource">Computing-Resource-Type</th>
                                     <th class="running_start">Start-Time</th>
                                     <th class="running_finish">Finish-Time</th>
@@ -481,7 +481,7 @@
                             <table id="failed_table2" class="layui-table table" lay-size="sm" lay-even lay-skin="nob">
                                 <thead hidden>
                                     <th class="running_job">Job-ID</th>
-                                    <th class="running_vm">VM-ID</th>
+                                    <th class="running_vm">Container-ID</th>
                                     <th class="running_resource">Computing-Resource-Type</th>
                                     <th class="running_start">Start-Time</th>
                                     <th class="running_finish">Finish-Time</th>
@@ -503,7 +503,7 @@
                                 <thead>
                                     <th class="detail_job">Job-ID</th>
                                     <th class="detail_task">Task-ID</th>
-                                    <th class="detail_vm">VM-ID</th>
+                                    <th class="detail_vm">Container-ID</th>
                                     <th class="detail_resource">Computing-Resource-Type</th>
                                     <th class="detail_simTime">Sim-Time</th>
                                     <th class="detail_realTime">Real-Time</th>
@@ -523,7 +523,7 @@
                                 <thead hidden>
                                     <th class="detail_job">Job-ID</th>
                                     <th class="detail_task">Task-ID</th>
-                                    <th class="detail_vm">VM-ID</th>
+                                    <th class="detail_vm">Container-ID</th>
                                     <th class="detail_resource">Computing-Resource-Type</th>
                                     <th class="detail_simTime">Sim-Time</th>
                                     <th class="detail_realTime">Real-Time</th>

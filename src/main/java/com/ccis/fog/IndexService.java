@@ -751,10 +751,13 @@ public class IndexService {
 //                case "All-in-Fog":
                 case "All-in-Edge":
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategyAllinFog());
-                    System.out.println("ddddddddd:All-in-Edge");
                     break;
                 case "All-in-Cloud":
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategyAllinCloud());
+                    break;
+                case "Energy-Optimal":
+                    System.out.println("Energy-Optimal");
+                    wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategySimple());
                     break;
                 case "Simple":
                     wfEngine.getoffloadingEngine().setOffloadingStrategy(new OffloadingStrategySimple());

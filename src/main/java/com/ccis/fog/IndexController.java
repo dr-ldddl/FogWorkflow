@@ -824,5 +824,12 @@ public class IndexController {
 
         return "DagStructure";
     }
+
+    //绑定任务页面
+    @RequestMapping("CodeMirror")
+    public String CodeMirror(){
+
+        return "codeMirror";
+    }
 }
 

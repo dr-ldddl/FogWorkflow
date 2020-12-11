@@ -44,7 +44,7 @@
 <body>
 <div class="login_main">
     <fieldset class="layui-elem-field layui-field-title zyl_mar_03">
-        <legend>Welcome to - FogWorkflow platform</legend>
+        <legend>Welcome to - EdgeWorkflow platform</legend>
     </fieldset>
     <%--<form class="layui-form zyl_pad_01" action="">--%>
     <div class="layui-form zyl_pad_01">

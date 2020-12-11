@@ -303,6 +303,7 @@ body::-webkit-scrollbar{
     border:none;
     background-color: #F2F2F2;
     text-align: center;
+    color: #666;
 
 }
 .input_even {
@@ -312,6 +313,7 @@ body::-webkit-scrollbar{
     border:none;
     background-color: #FFFFFF;
     text-align: center;
+    color: #666;
 }
 
 /**************plan表格开始****************/
@@ -779,7 +781,7 @@ body::-webkit-scrollbar{
 }
 
 .detail_vm{
-    width: 4%;
+    width: 6%;
     text-align: center !important;
 }
 
@@ -819,7 +821,7 @@ body::-webkit-scrollbar{
 }
 
 .detail_parents{
-    width: 32%;
+    width: 30%;
     text-align: center !important;
 }
 
